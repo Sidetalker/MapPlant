@@ -9,7 +9,7 @@
 /* Begin PBXBuildFile section */
 		31CBD8CD1A662B5800BF195C /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31CBD8CC1A662B5800BF195C /* AppDelegate.swift */; };
 		31CBD8D01A662B5800BF195C /* MapPlant.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 31CBD8CE1A662B5800BF195C /* MapPlant.xcdatamodeld */; };
-		31CBD8D21A662B5800BF195C /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31CBD8D11A662B5800BF195C /* ViewController.swift */; };
+		31CBD8D21A662B5800BF195C /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31CBD8D11A662B5800BF195C /* HomeViewController.swift */; };
 		31CBD8D51A662B5800BF195C /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 31CBD8D31A662B5800BF195C /* Main.storyboard */; };
 		31CBD8D71A662B5800BF195C /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 31CBD8D61A662B5800BF195C /* Images.xcassets */; };
 		31CBD8DA1A662B5800BF195C /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 31CBD8D81A662B5800BF195C /* LaunchScreen.xib */; };
@@ -31,7 +31,7 @@
 		31CBD8CB1A662B5800BF195C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		31CBD8CC1A662B5800BF195C /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		31CBD8CF1A662B5800BF195C /* MapPlant.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = MapPlant.xcdatamodel; sourceTree = "<group>"; };
-		31CBD8D11A662B5800BF195C /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		31CBD8D11A662B5800BF195C /* HomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
 		31CBD8D41A662B5800BF195C /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		31CBD8D61A662B5800BF195C /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		31CBD8D91A662B5800BF195C /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/LaunchScreen.xib; sourceTree = "<group>"; };
@@ -80,7 +80,7 @@
 			isa = PBXGroup;
 			children = (
 				31CBD8CC1A662B5800BF195C /* AppDelegate.swift */,
-				31CBD8D11A662B5800BF195C /* ViewController.swift */,
+				31CBD8D11A662B5800BF195C /* HomeViewController.swift */,
 				31CBD8D31A662B5800BF195C /* Main.storyboard */,
 				31CBD8D61A662B5800BF195C /* Images.xcassets */,
 				31CBD8D81A662B5800BF195C /* LaunchScreen.xib */,
@@ -164,6 +164,7 @@
 				TargetAttributes = {
 					31CBD8C61A662B5800BF195C = {
 						CreatedOnToolsVersion = 6.1.1;
+						DevelopmentTeam = S7BT87895F;
 					};
 					31CBD8DE1A662B5800BF195C = {
 						CreatedOnToolsVersion = 6.1.1;
@@ -215,7 +216,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				31CBD8D21A662B5800BF195C /* ViewController.swift in Sources */,
+				31CBD8D21A662B5800BF195C /* HomeViewController.swift in Sources */,
 				31CBD8D01A662B5800BF195C /* MapPlant.xcdatamodeld in Sources */,
 				31CBD8CD1A662B5800BF195C /* AppDelegate.swift in Sources */,
 			);
@@ -341,6 +342,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				INFOPLIST_FILE = MapPlant/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.1;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
@@ -351,6 +353,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				INFOPLIST_FILE = MapPlant/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.1;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};

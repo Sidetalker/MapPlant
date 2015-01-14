@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6211" systemVersion="14A298i" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="vXZ-lx-hvc">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6254" systemVersion="14B25" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="vXZ-lx-hvc">
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6204"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6247"/>
     </dependencies>
     <scenes>
-        <!--View Controller-->
+        <!--Home View Controller-->
         <scene sceneID="ufC-wZ-h7g">
             <objects>
-                <viewController id="vXZ-lx-hvc" customClass="ViewController" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="vXZ-lx-hvc" customClass="HomeViewController" customModule="MapPlant" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="jyV-Pf-zRb"/>
                         <viewControllerLayoutGuide type="bottom" id="2fi-mo-0CV"/>
@@ -15,7 +15,79 @@
                     <view key="view" contentMode="scaleToFill" id="kh9-bI-dsS">
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <subviews>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="cyO-aB-3W7">
+                                <rect key="frame" x="-23" y="-15" width="46" height="30"/>
+                                <state key="normal" title="Reset">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Z5c-Iz-sWr">
+                                <rect key="frame" x="-23" y="-15" width="46" height="30"/>
+                                <state key="normal" title="Stop">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                            </button>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Record Count: 0     Update Speed: 0/s" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="y8h-zt-aQC">
+                                <rect key="frame" x="0.0" y="-21" width="42" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="gWK-hu-dbq">
+                                <rect key="frame" x="-23" y="-15" width="46" height="30"/>
+                                <state key="normal" title="Start">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                            </button>
+                        </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="cyO-aB-3W7" firstAttribute="top" secondItem="jyV-Pf-zRb" secondAttribute="bottom" id="2gY-ET-YIF"/>
+                            <constraint firstItem="Z5c-Iz-sWr" firstAttribute="top" secondItem="jyV-Pf-zRb" secondAttribute="bottom" id="3nP-fa-2Dd"/>
+                            <constraint firstAttribute="centerX" secondItem="Z5c-Iz-sWr" secondAttribute="centerX" constant="0.5" id="4jG-9Y-wEJ"/>
+                            <constraint firstItem="cyO-aB-3W7" firstAttribute="leading" secondItem="Z5c-Iz-sWr" secondAttribute="trailing" constant="50" id="5v1-vM-uqN"/>
+                            <constraint firstItem="Z5c-Iz-sWr" firstAttribute="leading" secondItem="gWK-hu-dbq" secondAttribute="trailing" constant="50" id="Pfl-cb-nom"/>
+                            <constraint firstItem="2fi-mo-0CV" firstAttribute="top" secondItem="y8h-zt-aQC" secondAttribute="bottom" constant="8" id="Rwb-sC-kzd"/>
+                            <constraint firstItem="gWK-hu-dbq" firstAttribute="top" secondItem="jyV-Pf-zRb" secondAttribute="bottom" id="Vpo-1N-hQe"/>
+                            <constraint firstAttribute="centerX" secondItem="y8h-zt-aQC" secondAttribute="centerX" id="rAB-n1-jEn"/>
+                        </constraints>
+                        <variation key="default">
+                            <mask key="subviews">
+                                <exclude reference="cyO-aB-3W7"/>
+                                <exclude reference="Z5c-Iz-sWr"/>
+                                <exclude reference="y8h-zt-aQC"/>
+                                <exclude reference="gWK-hu-dbq"/>
+                            </mask>
+                            <mask key="constraints">
+                                <exclude reference="Vpo-1N-hQe"/>
+                                <exclude reference="3nP-fa-2Dd"/>
+                                <exclude reference="4jG-9Y-wEJ"/>
+                                <exclude reference="Pfl-cb-nom"/>
+                                <exclude reference="2gY-ET-YIF"/>
+                                <exclude reference="5v1-vM-uqN"/>
+                                <exclude reference="rAB-n1-jEn"/>
+                                <exclude reference="Rwb-sC-kzd"/>
+                            </mask>
+                        </variation>
+                        <variation key="widthClass=compact">
+                            <mask key="subviews">
+                                <include reference="cyO-aB-3W7"/>
+                                <include reference="Z5c-Iz-sWr"/>
+                                <include reference="y8h-zt-aQC"/>
+                                <include reference="gWK-hu-dbq"/>
+                            </mask>
+                            <mask key="constraints">
+                                <include reference="Vpo-1N-hQe"/>
+                                <include reference="3nP-fa-2Dd"/>
+                                <include reference="4jG-9Y-wEJ"/>
+                                <include reference="Pfl-cb-nom"/>
+                                <include reference="2gY-ET-YIF"/>
+                                <include reference="5v1-vM-uqN"/>
+                                <include reference="rAB-n1-jEn"/>
+                                <include reference="Rwb-sC-kzd"/>
+                            </mask>
+                        </variation>
                     </view>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="x5A-6p-PRh" sceneMemberID="firstResponder"/>
