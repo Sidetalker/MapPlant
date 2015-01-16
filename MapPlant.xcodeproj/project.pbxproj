@@ -14,6 +14,21 @@
 		31CBD8D71A662B5800BF195C /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 31CBD8D61A662B5800BF195C /* Images.xcassets */; };
 		31CBD8DA1A662B5800BF195C /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 31CBD8D81A662B5800BF195C /* LaunchScreen.xib */; };
 		31CBD8E61A662B5800BF195C /* MapPlantTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31CBD8E51A662B5800BF195C /* MapPlantTests.swift */; };
+		757057E81A688BD600C05B21 /* Session.swift in Sources */ = {isa = PBXBuildFile; fileRef = 757057E71A688BD600C05B21 /* Session.swift */; };
+		757057EA1A688BD600C05B21 /* Location.swift in Sources */ = {isa = PBXBuildFile; fileRef = 757057E91A688BD600C05B21 /* Location.swift */; };
+		757057EC1A688BD600C05B21 /* Group.swift in Sources */ = {isa = PBXBuildFile; fileRef = 757057EB1A688BD600C05B21 /* Group.swift */; };
+		757057EE1A688BD600C05B21 /* LocationSet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 757057ED1A688BD600C05B21 /* LocationSet.swift */; };
+		757057F01A688BD700C05B21 /* Route.swift in Sources */ = {isa = PBXBuildFile; fileRef = 757057EF1A688BD700C05B21 /* Route.swift */; };
+		757057F21A688BD700C05B21 /* Tags.swift in Sources */ = {isa = PBXBuildFile; fileRef = 757057F11A688BD700C05B21 /* Tags.swift */; };
+		757057F41A688BD700C05B21 /* LogBook.swift in Sources */ = {isa = PBXBuildFile; fileRef = 757057F31A688BD700C05B21 /* LogBook.swift */; };
+		75B248561A688197005ECBA1 /* combine.sh in Resources */ = {isa = PBXBuildFile; fileRef = 75B2484D1A688197005ECBA1 /* combine.sh */; };
+		75B248571A688197005ECBA1 /* Formatter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75B2484E1A688197005ECBA1 /* Formatter.swift */; };
+		75B248581A688197005ECBA1 /* Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 75B2484F1A688197005ECBA1 /* Info.plist */; };
+		75B248591A688197005ECBA1 /* Logger.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75B248501A688197005ECBA1 /* Logger.swift */; };
+		75B2485A1A688197005ECBA1 /* LogLevel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75B248511A688197005ECBA1 /* LogLevel.swift */; };
+		75B2485B1A688197005ECBA1 /* LogLocation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75B248521A688197005ECBA1 /* LogLocation.swift */; };
+		75B2485C1A688197005ECBA1 /* LogSelector.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75B248531A688197005ECBA1 /* LogSelector.swift */; };
+		75B2485D1A688197005ECBA1 /* Swell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75B248551A688197005ECBA1 /* Swell.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -38,6 +53,22 @@
 		31CBD8DF1A662B5800BF195C /* MapPlantTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = MapPlantTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		31CBD8E41A662B5800BF195C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		31CBD8E51A662B5800BF195C /* MapPlantTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapPlantTests.swift; sourceTree = "<group>"; };
+		757057E71A688BD600C05B21 /* Session.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Session.swift; sourceTree = "<group>"; };
+		757057E91A688BD600C05B21 /* Location.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Location.swift; sourceTree = "<group>"; };
+		757057EB1A688BD600C05B21 /* Group.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Group.swift; sourceTree = "<group>"; };
+		757057ED1A688BD600C05B21 /* LocationSet.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LocationSet.swift; sourceTree = "<group>"; };
+		757057EF1A688BD700C05B21 /* Route.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Route.swift; sourceTree = "<group>"; };
+		757057F11A688BD700C05B21 /* Tags.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Tags.swift; sourceTree = "<group>"; };
+		757057F31A688BD700C05B21 /* LogBook.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LogBook.swift; sourceTree = "<group>"; };
+		75B2484D1A688197005ECBA1 /* combine.sh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.script.sh; path = combine.sh; sourceTree = "<group>"; };
+		75B2484E1A688197005ECBA1 /* Formatter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Formatter.swift; sourceTree = "<group>"; };
+		75B2484F1A688197005ECBA1 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		75B248501A688197005ECBA1 /* Logger.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Logger.swift; sourceTree = "<group>"; };
+		75B248511A688197005ECBA1 /* LogLevel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LogLevel.swift; sourceTree = "<group>"; };
+		75B248521A688197005ECBA1 /* LogLocation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LogLocation.swift; sourceTree = "<group>"; };
+		75B248531A688197005ECBA1 /* LogSelector.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LogSelector.swift; sourceTree = "<group>"; };
+		75B248541A688197005ECBA1 /* Swell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Swell.h; sourceTree = "<group>"; };
+		75B248551A688197005ECBA1 /* Swell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Swell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -61,6 +92,7 @@
 		31CBD8BE1A662B5800BF195C = {
 			isa = PBXGroup;
 			children = (
+				75B2484B1A68817B005ECBA1 /* 3rd Party Frameworks */,
 				31CBD8C91A662B5800BF195C /* MapPlant */,
 				31CBD8E21A662B5800BF195C /* MapPlantTests */,
 				31CBD8C81A662B5800BF195C /* Products */,
@@ -85,6 +117,13 @@
 				31CBD8D61A662B5800BF195C /* Images.xcassets */,
 				31CBD8D81A662B5800BF195C /* LaunchScreen.xib */,
 				31CBD8CE1A662B5800BF195C /* MapPlant.xcdatamodeld */,
+				757057F31A688BD700C05B21 /* LogBook.swift */,
+				757057F11A688BD700C05B21 /* Tags.swift */,
+				757057EF1A688BD700C05B21 /* Route.swift */,
+				757057ED1A688BD600C05B21 /* LocationSet.swift */,
+				757057EB1A688BD600C05B21 /* Group.swift */,
+				757057E91A688BD600C05B21 /* Location.swift */,
+				757057E71A688BD600C05B21 /* Session.swift */,
 				31CBD8CA1A662B5800BF195C /* Supporting Files */,
 			);
 			path = MapPlant;
@@ -113,6 +152,30 @@
 				31CBD8E41A662B5800BF195C /* Info.plist */,
 			);
 			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		75B2484B1A68817B005ECBA1 /* 3rd Party Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				75B2484C1A688188005ECBA1 /* Swell */,
+			);
+			name = "3rd Party Frameworks";
+			sourceTree = "<group>";
+		};
+		75B2484C1A688188005ECBA1 /* Swell */ = {
+			isa = PBXGroup;
+			children = (
+				75B2484D1A688197005ECBA1 /* combine.sh */,
+				75B2484E1A688197005ECBA1 /* Formatter.swift */,
+				75B2484F1A688197005ECBA1 /* Info.plist */,
+				75B248501A688197005ECBA1 /* Logger.swift */,
+				75B248511A688197005ECBA1 /* LogLevel.swift */,
+				75B248521A688197005ECBA1 /* LogLocation.swift */,
+				75B248531A688197005ECBA1 /* LogSelector.swift */,
+				75B248541A688197005ECBA1 /* Swell.h */,
+				75B248551A688197005ECBA1 /* Swell.swift */,
+			);
+			name = Swell;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -196,8 +259,10 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				75B248561A688197005ECBA1 /* combine.sh in Resources */,
 				31CBD8D51A662B5800BF195C /* Main.storyboard in Resources */,
 				31CBD8DA1A662B5800BF195C /* LaunchScreen.xib in Resources */,
+				75B248581A688197005ECBA1 /* Info.plist in Resources */,
 				31CBD8D71A662B5800BF195C /* Images.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -216,8 +281,21 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				757057E81A688BD600C05B21 /* Session.swift in Sources */,
+				757057EA1A688BD600C05B21 /* Location.swift in Sources */,
+				75B248571A688197005ECBA1 /* Formatter.swift in Sources */,
+				757057EC1A688BD600C05B21 /* Group.swift in Sources */,
 				31CBD8D21A662B5800BF195C /* HomeViewController.swift in Sources */,
+				757057F41A688BD700C05B21 /* LogBook.swift in Sources */,
+				757057F01A688BD700C05B21 /* Route.swift in Sources */,
+				75B2485B1A688197005ECBA1 /* LogLocation.swift in Sources */,
+				75B2485A1A688197005ECBA1 /* LogLevel.swift in Sources */,
+				757057F21A688BD700C05B21 /* Tags.swift in Sources */,
 				31CBD8D01A662B5800BF195C /* MapPlant.xcdatamodeld in Sources */,
+				757057EE1A688BD600C05B21 /* LocationSet.swift in Sources */,
+				75B248591A688197005ECBA1 /* Logger.swift in Sources */,
+				75B2485C1A688197005ECBA1 /* LogSelector.swift in Sources */,
+				75B2485D1A688197005ECBA1 /* Swell.swift in Sources */,
 				31CBD8CD1A662B5800BF195C /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -412,6 +490,7 @@
 				31CBD8EB1A662B5800BF195C /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		31CBD8EC1A662B5800BF195C /* Build configuration list for PBXNativeTarget "MapPlantTests" */ = {
 			isa = XCConfigurationList;
@@ -420,6 +499,7 @@
 				31CBD8EE1A662B5800BF195C /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 

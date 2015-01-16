@@ -1,4 +1,49 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<model name="Test1.xcdatamodel" userDefinedModelVersionIdentifier="" type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="1" systemVersion="11A491" minimumToolsVersion="Automatic" macOSVersion="Automatic" iOSVersion="Automatic">
-    <elements/>
+<model userDefinedModelVersionIdentifier="" type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="6254" systemVersion="14B25" minimumToolsVersion="Automatic" macOSVersion="Automatic" iOSVersion="Automatic">
+    <entity name="Group" representedClassName="MapPlant.Group" syncable="YES">
+        <attribute name="name" optional="YES" attributeType="String" syncable="YES"/>
+        <relationship name="logBook" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="LogBook" inverseName="groups" inverseEntity="LogBook" syncable="YES"/>
+        <relationship name="routes" optional="YES" toMany="YES" deletionRule="Nullify" ordered="YES" destinationEntity="Route" inverseName="group" inverseEntity="Route" syncable="YES"/>
+        <relationship name="tags" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Tags" inverseName="group" inverseEntity="Tags" syncable="YES"/>
+    </entity>
+    <entity name="Location" representedClassName="MapPlant.Location" syncable="YES">
+        <attribute name="lat" optional="YES" attributeType="Double" defaultValueString="0.0" syncable="YES"/>
+        <attribute name="long" optional="YES" attributeType="Double" defaultValueString="0.0" syncable="YES"/>
+        <relationship name="locationSet" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="LocationSet" inverseName="locations" inverseEntity="LocationSet" syncable="YES"/>
+    </entity>
+    <entity name="LocationSet" representedClassName="MapPlant.LocationSet" syncable="YES">
+        <relationship name="locations" optional="YES" toMany="YES" deletionRule="Nullify" ordered="YES" destinationEntity="Location" inverseName="locationSet" inverseEntity="Location" syncable="YES"/>
+        <relationship name="session" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Session" inverseName="locationSet" inverseEntity="Session" syncable="YES"/>
+    </entity>
+    <entity name="LogBook" representedClassName="MapPlant.LogBook" syncable="YES">
+        <relationship name="groups" optional="YES" toMany="YES" deletionRule="Nullify" ordered="YES" destinationEntity="Group" inverseName="logBook" inverseEntity="Group" syncable="YES"/>
+    </entity>
+    <entity name="Route" representedClassName="MapPlant.Route" syncable="YES">
+        <attribute name="name" optional="YES" attributeType="String" syncable="YES"/>
+        <relationship name="group" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Group" inverseName="routes" inverseEntity="Group" syncable="YES"/>
+        <relationship name="session" optional="YES" toMany="YES" deletionRule="Nullify" ordered="YES" destinationEntity="Session" inverseName="route" inverseEntity="Session" syncable="YES"/>
+        <relationship name="tags" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Tags" inverseName="route" inverseEntity="Tags" syncable="YES"/>
+    </entity>
+    <entity name="Session" representedClassName="MapPlant.Session" syncable="YES">
+        <attribute name="date" optional="YES" attributeType="Date" syncable="YES"/>
+        <attribute name="name" optional="YES" attributeType="String" syncable="YES"/>
+        <relationship name="locationSet" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="LocationSet" inverseName="session" inverseEntity="LocationSet" syncable="YES"/>
+        <relationship name="route" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Route" inverseName="session" inverseEntity="Route" syncable="YES"/>
+        <relationship name="tags" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Tags" inverseName="session" inverseEntity="Tags" syncable="YES"/>
+    </entity>
+    <entity name="Tags" representedClassName="MapPlant.Tags" syncable="YES">
+        <attribute name="name" optional="YES" attributeType="String" syncable="YES"/>
+        <relationship name="group" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Group" inverseName="tags" inverseEntity="Group" syncable="YES"/>
+        <relationship name="route" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Route" inverseName="tags" inverseEntity="Route" syncable="YES"/>
+        <relationship name="session" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Session" inverseName="tags" inverseEntity="Session" syncable="YES"/>
+    </entity>
+    <elements>
+        <element name="Group" positionX="0" positionY="72" width="128" height="105"/>
+        <element name="Location" positionX="-18" positionY="45" width="128" height="90"/>
+        <element name="LocationSet" positionX="-9" positionY="54" width="128" height="75"/>
+        <element name="LogBook" positionX="18" positionY="81" width="128" height="60"/>
+        <element name="Route" positionX="-54" positionY="-9" width="128" height="105"/>
+        <element name="Session" positionX="-36" positionY="36" width="128" height="120"/>
+        <element name="Tags" positionX="0" positionY="72" width="128" height="105"/>
+    </elements>
 </model>
