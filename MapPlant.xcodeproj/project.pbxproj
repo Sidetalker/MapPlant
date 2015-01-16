@@ -29,6 +29,8 @@
 		75B2485B1A688197005ECBA1 /* LogLocation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75B248521A688197005ECBA1 /* LogLocation.swift */; };
 		75B2485C1A688197005ECBA1 /* LogSelector.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75B248531A688197005ECBA1 /* LogSelector.swift */; };
 		75B2485D1A688197005ECBA1 /* Swell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75B248551A688197005ECBA1 /* Swell.swift */; };
+		75C1CB0B1A688DB200110FCA /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75C1CB0A1A688DB200110FCA /* Constants.swift */; };
+		75C1CB0E1A688EC300110FCA /* Helpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75C1CB0D1A688EC300110FCA /* Helpers.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -69,6 +71,8 @@
 		75B248531A688197005ECBA1 /* LogSelector.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LogSelector.swift; sourceTree = "<group>"; };
 		75B248541A688197005ECBA1 /* Swell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Swell.h; sourceTree = "<group>"; };
 		75B248551A688197005ECBA1 /* Swell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Swell.swift; sourceTree = "<group>"; };
+		75C1CB0A1A688DB200110FCA /* Constants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
+		75C1CB0D1A688EC300110FCA /* Helpers.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Helpers.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -111,19 +115,11 @@
 		31CBD8C91A662B5800BF195C /* MapPlant */ = {
 			isa = PBXGroup;
 			children = (
+				75C1CB0C1A688DBB00110FCA /* CoreData */,
+				31CBD8D31A662B5800BF195C /* Main.storyboard */,
+				31CBD8D81A662B5800BF195C /* LaunchScreen.xib */,
 				31CBD8CC1A662B5800BF195C /* AppDelegate.swift */,
 				31CBD8D11A662B5800BF195C /* HomeViewController.swift */,
-				31CBD8D31A662B5800BF195C /* Main.storyboard */,
-				31CBD8D61A662B5800BF195C /* Images.xcassets */,
-				31CBD8D81A662B5800BF195C /* LaunchScreen.xib */,
-				31CBD8CE1A662B5800BF195C /* MapPlant.xcdatamodeld */,
-				757057F31A688BD700C05B21 /* LogBook.swift */,
-				757057F11A688BD700C05B21 /* Tags.swift */,
-				757057EF1A688BD700C05B21 /* Route.swift */,
-				757057ED1A688BD600C05B21 /* LocationSet.swift */,
-				757057EB1A688BD600C05B21 /* Group.swift */,
-				757057E91A688BD600C05B21 /* Location.swift */,
-				757057E71A688BD600C05B21 /* Session.swift */,
 				31CBD8CA1A662B5800BF195C /* Supporting Files */,
 			);
 			path = MapPlant;
@@ -132,7 +128,10 @@
 		31CBD8CA1A662B5800BF195C /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				75C1CB0A1A688DB200110FCA /* Constants.swift */,
+				31CBD8D61A662B5800BF195C /* Images.xcassets */,
 				31CBD8CB1A662B5800BF195C /* Info.plist */,
+				75C1CB0D1A688EC300110FCA /* Helpers.swift */,
 			);
 			name = "Supporting Files";
 			sourceTree = "<group>";
@@ -176,6 +175,21 @@
 				75B248551A688197005ECBA1 /* Swell.swift */,
 			);
 			name = Swell;
+			sourceTree = "<group>";
+		};
+		75C1CB0C1A688DBB00110FCA /* CoreData */ = {
+			isa = PBXGroup;
+			children = (
+				31CBD8CE1A662B5800BF195C /* MapPlant.xcdatamodeld */,
+				757057F31A688BD700C05B21 /* LogBook.swift */,
+				757057F11A688BD700C05B21 /* Tags.swift */,
+				757057EF1A688BD700C05B21 /* Route.swift */,
+				757057ED1A688BD600C05B21 /* LocationSet.swift */,
+				757057EB1A688BD600C05B21 /* Group.swift */,
+				757057E91A688BD600C05B21 /* Location.swift */,
+				757057E71A688BD600C05B21 /* Session.swift */,
+			);
+			name = CoreData;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -282,6 +296,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				757057E81A688BD600C05B21 /* Session.swift in Sources */,
+				75C1CB0B1A688DB200110FCA /* Constants.swift in Sources */,
 				757057EA1A688BD600C05B21 /* Location.swift in Sources */,
 				75B248571A688197005ECBA1 /* Formatter.swift in Sources */,
 				757057EC1A688BD600C05B21 /* Group.swift in Sources */,
@@ -293,6 +308,7 @@
 				757057F21A688BD700C05B21 /* Tags.swift in Sources */,
 				31CBD8D01A662B5800BF195C /* MapPlant.xcdatamodeld in Sources */,
 				757057EE1A688BD600C05B21 /* LocationSet.swift in Sources */,
+				75C1CB0E1A688EC300110FCA /* Helpers.swift in Sources */,
 				75B248591A688197005ECBA1 /* Logger.swift in Sources */,
 				75B2485C1A688197005ECBA1 /* LogSelector.swift in Sources */,
 				75B2485D1A688197005ECBA1 /* Swell.swift in Sources */,

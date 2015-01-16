@@ -40,19 +40,15 @@ class HomeViewController: UIViewController {
     }
     
     func createTestRoute() {
-         let testRoute = NSEntityDescription.insertNewObjectForEntityForName("Route", inManagedObjectContext: self.managedObjectContext!) as Route
+        let testRoute = insertObject(Const.Data.Route) as Route
         
         testRoute.name = "Test Route"
     }
     
     func loadTestRoute() {
-        let fetchRequest = NSFetchRequest(entityName: "Route")
+        let routes = getObjects(Const.Data.Route) as [Route]
         
-        if let fetchResults = managedObjectContext!.executeFetchRequest(fetchRequest, error: nil) as? [Route] {
-            let result = fetchResults[0]
-            
-            Swell.info("\(result.name) was loaded successfully!")
-        }
+        Swell.info("We retrieved \(routes.count) routes - the first on is named \(routes[0].name)")
     }
 }
 
