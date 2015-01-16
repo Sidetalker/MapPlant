@@ -12,7 +12,8 @@ import CoreLocation
 
 class RecordViewController: UIViewController, CLLocationManagerDelegate {
     // Map variables
-    @IBOutlet weak var mapView: MKMapView!
+//    @IBOutlet weak var mapView: MKMapView!
+    var mapView = MKMapView()
     
     // Location variables
     var locationManager = CLLocationManager()
@@ -24,27 +25,14 @@ class RecordViewController: UIViewController, CLLocationManagerDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        // Configure map view
+        mapView.showsUserLocation = true
+        
         // Configure location manager
         locationManager.delegate = self
         locationManager.desiredAccuracy = kCLLocationAccuracyBest
         locationManager.requestAlwaysAuthorization()
         locationManager.startUpdatingLocation()
-        
-        let location = CLLocationCoordinate2D(
-            latitude: 51.50007773,
-            longitude: -0.1246402
-        )
-        // 2
-        let span = MKCoordinateSpanMake(0.05, 0.05)
-        let region = MKCoordinateRegion(center: location, span: span)
-        mapView.setRegion(region, animated: true)
-        
-        //3
-        let annotation = MKPointAnnotation()
-        annotation.setCoordinate(location)
-        annotation.title = "Big Ben"
-        annotation.subtitle = "London"
-        mapView.addAnnotation(annotation)
     }
     
     override func didReceiveMemoryWarning() {
@@ -72,12 +60,12 @@ class RecordViewController: UIViewController, CLLocationManagerDelegate {
         location.long = locationManager.location.coordinate.longitude
         location.accuracy = locationManager.location.horizontalAccuracy
         
-        lastLoc = location
-        
         if let last = lastLoc {
             if last.long != location.long || last.lat != location.lat {
                 Swell.debug("\(location.lat), \(location.long) - \(location.accuracy)")
             }
         }
+        
+        lastLoc = location
     }
 }

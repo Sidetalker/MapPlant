@@ -44,6 +44,7 @@ class HomeViewController: UIViewController {
         let testRoute = insertObject(Const.Data.Route) as Route
         
         testRoute.name = "Test Route"
+        save()
     }
     
     func loadTestRoute() {
