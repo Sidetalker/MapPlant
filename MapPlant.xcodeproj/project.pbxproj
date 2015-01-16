@@ -31,6 +31,9 @@
 		75B2485D1A688197005ECBA1 /* Swell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75B248551A688197005ECBA1 /* Swell.swift */; };
 		75C1CB0B1A688DB200110FCA /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75C1CB0A1A688DB200110FCA /* Constants.swift */; };
 		75C1CB0E1A688EC300110FCA /* Helpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75C1CB0D1A688EC300110FCA /* Helpers.swift */; };
+		75C1CB101A68A48E00110FCA /* RecordViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75C1CB0F1A68A48E00110FCA /* RecordViewController.swift */; };
+		75C1CB121A68A61100110FCA /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 75C1CB111A68A61100110FCA /* MapKit.framework */; };
+		75C1CB141A68A71B00110FCA /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 75C1CB131A68A71B00110FCA /* CoreLocation.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -73,6 +76,9 @@
 		75B248551A688197005ECBA1 /* Swell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Swell.swift; sourceTree = "<group>"; };
 		75C1CB0A1A688DB200110FCA /* Constants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		75C1CB0D1A688EC300110FCA /* Helpers.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Helpers.swift; sourceTree = "<group>"; };
+		75C1CB0F1A68A48E00110FCA /* RecordViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RecordViewController.swift; sourceTree = "<group>"; };
+		75C1CB111A68A61100110FCA /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
+		75C1CB131A68A71B00110FCA /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -80,6 +86,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				75C1CB141A68A71B00110FCA /* CoreLocation.framework in Frameworks */,
+				75C1CB121A68A61100110FCA /* MapKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -96,6 +104,7 @@
 		31CBD8BE1A662B5800BF195C = {
 			isa = PBXGroup;
 			children = (
+				75C1CB151A68A72200110FCA /* Frameworks */,
 				75B2484B1A68817B005ECBA1 /* 3rd Party Frameworks */,
 				31CBD8C91A662B5800BF195C /* MapPlant */,
 				31CBD8E21A662B5800BF195C /* MapPlantTests */,
@@ -120,6 +129,7 @@
 				31CBD8D81A662B5800BF195C /* LaunchScreen.xib */,
 				31CBD8CC1A662B5800BF195C /* AppDelegate.swift */,
 				31CBD8D11A662B5800BF195C /* HomeViewController.swift */,
+				75C1CB0F1A68A48E00110FCA /* RecordViewController.swift */,
 				31CBD8CA1A662B5800BF195C /* Supporting Files */,
 			);
 			path = MapPlant;
@@ -190,6 +200,15 @@
 				757057E71A688BD600C05B21 /* Session.swift */,
 			);
 			name = CoreData;
+			sourceTree = "<group>";
+		};
+		75C1CB151A68A72200110FCA /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				75C1CB131A68A71B00110FCA /* CoreLocation.framework */,
+				75C1CB111A68A61100110FCA /* MapKit.framework */,
+			);
+			name = Frameworks;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -301,6 +320,7 @@
 				75B248571A688197005ECBA1 /* Formatter.swift in Sources */,
 				757057EC1A688BD600C05B21 /* Group.swift in Sources */,
 				31CBD8D21A662B5800BF195C /* HomeViewController.swift in Sources */,
+				75C1CB101A68A48E00110FCA /* RecordViewController.swift in Sources */,
 				757057F41A688BD700C05B21 /* LogBook.swift in Sources */,
 				757057F01A688BD700C05B21 /* Route.swift in Sources */,
 				75B2485B1A688197005ECBA1 /* LogLocation.swift in Sources */,

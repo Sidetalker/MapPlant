@@ -10,20 +10,17 @@ import UIKit
 import CoreData
 
 class HomeViewController: UIViewController {
-    
-    lazy var managedObjectContext : NSManagedObjectContext? = {
-        let appDelegate = UIApplication.sharedApplication().delegate as AppDelegate
-        if let managedObjectContext = appDelegate.managedObjectContext { return managedObjectContext }
-        else { return nil } }()
+    // Logger
+    let logger = Swell.getLogger("HomeViewController")
 
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        if managedObjectContext == nil {
-            Swell.error("Could not load managedObjectContext")
-        } else {
-            Swell.info("managedObjectContext successfully loaded")
-        }
+        // Configure logging
+        //Swell.configureLogger("HomeViewController", level: LogLevel.DEBUG, formatter: LogFormatter.logFormatterForString("HomeVC"))
+        
+        
+        navigationController?.setNavigationBarHidden(true, animated: false)
         
         createTestRoute()
     }
@@ -39,6 +36,10 @@ class HomeViewController: UIViewController {
         // Dispose of any resources that can be recreated.
     }
     
+    override func prefersStatusBarHidden() -> Bool {
+        return true
+    }
+    
     func createTestRoute() {
         let testRoute = insertObject(Const.Data.Route) as Route
         
@@ -46,9 +47,9 @@ class HomeViewController: UIViewController {
     }
     
     func loadTestRoute() {
-        let routes = getObjects(Const.Data.Route) as [Route]
+        let routes = getObjects(Const.Data.Route, nil) as [Route]
         
-        Swell.info("We retrieved \(routes.count) routes - the first on is named \(routes[0].name)")
+        logger.info("We retrieved \(routes.count) routes - the first one is named \(routes[0].name)")
     }
 }
 

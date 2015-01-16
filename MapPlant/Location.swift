@@ -13,6 +13,7 @@ class Location: NSManagedObject {
 
     @NSManaged var lat: NSNumber
     @NSManaged var long: NSNumber
+    @NSManaged var accuracy: Double
     @NSManaged var locationSet: LocationSet
 
 }
