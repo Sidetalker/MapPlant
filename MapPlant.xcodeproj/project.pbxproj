@@ -10,6 +10,7 @@
 		31CBD8CD1A662B5800BF195C /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31CBD8CC1A662B5800BF195C /* AppDelegate.swift */; };
 		31CBD8D01A662B5800BF195C /* MapPlant.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 31CBD8CE1A662B5800BF195C /* MapPlant.xcdatamodeld */; };
 		31CBD8D21A662B5800BF195C /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31CBD8D11A662B5800BF195C /* HomeViewController.swift */; };
+		31CBD8D51A662B5800BF195C /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 31CBD8D31A662B5800BF195C /* Main.storyboard */; };
 		31CBD8D71A662B5800BF195C /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 31CBD8D61A662B5800BF195C /* Images.xcassets */; };
 		31CBD8DA1A662B5800BF195C /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 31CBD8D81A662B5800BF195C /* LaunchScreen.xib */; };
 		31CBD8E61A662B5800BF195C /* MapPlantTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31CBD8E51A662B5800BF195C /* MapPlantTests.swift */; };
@@ -51,6 +52,7 @@
 		31CBD8CC1A662B5800BF195C /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		31CBD8CF1A662B5800BF195C /* MapPlant.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = MapPlant.xcdatamodel; sourceTree = "<group>"; };
 		31CBD8D11A662B5800BF195C /* HomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
+		31CBD8D41A662B5800BF195C /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		31CBD8D61A662B5800BF195C /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		31CBD8D91A662B5800BF195C /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/LaunchScreen.xib; sourceTree = "<group>"; };
 		31CBD8DF1A662B5800BF195C /* MapPlantTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = MapPlantTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -123,6 +125,7 @@
 			isa = PBXGroup;
 			children = (
 				75C1CB0C1A688DBB00110FCA /* CoreData */,
+				31CBD8D31A662B5800BF195C /* Main.storyboard */,
 				31CBD8D81A662B5800BF195C /* LaunchScreen.xib */,
 				31CBD8CC1A662B5800BF195C /* AppDelegate.swift */,
 				31CBD8D11A662B5800BF195C /* HomeViewController.swift */,
@@ -290,6 +293,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				75B248561A688197005ECBA1 /* combine.sh in Resources */,
+				31CBD8D51A662B5800BF195C /* Main.storyboard in Resources */,
 				31CBD8DA1A662B5800BF195C /* LaunchScreen.xib in Resources */,
 				75B248581A688197005ECBA1 /* Info.plist in Resources */,
 				31CBD8D71A662B5800BF195C /* Images.xcassets in Resources */,
@@ -351,6 +355,14 @@
 /* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
+		31CBD8D31A662B5800BF195C /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				31CBD8D41A662B5800BF195C /* Base */,
+			);
+			name = Main.storyboard;
+			sourceTree = "<group>";
+		};
 		31CBD8D81A662B5800BF195C /* LaunchScreen.xib */ = {
 			isa = PBXVariantGroup;
 			children = (
