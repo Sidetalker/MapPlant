@@ -12,12 +12,18 @@ import CoreLocation
 
 class RecordViewController: UIViewController, CLLocationManagerDelegate, MKMapViewDelegate {
     // Map variables
-    //    @IBOutlet weak var mapView: MKMapView!
     var mapView = MKMapView()
+    
+    // UIControls
+    var state = 0
+    var startReset: UIButton!
+    var pauseResume: UIButton!
     
     // Location variables
     var locationManager = CLLocationManager()
-    var lastLoc: Location?
+    var lastLoc = [0.0, 0.0]
+    var allLocations = [CLLocationCoordinate2D]()
+    var allAccuracies = [CLLocationAccuracy]()
     
     // Logger
     let logger = Swell.getLogger("RecordViewController")
@@ -26,6 +32,8 @@ class RecordViewController: UIViewController, CLLocationManagerDelegate, MKMapVi
     var width: CGFloat = 0
     var height: CGFloat = 0
     
+    // MARK: - UIViewController overrides
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -33,23 +41,10 @@ class RecordViewController: UIViewController, CLLocationManagerDelegate, MKMapVi
         width = self.view.frame.size.width
         height = self.view.frame.size.height
         
-        // Create and configure the map
-        mapView = MKMapView(frame: CGRect(x: 0, y: 0, width: width, height: height / 2))
-        mapView.showsUserLocation = true
-        mapView.mapType = MKMapType.Standard
-        mapView.delegate = self
-        
-        // Add our subviews to main view
-        self.view.addSubview(mapView)
-        
-        // Configure map view
-        mapView.showsUserLocation = true
-        
-        // Configure location manager
-        locationManager.delegate = self
-        locationManager.desiredAccuracy = kCLLocationAccuracyBest
-        locationManager.requestAlwaysAuthorization()
-        locationManager.startUpdatingLocation()
+        // Configure location manager + locations
+        configureLocationManager()
+        configureButtons()
+        configureMap()
     }
     
     override func didReceiveMemoryWarning() {
@@ -58,6 +53,56 @@ class RecordViewController: UIViewController, CLLocationManagerDelegate, MKMapVi
     
     override func prefersStatusBarHidden() -> Bool {
         return true
+    }
+    
+    // MARK: - Initializations
+    
+    // Create and configure out buttons 
+    func configureButtons() {
+        startReset = UIButton.buttonWithType(UIButtonType.Custom) as UIButton
+        startReset.frame = CGRectMake(0, self.view.frame.size.height / 2, self.view.frame.size.width / 2, 44)
+        startReset.backgroundColor = UIColor.greenColor()
+        startReset.addTarget(self, action: "startResetPressed", forControlEvents: UIControlEvents.TouchUpInside)
+        startReset.setTitle("Start", forState: UIControlState.Normal)
+        
+        pauseResume = UIButton.buttonWithType(UIButtonType.Custom) as UIButton
+        pauseResume.frame = CGRectMake(self.view.frame.size.width / 2, self.view.frame.size.height / 2, self.view.frame.size.width / 2, 44)
+        pauseResume.backgroundColor = UIColor.lightGrayColor()
+        pauseResume.addTarget(self, action: "pauseResumePressed", forControlEvents: UIControlEvents.TouchUpInside)
+        pauseResume.setTitle("", forState: UIControlState.Normal)
+        
+        self.view.addSubview(startReset)
+        self.view.addSubview(pauseResume)
+    }
+    
+    // Create and configure the map
+    func configureMap() {
+        mapView = MKMapView(frame: CGRect(x: 0, y: 0, width: width, height: height / 2))
+        mapView.showsUserLocation = true
+        mapView.mapType = MKMapType.Standard
+        mapView.delegate = self
+        
+        self.view.addSubview(mapView)
+    }
+    
+    // Configure location manager
+    func configureLocationManager() {
+        locationManager.delegate = self
+        locationManager.desiredAccuracy = kCLLocationAccuracyBest
+        locationManager.requestAlwaysAuthorization()
+        locationManager.startUpdatingLocation()
+    }
+    
+    // MARK: - Button handlers
+    
+    func startResetPressed() {
+        Swell.debug("startResetPressed")
+        
+        
+    }
+    
+    func pauseResumePressed() {
+        Swell.debug("pauseResume")
     }
     
     // MARK: - Location manager delegates
@@ -73,20 +118,20 @@ class RecordViewController: UIViewController, CLLocationManagerDelegate, MKMapVi
     
     // Log location updates
     func locationManager(manager: CLLocationManager!, didUpdateLocations locations: [AnyObject]!) {
-        let location = insertObject(Const.Data.Location) as Location
+        var newLocation = true
         
-        location.lat = locationManager.location.coordinate.latitude
-        location.long = locationManager.location.coordinate.longitude
-        location.accuracy = locationManager.location.horizontalAccuracy
+        let lat = locationManager.location.coordinate.latitude
+        let long = locationManager.location.coordinate.longitude
+        let accuracy = locationManager.location.horizontalAccuracy
         
-        if let last = lastLoc {
-            if last.long != location.long || last.lat != location.lat {
-                Swell.debug("\(location.lat), \(location.long) - \(location.accuracy)")
-            }
+        let coordinate = CLLocationCoordinate2D(latitude: CLLocationDegrees(lat), longitude: CLLocationDegrees(long))
+        
+        // Only save the location if it's not the same as the last one
+        if lat != lastLoc[0] || long != lastLoc[1] {
+            allLocations.append(coordinate)
+            allAccuracies.append(accuracy)
+            lastLoc = [lat, long]
         }
-        
-        lastLoc = location
-        save()
     }
     
     // MARK: - Map delegates
@@ -95,27 +140,15 @@ class RecordViewController: UIViewController, CLLocationManagerDelegate, MKMapVi
     func mapView(mapView: MKMapView!, didUpdateUserLocation userLocation: MKUserLocation!) {
         // Gather location info
         var location = CLLocationCoordinate2D(latitude: userLocation.coordinate.latitude, longitude: userLocation.coordinate.longitude)
-        var span = MKCoordinateSpan(latitudeDelta: 0.005, longitudeDelta: 0.005)
+        var span = MKCoordinateSpan(latitudeDelta: 0.01, longitudeDelta: 0.01)
         var region = MKCoordinateRegion(center: location, span: span)
         
         // Zoom to the generated region
         mapView.setRegion(region, animated: true)
         
-        Swell.debug("Map received user location update")
-        
-        // Retrieve all locations
-        let locations = getObjects(Const.Data.Location, nil) as [Location]
-        
         // If we have at least two locations, create a polyline from all locations
-        if locations.count > 1 {
-            var coords = [CLLocationCoordinate2D]()
-            
-            for location in locations {
-                let curCoord = CLLocationCoordinate2D(latitude: location.lat as CLLocationDegrees, longitude: location.long as CLLocationDegrees)
-                coords.append(curCoord)
-            }
-            
-            let polyline = MKPolyline(coordinates: &coords, count: coords.count)
+        if allLocations.count > 1 {
+            let polyline = MKPolyline(coordinates: &allLocations, count: allLocations.count)
             
             mapView.addOverlay(polyline)
         }

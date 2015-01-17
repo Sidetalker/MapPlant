@@ -16,4 +16,16 @@ struct Const {
         static let Location = "Location"
         static let Session = "Session"
     }
+    
+    struct RecordState {
+        static let Initialized = 0
+        static let Running = 1
+        static let Paused = 2
+    }
+    
+    struct RecordMap {
+        static let TrackAndDraw = 0
+        static let TrackOnly = 1
+        static let DrawOnly = 2
+    }
 }

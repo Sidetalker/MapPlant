@@ -16,10 +16,6 @@ class HomeViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        // Configure logging
-        //Swell.configureLogger("HomeViewController", level: LogLevel.DEBUG, formatter: LogFormatter.logFormatterForString("HomeVC"))
-        
-        
         navigationController?.setNavigationBarHidden(true, animated: false)
         
         createTestRoute()

@@ -38,7 +38,10 @@ func getObjects(name: String, predicate: NSPredicate?) -> [AnyObject] {
 // Saves the CoreData stacks
 func save() {
     var error : NSError?
-    if (managedObjectContext!.save(&error) ) {
+    
+    managedObjectContext!.save(&error)
+    
+    if error != nil {
         println(error?.localizedDescription)
     }
 }
