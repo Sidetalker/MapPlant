@@ -2,7 +2,6 @@
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6254" systemVersion="14B25" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="R9z-b1-aG0">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6247"/>
-        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
     <scenes>
         <!--Home View Controller-->
@@ -67,55 +66,10 @@
                         <viewControllerLayoutGuide type="bottom" id="h4Q-3O-Bsp"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="Xo4-I9-cFO">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <subviews>
-                            <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="dGw-Sk-N0O">
-                                <rect key="frame" x="0.0" y="0.0" width="240" height="128"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="300" id="s2M-pW-dQq"/>
-                                </constraints>
-                                <variation key="default">
-                                    <mask key="constraints">
-                                        <exclude reference="s2M-pW-dQq"/>
-                                    </mask>
-                                </variation>
-                                <variation key="widthClass=compact">
-                                    <mask key="constraints">
-                                        <include reference="s2M-pW-dQq"/>
-                                    </mask>
-                                </variation>
-                            </mapView>
-                        </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                        <constraints>
-                            <constraint firstAttribute="trailingMargin" secondItem="dGw-Sk-N0O" secondAttribute="trailing" constant="-16" id="7oC-YJ-zC4"/>
-                            <constraint firstItem="dGw-Sk-N0O" firstAttribute="top" secondItem="wzK-zF-NgQ" secondAttribute="bottom" constant="-20" id="G50-F2-BC0"/>
-                            <constraint firstItem="dGw-Sk-N0O" firstAttribute="leading" secondItem="Xo4-I9-cFO" secondAttribute="leadingMargin" constant="-16" id="cZT-UY-fvp"/>
-                        </constraints>
-                        <variation key="default">
-                            <mask key="subviews">
-                                <exclude reference="dGw-Sk-N0O"/>
-                            </mask>
-                            <mask key="constraints">
-                                <exclude reference="7oC-YJ-zC4"/>
-                                <exclude reference="G50-F2-BC0"/>
-                                <exclude reference="cZT-UY-fvp"/>
-                            </mask>
-                        </variation>
-                        <variation key="widthClass=compact">
-                            <mask key="subviews">
-                                <include reference="dGw-Sk-N0O"/>
-                            </mask>
-                            <mask key="constraints">
-                                <include reference="7oC-YJ-zC4"/>
-                                <include reference="G50-F2-BC0"/>
-                                <include reference="cZT-UY-fvp"/>
-                            </mask>
-                        </variation>
                     </view>
-                    <connections>
-                        <outlet property="mapView" destination="dGw-Sk-N0O" id="fQw-sP-tUv"/>
-                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="5bh-DS-jaO" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
