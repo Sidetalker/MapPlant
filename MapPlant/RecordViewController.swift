@@ -22,17 +22,19 @@ class RecordViewController: UIViewController, CLLocationManagerDelegate, MKMapVi
     var btnClearQuit: UIButton!
     var btnToggleFocus: UIButton!
     var btnFinishRecording: UIButton!
-    var lblLocation: UILabel!
+    var lblInfo: UILabel!
     
     // State variables
     var state = Const.Record.Stopped
     var focus = Const.Record.FocusOn
+    var startTime = NSDate().timeIntervalSinceReferenceDate
     
     // Location variables
     var locationManager = CLLocationManager()
     var lastLoc = [0.0, 0.0]
     var allLocations = [CLLocationCoordinate2D]()
     var allAccuracies = [CLLocationAccuracy]()
+    var distance = 0.0
     
     // Logger
     let logger = Swell.getLogger("RecordViewController")
@@ -68,19 +70,19 @@ class RecordViewController: UIViewController, CLLocationManagerDelegate, MKMapVi
     // MARK: - Initializations
     
     func configureLabels() {
-        lblLocation = UILabel()
-        lblLocation.frame = CGRect(x: 10, y: height / 2 + Const.Record.ButtonHeight + 10, width: 0, height: 0)
-        lblLocation.font = UIFont(name: "Courier", size: 11)
-        lblLocation.text = "Lat: NULL\nLong: NULL\nAccuracy: NULL\nLocations: 0"
-        lblLocation.numberOfLines = 4
-        lblLocation.sizeToFit()
+        lblInfo = UILabel()
+        lblInfo.frame = CGRect(x: 10, y: height / 2 + Const.Record.ButtonHeight + 10, width: 0, height: 0)
+        lblInfo.font = UIFont(name: "Courier", size: 14)
+        lblInfo.text = "Lat: NULL\nLong: NULL\nAccuracy: NULL\nLocations: 0\nTime: 00:00\nDistance: 0 meters"
+        lblInfo.numberOfLines = 6
+        lblInfo.sizeToFit()
     
-        let finalPoint = lblLocation.frame.origin
-        let finalSize = CGSize(width: width / 2, height: lblLocation.frame.size.height)
+        let finalPoint = lblInfo.frame.origin
+        let finalSize = CGSize(width: width, height: lblInfo.frame.size.height)
         
-        lblLocation.frame = CGRect(origin: finalPoint, size: finalSize)
+        lblInfo.frame = CGRect(origin: finalPoint, size: finalSize)
         
-        self.view.addSubview(lblLocation)
+        self.view.addSubview(lblInfo)
     }
     
     // Create and configure our buttons 
@@ -255,11 +257,15 @@ class RecordViewController: UIViewController, CLLocationManagerDelegate, MKMapVi
             
             allLocations = [CLLocationCoordinate2D]()
             allAccuracies = [CLLocationAccuracy]()
+            startTime = NSDate().timeIntervalSinceReferenceDate
+            distance = 0.0
             
-            lblLocation.text = "Lat: NULL\nLong: NULL\nAccuracy: NULL\nLocations: 0"
+            lblInfo.text = "Lat: NULL\nLong: NULL\nAccuracy: NULL\nLocations: 0\nTime: 00:00\nDistance: 0 meters"
             
-            for overlay in mapView.overlays {
-                mapView.removeOverlay(overlay as MKOverlay)
+            if mapView.overlays != nil {
+                for overlay in mapView.overlays {
+                    mapView.removeOverlay(overlay as MKOverlay)
+                }
             }
         default:
             logger.error("Unrecognized State")
@@ -289,11 +295,37 @@ class RecordViewController: UIViewController, CLLocationManagerDelegate, MKMapVi
         
         // Only save the location if it's not the same as the last one
         if lat != lastLoc[0] || long != lastLoc[1] {
+            // Store the latest location data
             allLocations.append(coordinate)
             allAccuracies.append(accuracy)
+            
+            // Determine the current record time
+            let curTime = NSDate().timeIntervalSinceReferenceDate
+            var elapsedTime: NSTimeInterval = curTime - startTime
+            
+            let minutes = UInt8(elapsedTime / 60.0)
+            elapsedTime -= NSTimeInterval(minutes) * 60
+            
+            let seconds = UInt8(elapsedTime)
+            elapsedTime -= NSTimeInterval(seconds)
+            
+            let strMinutes = minutes > 9 ? String(minutes):"0" + String(minutes)
+            let strSeconds = seconds > 9 ? String(seconds):"0" + String(seconds)
+            
+            let timeString = "\(strMinutes):\(strSeconds)"
+            
+            // Update the total distance
+            if lastLoc[0] != 0 || lastLoc[1] != 0 {
+                let lastDistance = locationManager.location.distanceFromLocation(CLLocation(latitude: lastLoc[0], longitude: lastLoc[1]))
+                
+                distance += lastDistance
+            }
+            
+            // Update the previous location variable
             lastLoc = [lat, long]
             
-            lblLocation.text = "Lat: \(lat)°\nLong: \(long)°\nAccuracy: \(round(accuracy)) ft.\nLocations: \(allLocations.count)"
+            // Update the information label
+            lblInfo.text = "Lat: \(lat)°\nLong: \(long)°\nAccuracy: \(round(accuracy)) ft.\nLocations: \(allLocations.count)\nTime: \(timeString)\nDistance: \(round(distance * 100)/100) meters"
         }
         
         // If we have at least two locations, create a polyline from all locations
