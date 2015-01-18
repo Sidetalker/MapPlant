@@ -18,11 +18,14 @@ class RecordViewController: UIViewController, CLLocationManagerDelegate, MKMapVi
     var lineWidth: CGFloat = 2.5
     
     // UIControls
-    var state = Const.RecordState.Stopped
-    var focus = Const.RecordMap.FocusOn
-    var startStop: UIButton!
-    var clearQuit: UIButton!
-    var toggleFocus: UIButton!
+    var btnStartStop: UIButton!
+    var btnClearQuit: UIButton!
+    var btnToggleFocus: UIButton!
+    var lblLocation: UILabel!
+    
+    // State variables
+    var state = Const.Record.Stopped
+    var focus = Const.Record.FocusOn
     
     // Location variables
     var locationManager = CLLocationManager()
@@ -49,6 +52,7 @@ class RecordViewController: UIViewController, CLLocationManagerDelegate, MKMapVi
         // Configure location manager + locations
         configureLocationManager()
         configureButtons()
+        configureLabels()
         configureMap()
     }
     
@@ -62,28 +66,44 @@ class RecordViewController: UIViewController, CLLocationManagerDelegate, MKMapVi
     
     // MARK: - Initializations
     
-    // Create and configure out buttons 
+    func configureLabels() {
+        lblLocation = UILabel()
+        lblLocation.frame = CGRect(x: 0, y: height / 2 + Const.Record.ButtonHeight, width: 0, height: 0)
+        lblLocation.font = UIFont(name: "Courier", size: 11)
+        lblLocation.text = "Lat: NULL\nLong: NULL\nAccuracy: NULL\nLocations: 0"
+        lblLocation.numberOfLines = 4
+        lblLocation.sizeToFit()
+    
+        let finalPoint = lblLocation.frame.origin
+        let finalSize = CGSize(width: width / 2, height: lblLocation.frame.size.height)
+        
+        lblLocation.frame = CGRect(origin: finalPoint, size: finalSize)
+        
+        self.view.addSubview(lblLocation)
+    }
+    
+    // Create and configure our buttons 
     func configureButtons() {
-        startStop = UIButton.buttonWithType(UIButtonType.Custom) as UIButton
-        startStop.frame = CGRectMake(0, self.view.frame.size.height / 2, self.view.frame.size.width / 2 - 22, 44)
-        startStop.backgroundColor = UIColor.greenColor()
-        startStop.addTarget(self, action: "startStopPressed", forControlEvents: UIControlEvents.TouchUpInside)
-        startStop.setTitle("Start", forState: UIControlState.Normal)
+        btnStartStop = UIButton.buttonWithType(UIButtonType.Custom) as UIButton
+        btnStartStop.frame = CGRectMake(0, height / 2, width / 2 - 22, Const.Record.ButtonHeight)
+        btnStartStop.backgroundColor = UIColor.greenColor()
+        btnStartStop.addTarget(self, action: "btnStartStopPressed", forControlEvents: UIControlEvents.TouchUpInside)
+        btnStartStop.setTitle("Start", forState: UIControlState.Normal)
         
-        clearQuit = UIButton.buttonWithType(UIButtonType.Custom) as UIButton
-        clearQuit.frame = CGRectMake(self.view.frame.size.width / 2 + 22, self.view.frame.size.height / 2, self.view.frame.size.width / 2 - 22, 44)
-        clearQuit.backgroundColor = UIColor.darkGrayColor()
-        clearQuit.addTarget(self, action: "clearQuitPressed", forControlEvents: UIControlEvents.TouchUpInside)
-        clearQuit.setTitle("Quit", forState: UIControlState.Normal)
+        btnClearQuit = UIButton.buttonWithType(UIButtonType.Custom) as UIButton
+        btnClearQuit.frame = CGRectMake(width / 2 + 22, height / 2, width / 2 - 22, Const.Record.ButtonHeight)
+        btnClearQuit.backgroundColor = UIColor.darkGrayColor()
+        btnClearQuit.addTarget(self, action: "btnClearQuitPressed", forControlEvents: UIControlEvents.TouchUpInside)
+        btnClearQuit.setTitle("Quit", forState: UIControlState.Normal)
         
-        toggleFocus = UIButton.buttonWithType(UIButtonType.Custom) as UIButton
-        toggleFocus.frame = CGRectMake(self.view.frame.size.width / 2 - 22, self.view.frame.size.height / 2, 44, 44)
-        toggleFocus.backgroundColor = UIColor.blueColor()
-        toggleFocus.addTarget(self, action: "toggleFocusPressed", forControlEvents: UIControlEvents.TouchUpInside)
+        btnToggleFocus = UIButton.buttonWithType(UIButtonType.Custom) as UIButton
+        btnToggleFocus.frame = CGRectMake(width / 2 - 22, height / 2, 44, Const.Record.ButtonHeight)
+        btnToggleFocus.backgroundColor = UIColor.blueColor()
+        btnToggleFocus.addTarget(self, action: "btnToggleFocusPressed", forControlEvents: UIControlEvents.TouchUpInside)
         
-        self.view.addSubview(startStop)
-        self.view.addSubview(clearQuit)
-        self.view.addSubview(toggleFocus)
+        self.view.addSubview(btnStartStop)
+        self.view.addSubview(btnClearQuit)
+        self.view.addSubview(btnToggleFocus)
     }
     
     // Create and configure the map
@@ -105,72 +125,77 @@ class RecordViewController: UIViewController, CLLocationManagerDelegate, MKMapVi
     
     // MARK: - Button handlers
     
-    func toggleFocusPressed() {
-        if focus == Const.RecordMap.FocusOn {
+    // Enable / disable display and tracking of blue dot on map
+    func btnToggleFocusPressed() {
+        if focus == Const.Record.FocusOn {
             logger.debug("Focus Off")
             mapView.showsUserLocation = false
-            toggleFocus.backgroundColor = UIColor.lightGrayColor()
-            focus = Const.RecordMap.FocusOff
+            btnToggleFocus.backgroundColor = UIColor.lightGrayColor()
+            focus = Const.Record.FocusOff
         }
         else {
             logger.debug("Focus On")
             mapView.showsUserLocation = true
-            toggleFocus.backgroundColor = UIColor.blueColor()
-            focus = Const.RecordMap.FocusOn
+            btnToggleFocus.backgroundColor = UIColor.blueColor()
+            focus = Const.Record.FocusOn
         }
     }
     
-    func startStopPressed() {
+    // Start or stop location logging
+    func btnStartStopPressed() {
         switch state {
-        case Const.RecordState.Stopped:
+        case Const.Record.Stopped:
             startRecording()
-        case Const.RecordState.Running:
+        case Const.Record.Running:
             stopRecording()
         default:
             logger.error("Unrecognized State")
         }
     }
     
+    // Update state, location manager and buttons to begin recording
     func startRecording() {
         logger.debug("Started Recording")
         
         // Change state
-        state = Const.RecordState.Running
+        state = Const.Record.Running
         
         // Update buttons
-        startStop.backgroundColor = UIColor.orangeColor()
-        startStop.setTitle("Stop", forState: UIControlState.Normal)
+        btnStartStop.backgroundColor = UIColor.orangeColor()
+        btnStartStop.setTitle("Stop", forState: UIControlState.Normal)
         
-        clearQuit.backgroundColor = UIColor.redColor()
-        clearQuit.setTitle("Reset", forState: UIControlState.Normal)
+        btnClearQuit.backgroundColor = UIColor.redColor()
+        btnClearQuit.setTitle("Reset", forState: UIControlState.Normal)
         
         // Begin recording location again
         locationManager.startUpdatingLocation()
     }
     
+    // Update state, location manager and buttons to stop recording
     func stopRecording() {
         logger.debug("Stopped Recording")
         
         // Change state
-        state = Const.RecordState.Stopped
+        state = Const.Record.Stopped
         
         // Update buttons
-        clearQuit.backgroundColor = UIColor.darkGrayColor()
-        clearQuit.setTitle("Quit", forState: UIControlState.Normal)
+        btnClearQuit.backgroundColor = UIColor.darkGrayColor()
+        btnClearQuit.setTitle("Quit", forState: UIControlState.Normal)
         
-        startStop.backgroundColor = UIColor.greenColor()
-        startStop.setTitle("Start", forState: UIControlState.Normal)
+        btnStartStop.backgroundColor = UIColor.greenColor()
+        btnStartStop.setTitle("Start", forState: UIControlState.Normal)
         
         // Stop recording user location
         locationManager.stopUpdatingLocation()
     }
     
-    func clearQuitPressed() {
+    // Clear the location data or exit depending on state
+    func btnClearQuitPressed() {
         switch state {
-        case Const.RecordState.Stopped:
+        case Const.Record.Stopped:
             logger.debug("Quitting Record")
             self.dismissViewControllerAnimated(true, completion: nil)
-        case Const.RecordState.Running:
+        case Const.Record.Running:
             logger.debug("Clearing all Data")
             allLocations = [CLLocationCoordinate2D]()
             allAccuracies = [CLLocationAccuracy]()
@@ -209,6 +234,8 @@ class RecordViewController: UIViewController, CLLocationManagerDelegate, MKMapVi
             allLocations.append(coordinate)
             allAccuracies.append(accuracy)
             lastLoc = [lat, long]
+            
+            lblLocation.text = "Lat: \(lat)°\nLong: \(long)°\nAccuracy: \(round(accuracy)) ft.\nLocations: \(allLocations.count)"
         }
         
         // If we have at least two locations, create a polyline from all locations

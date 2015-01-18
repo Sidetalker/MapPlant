@@ -6,6 +6,8 @@
 //  Copyright (c) 2015 Kevin Sullivan. All rights reserved.
 //
 
+import UIKit
+
 struct Const {
     struct Data {
         static let LogBook = "LogBook"
@@ -17,13 +19,11 @@ struct Const {
         static let Session = "Session"
     }
     
-    struct RecordState {
-        static let Running = 1
-        static let Stopped = 0
-    }
-    
-    struct RecordMap {
-        static let FocusOn = 0
-        static let FocusOff = 1
+    struct Record {
+        static let Running = 0
+        static let Stopped = 1
+        static let FocusOn = 2
+        static let FocusOff = 3
+        static let ButtonHeight: CGFloat = 44
     }
 }
