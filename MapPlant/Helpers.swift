@@ -45,3 +45,10 @@ func save() {
         println(error?.localizedDescription)
     }
 }
+
+// Extends arrays to access the last index with a .last
+extension Array {
+    var last: T {
+        return self[self.endIndex - 1]
+    }
+}

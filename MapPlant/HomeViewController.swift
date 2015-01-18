@@ -10,43 +10,60 @@ import UIKit
 import CoreData
 
 class HomeViewController: UIViewController {
-    // Logger
+    // Logger configuration
     let logger = Swell.getLogger("HomeViewController")
 
+    // MARK: - UIViewController overrides
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
         navigationController?.setNavigationBarHidden(true, animated: false)
         
-        createTestRoute()
+        generateDefaults()
     }
     
     override func viewDidAppear(animated: Bool) {
         super.viewDidAppear(true)
-        
-        loadTestRoute()
     }
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
     }
     
     override func prefersStatusBarHidden() -> Bool {
         return true
     }
     
-    func createTestRoute() {
-        let testRoute = insertObject(Const.Data.Route) as Route
-        
-        testRoute.name = "Test Route"
-        save()
-    }
-    
-    func loadTestRoute() {
+    // Generates default group and route if CoreData is unpopulated
+    func generateDefaults() {
         let routes = getObjects(Const.Data.Route, nil) as [Route]
+        let groups = getObjects(Const.Data.Group, nil) as [Group]
         
-        logger.info("We retrieved \(routes.count) routes - the first one is named \(routes[0].name)")
+        var defaultGroup: Group?
+        var defaultRoute: Route?
+        
+        if groups.count == 0 {
+            logger.debug("Generated default group")
+            
+            defaultGroup = insertObject(Const.Data.Group) as? Group
+            defaultGroup!.name = "My Groups"
+            
+            save()
+        }
+        else {
+            defaultGroup = groups[0]
+        }
+        
+        if routes.count == 0 {
+            logger.debug("Generated default route")
+            
+            defaultRoute = insertObject(Const.Data.Route) as? Route
+            defaultRoute!.name = "My Route"
+            defaultRoute!.group = defaultGroup!
+            
+            save()
+        }
     }
 }
 

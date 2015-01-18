@@ -21,6 +21,7 @@ class RecordViewController: UIViewController, CLLocationManagerDelegate, MKMapVi
     var btnStartStop: UIButton!
     var btnClearQuit: UIButton!
     var btnToggleFocus: UIButton!
+    var btnFinishRecording: UIButton!
     var lblLocation: UILabel!
     
     // State variables
@@ -68,7 +69,7 @@ class RecordViewController: UIViewController, CLLocationManagerDelegate, MKMapVi
     
     func configureLabels() {
         lblLocation = UILabel()
-        lblLocation.frame = CGRect(x: 0, y: height / 2 + Const.Record.ButtonHeight, width: 0, height: 0)
+        lblLocation.frame = CGRect(x: 10, y: height / 2 + Const.Record.ButtonHeight + 10, width: 0, height: 0)
         lblLocation.font = UIFont(name: "Courier", size: 11)
         lblLocation.text = "Lat: NULL\nLong: NULL\nAccuracy: NULL\nLocations: 0"
         lblLocation.numberOfLines = 4
@@ -101,9 +102,16 @@ class RecordViewController: UIViewController, CLLocationManagerDelegate, MKMapVi
         btnToggleFocus.backgroundColor = UIColor.blueColor()
         btnToggleFocus.addTarget(self, action: "btnToggleFocusPressed", forControlEvents: UIControlEvents.TouchUpInside)
         
+        btnFinishRecording = UIButton.buttonWithType(UIButtonType.Custom) as UIButton
+        btnFinishRecording.frame = CGRectMake(0, height - Const.Record.ButtonHeight, width, Const.Record.ButtonHeight)
+        btnFinishRecording.backgroundColor = UIColor.purpleColor()
+        btnFinishRecording.addTarget(self, action: "btnFinishRecordingPressed", forControlEvents: UIControlEvents.TouchUpInside)
+        btnFinishRecording.setTitle("Finish Recording", forState: UIControlState.Normal)
+        
         self.view.addSubview(btnStartStop)
         self.view.addSubview(btnClearQuit)
         self.view.addSubview(btnToggleFocus)
+        self.view.addSubview(btnFinishRecording)
     }
     
     // Create and configure the map
@@ -124,6 +132,52 @@ class RecordViewController: UIViewController, CLLocationManagerDelegate, MKMapVi
     }
     
     // MARK: - Button handlers
+    
+    // Save the location data to CoreData store and transition to
+    func btnFinishRecordingPressed() {
+        logger.debug("Finishing Recording")
+        
+        // Make sure the location count matches the accuracy count
+        if allLocations.count != allAccuracies.count {
+            logger.error("Location count doesn't match accuracy count")
+            return
+        }
+        
+        // Make sure we HAVE a location
+        if allLocations.count == 0 {
+            logger.error("We don't have any locations logged you moron!")
+            return
+        }
+        
+        // Create a location set
+        let locationSet = insertObject(Const.Data.LocationSet) as LocationSet
+        let session = insertObject(Const.Data.Session) as Session
+        var route: Route!
+        
+        locationSet.session = session
+        
+        session.name = "New Session"
+        session.date = NSDate()
+        session.locationSet = locationSet
+        
+        var tempLocations = [Location]()
+        
+        // Save all locations to CoreData
+        for i in 0...allLocations.count - 1 {
+            let location = insertObject(Const.Data.Location) as Location
+            
+            location.lat = allLocations[i].latitude as Double
+            location.long = allLocations[i].longitude as Double
+            location.accuracy = allAccuracies[i] as Double
+            location.locationSet = locationSet
+            
+            tempLocations.append(location)
+            
+            save()
+        }
+        
+        locationSet.locations = NSOrderedSet(array: tempLocations)
+    }
     
     // Enable / disable display and tracking of blue dot on map
     func btnToggleFocusPressed() {
@@ -194,11 +248,15 @@ class RecordViewController: UIViewController, CLLocationManagerDelegate, MKMapVi
         switch state {
         case Const.Record.Stopped:
             logger.debug("Quitting Record")
+            
             self.dismissViewControllerAnimated(true, completion: nil)
         case Const.Record.Running:
             logger.debug("Clearing all Data")
+            
             allLocations = [CLLocationCoordinate2D]()
             allAccuracies = [CLLocationAccuracy]()
+            
+            lblLocation.text = "Lat: NULL\nLong: NULL\nAccuracy: NULL\nLocations: 0"
             
             for overlay in mapView.overlays {
                 mapView.removeOverlay(overlay as MKOverlay)
