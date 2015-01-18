@@ -13,11 +13,16 @@ import CoreLocation
 class RecordViewController: UIViewController, CLLocationManagerDelegate, MKMapViewDelegate {
     // Map variables
     var mapView = MKMapView()
+    var polyline = MKPolyline()
+    var lineColor = UIColor.redColor()
+    var lineWidth: CGFloat = 2.5
     
     // UIControls
-    var state = 0
-    var startReset: UIButton!
-    var pauseResume: UIButton!
+    var state = Const.RecordState.Stopped
+    var focus = Const.RecordMap.FocusOn
+    var startStop: UIButton!
+    var clearQuit: UIButton!
+    var toggleFocus: UIButton!
     
     // Location variables
     var locationManager = CLLocationManager()
@@ -59,20 +64,26 @@ class RecordViewController: UIViewController, CLLocationManagerDelegate, MKMapVi
     
     // Create and configure out buttons 
     func configureButtons() {
-        startReset = UIButton.buttonWithType(UIButtonType.Custom) as UIButton
-        startReset.frame = CGRectMake(0, self.view.frame.size.height / 2, self.view.frame.size.width / 2, 44)
-        startReset.backgroundColor = UIColor.greenColor()
-        startReset.addTarget(self, action: "startResetPressed", forControlEvents: UIControlEvents.TouchUpInside)
-        startReset.setTitle("Start", forState: UIControlState.Normal)
+        startStop = UIButton.buttonWithType(UIButtonType.Custom) as UIButton
+        startStop.frame = CGRectMake(0, self.view.frame.size.height / 2, self.view.frame.size.width / 2 - 22, 44)
+        startStop.backgroundColor = UIColor.greenColor()
+        startStop.addTarget(self, action: "startStopPressed", forControlEvents: UIControlEvents.TouchUpInside)
+        startStop.setTitle("Start", forState: UIControlState.Normal)
         
-        pauseResume = UIButton.buttonWithType(UIButtonType.Custom) as UIButton
-        pauseResume.frame = CGRectMake(self.view.frame.size.width / 2, self.view.frame.size.height / 2, self.view.frame.size.width / 2, 44)
-        pauseResume.backgroundColor = UIColor.lightGrayColor()
-        pauseResume.addTarget(self, action: "pauseResumePressed", forControlEvents: UIControlEvents.TouchUpInside)
-        pauseResume.setTitle("", forState: UIControlState.Normal)
+        clearQuit = UIButton.buttonWithType(UIButtonType.Custom) as UIButton
+        clearQuit.frame = CGRectMake(self.view.frame.size.width / 2 + 22, self.view.frame.size.height / 2, self.view.frame.size.width / 2 - 22, 44)
+        clearQuit.backgroundColor = UIColor.darkGrayColor()
+        clearQuit.addTarget(self, action: "clearQuitPressed", forControlEvents: UIControlEvents.TouchUpInside)
+        clearQuit.setTitle("Quit", forState: UIControlState.Normal)
         
-        self.view.addSubview(startReset)
-        self.view.addSubview(pauseResume)
+        toggleFocus = UIButton.buttonWithType(UIButtonType.Custom) as UIButton
+        toggleFocus.frame = CGRectMake(self.view.frame.size.width / 2 - 22, self.view.frame.size.height / 2, 44, 44)
+        toggleFocus.backgroundColor = UIColor.blueColor()
+        toggleFocus.addTarget(self, action: "toggleFocusPressed", forControlEvents: UIControlEvents.TouchUpInside)
+        
+        self.view.addSubview(startStop)
+        self.view.addSubview(clearQuit)
+        self.view.addSubview(toggleFocus)
     }
     
     // Create and configure the map
@@ -90,19 +101,86 @@ class RecordViewController: UIViewController, CLLocationManagerDelegate, MKMapVi
         locationManager.delegate = self
         locationManager.desiredAccuracy = kCLLocationAccuracyBest
         locationManager.requestAlwaysAuthorization()
-        locationManager.startUpdatingLocation()
     }
     
     // MARK: - Button handlers
     
-    func startResetPressed() {
-        Swell.debug("startResetPressed")
-        
-        
+    func toggleFocusPressed() {
+        if focus == Const.RecordMap.FocusOn {
+            logger.debug("Focus Off")
+            mapView.showsUserLocation = false
+            toggleFocus.backgroundColor = UIColor.lightGrayColor()
+            focus = Const.RecordMap.FocusOff
+        }
+        else {
+            logger.debug("Focus On")
+            mapView.showsUserLocation = true
+            toggleFocus.backgroundColor = UIColor.blueColor()
+            focus = Const.RecordMap.FocusOn
+        }
     }
     
-    func pauseResumePressed() {
-        Swell.debug("pauseResume")
+    func startStopPressed() {
+        switch state {
+        case Const.RecordState.Stopped:
+            startRecording()
+        case Const.RecordState.Running:
+            stopRecording()
+        default:
+            logger.error("Unrecognized State")
+        }
+    }
+    
+    func startRecording() {
+        logger.debug("Started Recording")
+        
+        // Change state
+        state = Const.RecordState.Running
+        
+        // Update buttons
+        startStop.backgroundColor = UIColor.orangeColor()
+        startStop.setTitle("Stop", forState: UIControlState.Normal)
+        
+        clearQuit.backgroundColor = UIColor.redColor()
+        clearQuit.setTitle("Reset", forState: UIControlState.Normal)
+        
+        // Begin recording location again
+        locationManager.startUpdatingLocation()
+    }
+    
+    func stopRecording() {
+        logger.debug("Stopped Recording")
+        
+        // Change state
+        state = Const.RecordState.Stopped
+        
+        // Update buttons
+        clearQuit.backgroundColor = UIColor.darkGrayColor()
+        clearQuit.setTitle("Quit", forState: UIControlState.Normal)
+        
+        startStop.backgroundColor = UIColor.greenColor()
+        startStop.setTitle("Start", forState: UIControlState.Normal)
+        
+        // Stop recording user location
+        locationManager.stopUpdatingLocation()
+    }
+    
+    func clearQuitPressed() {
+        switch state {
+        case Const.RecordState.Stopped:
+            logger.debug("Quitting Record")
+            self.dismissViewControllerAnimated(true, completion: nil)
+        case Const.RecordState.Running:
+            logger.debug("Clearing all Data")
+            allLocations = [CLLocationCoordinate2D]()
+            allAccuracies = [CLLocationAccuracy]()
+            
+            for overlay in mapView.overlays {
+                mapView.removeOverlay(overlay as MKOverlay)
+            }
+        default:
+            logger.error("Unrecognized State")
+        }
     }
     
     // MARK: - Location manager delegates
@@ -112,7 +190,7 @@ class RecordViewController: UIViewController, CLLocationManagerDelegate, MKMapVi
         locationManager.stopUpdatingLocation()
         
         if (error != nil) {
-            Swell.error("Location manager failed with error: \(error)")
+            logger.error("Location manager failed with error: \(error)")
         }
     }
     
@@ -132,6 +210,13 @@ class RecordViewController: UIViewController, CLLocationManagerDelegate, MKMapVi
             allAccuracies.append(accuracy)
             lastLoc = [lat, long]
         }
+        
+        // If we have at least two locations, create a polyline from all locations
+        if allLocations.count > 1 {
+            polyline = MKPolyline(coordinates: &allLocations, count: allLocations.count)
+            
+            mapView.addOverlay(polyline)
+        }
     }
     
     // MARK: - Map delegates
@@ -145,21 +230,14 @@ class RecordViewController: UIViewController, CLLocationManagerDelegate, MKMapVi
         
         // Zoom to the generated region
         mapView.setRegion(region, animated: true)
-        
-        // If we have at least two locations, create a polyline from all locations
-        if allLocations.count > 1 {
-            let polyline = MKPolyline(coordinates: &allLocations, count: allLocations.count)
-            
-            mapView.addOverlay(polyline)
-        }
     }
 
     // Handle polyline drawing
     func mapView(mapView: MKMapView!, rendererForOverlay overlay: MKOverlay!) -> MKOverlayRenderer! {
         if overlay is MKPolyline {
             let renderer = MKPolylineRenderer(overlay: overlay)
-            renderer.strokeColor = UIColor.redColor()
-            renderer.lineWidth = 4
+            renderer.strokeColor = lineColor
+            renderer.lineWidth = lineWidth
         
             return renderer
         }
