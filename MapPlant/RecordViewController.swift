@@ -10,6 +10,37 @@ import UIKit
 import MapKit
 import CoreLocation
 
+class RecordSaveViewController: UITableViewController {
+    
+    // IBOutlets
+    @IBOutlet weak var lblSessionName: UILabel!
+    @IBOutlet weak var lblSessionTimestamp: UILabel!
+    @IBOutlet weak var lblRouteName: UILabel!
+    @IBOutlet weak var lblGroupName: UILabel!
+    @IBOutlet weak var lblDataPointCount: UILabel!
+    @IBOutlet weak var lblSessionTime: UILabel!
+    @IBOutlet weak var lblDistance: UILabel!
+    
+//    let dateFormatter = NSDateFormatter()
+//    dateFormatter.dateFormat = "MM/DD/YY | HH:MM:SS"
+//    let str = dateFormatter.stringFromDate(NSDate())
+    
+    // Matching variables
+    var sessionName = "My New Session"
+    var sessionTimestamp = NSDate.timeIntervalSinceReferenceDate()
+    var routeName = "My New Route"
+    var groupName = "My New Group"
+    var dataPoints = -1
+    var sessionTime = NSTimeInterval(1)
+    var distance = 0.0
+    
+    // MARK: - UITableViewController overrides
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+    }
+}
+
 class RecordViewController: UIViewController, CLLocationManagerDelegate, MKMapViewDelegate {
     // Map variables
     var mapView = MKMapView()
@@ -28,6 +59,7 @@ class RecordViewController: UIViewController, CLLocationManagerDelegate, MKMapVi
     var state = Const.Record.Stopped
     var focus = Const.Record.FocusOn
     var startTime = NSDate().timeIntervalSinceReferenceDate
+    var session = Session()
     
     // Location variables
     var locationManager = CLLocationManager()
@@ -153,7 +185,7 @@ class RecordViewController: UIViewController, CLLocationManagerDelegate, MKMapVi
         
         // Create a location set
         let locationSet = insertObject(Const.Data.LocationSet) as LocationSet
-        let session = insertObject(Const.Data.Session) as Session
+        session = insertObject(Const.Data.Session) as Session
         var route: Route!
         
         locationSet.session = session
@@ -174,11 +206,13 @@ class RecordViewController: UIViewController, CLLocationManagerDelegate, MKMapVi
             location.locationSet = locationSet
             
             tempLocations.append(location)
-            
-            save()
         }
         
         locationSet.locations = NSOrderedSet(array: tempLocations)
+        
+        save()
+        
+        performSegueWithIdentifier(Const.Segue.RecordToSave, sender: self)
     }
     
     // Enable / disable display and tracking of blue dot on map
@@ -269,6 +303,19 @@ class RecordViewController: UIViewController, CLLocationManagerDelegate, MKMapVi
             }
         default:
             logger.error("Unrecognized State")
+        }
+    }
+    
+    // MARK: - Segue preparation
+    
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+        if segue.identifier == Const.Segue.RecordToSave {
+            let saveVC = segue.destinationViewController as RecordSaveViewController
+            
+            saveVC.sessionTimestamp = startTime
+            saveVC.sessionTime = NSDate().timeIntervalSinceReferenceDate - startTime
+            saveVC.dataPoints = allLocations.count
+            saveVC.distance = distance
         }
     }
     

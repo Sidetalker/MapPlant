@@ -47,7 +47,7 @@ class HomeViewController: UIViewController {
             logger.debug("Generated default group")
             
             defaultGroup = insertObject(Const.Data.Group) as? Group
-            defaultGroup!.name = "My Groups"
+            defaultGroup!.name = "My First Group"
             
             save()
         }
@@ -59,7 +59,7 @@ class HomeViewController: UIViewController {
             logger.debug("Generated default route")
             
             defaultRoute = insertObject(Const.Data.Route) as? Route
-            defaultRoute!.name = "My Route"
+            defaultRoute!.name = "My First Route"
             defaultRoute!.group = defaultGroup!
             
             save()

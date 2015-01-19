@@ -26,4 +26,12 @@ struct Const {
         static let FocusOff = 3
         static let ButtonHeight: CGFloat = 44
     }
+    
+    struct Cell {
+        static let Route = "routeCell"
+    }
+    
+    struct Segue {
+        static let RecordToSave = "segueRecordSave"
+    }
 }
