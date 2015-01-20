@@ -62,7 +62,7 @@ class RouteTableContainer: UIViewController {
         
         editController.addAction(addGroup)
         editController.addAction(removeGroup)
-        editController.addAction(reorder)
+//        editController.addAction(reorder)
         editController.addAction(cancelAction)
         
         self.presentViewController(editController, animated: true) { (_) in
@@ -73,7 +73,7 @@ class RouteTableContainer: UIViewController {
     func addGroup() {
         logger.debug("Adding a new group")
         
-        let newGroupController = UIAlertController(title: "Add Group", message: "Enter the new group and routes name", preferredStyle: UIAlertControllerStyle.Alert)
+        let newGroupController = UIAlertController(title: "Add Group", message: "Enter the new group and route name", preferredStyle: UIAlertControllerStyle.Alert)
         
         let createAction = UIAlertAction(title: "Create", style: UIAlertActionStyle.Default) { (_) in
             let groupTextField = newGroupController.textFields![0] as UITextField
@@ -379,7 +379,7 @@ class RouteTableViewController: UITableViewController, UITableViewDelegate, UITa
     
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
-        //UINavigationControllerHideShowBarDuration
+        
         navigationController?.setNavigationBarHidden(true, animated: false)
     }
     
@@ -409,8 +409,10 @@ class RouteTableViewController: UITableViewController, UITableViewDelegate, UITa
             
             // Enumerate the objects in our NSOrderedSet and save the route names
             routes.enumerateObjectsUsingBlock { (route, index, stop) -> Void in
-                tempRouteNames.append(route.name)
-                tempSessionCounts.append(routes.count)
+                if let myRoute = route as? Route {
+                    tempRouteNames.append(myRoute.name)
+                    tempSessionCounts.append(myRoute.session.count)
+                }
             }
             
             routeNames.append(tempRouteNames)
@@ -434,16 +436,55 @@ class RouteTableViewController: UITableViewController, UITableViewDelegate, UITa
         return groupNames[section]
     }
     
+    override func tableView(tableView: UITableView, canEditRowAtIndexPath indexPath: NSIndexPath) -> Bool {
+        return true
+    }
+    
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell
     {
-        // This will be the case for programmatically loaded cells (see viewDidLoad to switch approaches)
         if let cell = tableView.dequeueReusableCellWithIdentifier(Const.Cell.Route) as? UITableViewCell {
-            cell.textLabel!.text = "\(routeNames[indexPath.section][indexPath.row]) - \(sessionCounts[indexPath.section][indexPath.row])"
+            cell.textLabel!.text = "\(routeNames[indexPath.section][indexPath.row])"
+            
+            if sessionCounts[indexPath.section][indexPath.row] == 1 {
+                cell.detailTextLabel!.text = "\(sessionCounts[indexPath.section][indexPath.row]) session"
+            }
+            else {
+                cell.detailTextLabel!.text = "\(sessionCounts[indexPath.section][indexPath.row]) sessions"
+            }
+            
             return cell
         }
         
         logger.error("Did not recognize reusable cell")
         return UITableViewCell();
+    }
+    
+    override func tableView(tableView: UITableView, commitEditingStyle editingStyle: UITableViewCellEditingStyle, forRowAtIndexPath indexPath: NSIndexPath) {
+        if editingStyle == UITableViewCellEditingStyle.Delete {
+            let allGroups = getObjects(Const.Data.Group, nil) as? [Group]
+            let curGroup = allGroups![indexPath.section]
+            let allRoutes = curGroup.routes
+            let curRoute = allRoutes[indexPath.row] as Route
+            
+            var mutableRoutes = curGroup.routes.mutableCopy() as NSMutableOrderedSet
+            managedObjectContext!.deleteObject(curRoute)
+            mutableRoutes.removeObjectAtIndex(indexPath.row)
+            curGroup.routes = mutableRoutes.copy() as NSOrderedSet
+            
+            self.tableView.beginUpdates()
+            
+            if curGroup.routes.count == 0 {
+                managedObjectContext!.deleteObject(curGroup)
+                self.tableView.deleteSections(NSIndexSet(index: indexPath.section), withRowAnimation: UITableViewRowAnimation.Automatic)
+            }
+            
+            self.tableView.deleteRowsAtIndexPaths([indexPath], withRowAnimation: UITableViewRowAnimation.Automatic)
+            
+            save()
+            self.populateDataSource()
+            
+            self.tableView.endUpdates()
+        }
     }
 }
 
@@ -466,10 +507,10 @@ class SessionTableViewController: UITableViewController, UITableViewDelegate, UI
 //        populateDataSource()
     }
     
-    override func viewDidAppear(animated: Bool) {
-        super.viewDidAppear(animated)
+    override func viewWillAppear(animated: Bool) {
+        super.viewWillAppear(animated)
         
-        navigationController?.setNavigationBarHidden(false, animated: true)
+        navigationController?.setNavigationBarHidden(false, animated: false)
     }
     
     override func prefersStatusBarHidden() -> Bool {

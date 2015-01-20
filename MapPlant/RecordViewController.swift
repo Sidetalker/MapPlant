@@ -59,7 +59,7 @@ class RecordViewController: UIViewController, CLLocationManagerDelegate, MKMapVi
     var state = Const.Record.Stopped
     var focus = Const.Record.FocusOn
     var startTime = NSDate().timeIntervalSinceReferenceDate
-    var session = Session()
+    var session: Session?
     
     // Location variables
     var locationManager = CLLocationManager()
@@ -185,14 +185,14 @@ class RecordViewController: UIViewController, CLLocationManagerDelegate, MKMapVi
         
         // Create a location set
         let locationSet = insertObject(Const.Data.LocationSet) as LocationSet
-        session = insertObject(Const.Data.Session) as Session
+        session = insertObject(Const.Data.Session) as? Session
         var route: Route!
         
-        locationSet.session = session
+        locationSet.session = session!
         
-        session.name = "New Session"
-        session.date = NSDate()
-        session.locationSet = locationSet
+        session!.name = "New Session"
+        session!.date = NSDate()
+        session!.locationSet = locationSet
         
         var tempLocations = [Location]()
         
