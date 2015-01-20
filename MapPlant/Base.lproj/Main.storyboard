@@ -128,13 +128,13 @@
                                 <exclude reference="0vO-7j-jHD"/>
                             </mask>
                             <mask key="constraints">
+                                <exclude reference="dYS-FG-ttT"/>
                                 <exclude reference="Iz3-sl-hiw"/>
                                 <exclude reference="Xlq-ky-ioK"/>
                                 <exclude reference="fPb-kd-jzT"/>
                                 <exclude reference="L0E-ra-8XB"/>
                                 <exclude reference="Qma-zm-ijQ"/>
                                 <exclude reference="jaf-qy-9Sp"/>
-                                <exclude reference="dYS-FG-ttT"/>
                             </mask>
                         </variation>
                         <variation key="widthClass=compact">
@@ -143,13 +143,13 @@
                                 <include reference="0vO-7j-jHD"/>
                             </mask>
                             <mask key="constraints">
+                                <include reference="dYS-FG-ttT"/>
                                 <include reference="Iz3-sl-hiw"/>
                                 <include reference="Xlq-ky-ioK"/>
                                 <include reference="fPb-kd-jzT"/>
                                 <include reference="L0E-ra-8XB"/>
                                 <include reference="Qma-zm-ijQ"/>
                                 <include reference="jaf-qy-9Sp"/>
-                                <include reference="dYS-FG-ttT"/>
                             </mask>
                         </variation>
                     </view>
@@ -245,6 +245,7 @@
             <objects>
                 <tableViewController id="wJY-uu-TZ4" customClass="RecordSaveViewController" customModule="MapPlant" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="static" style="grouped" separatorStyle="default" rowHeight="44" sectionHeaderHeight="10" sectionFooterHeight="10" id="R2P-Uq-73W">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
                         <sections>

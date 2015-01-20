@@ -8,6 +8,8 @@
 
 import UIKit
 
+// MARK: - RouteTableContainer
+
 class RouteTableContainer: UIViewController {
     // Logger
     let logger = Swell.getLogger("RouteTableContainer")
@@ -71,18 +73,22 @@ class RouteTableContainer: UIViewController {
     func addGroup() {
         logger.debug("Adding a new group")
         
-        let newGroupController = UIAlertController(title: "Add Group", message: "Enter the new group name", preferredStyle: UIAlertControllerStyle.Alert) 
+        let newGroupController = UIAlertController(title: "Add Group", message: "Enter the new group and routes name", preferredStyle: UIAlertControllerStyle.Alert)
         
         let createAction = UIAlertAction(title: "Create", style: UIAlertActionStyle.Default) { (_) in
             let groupTextField = newGroupController.textFields![0] as UITextField
+            let routeTextField = newGroupController.textFields![1] as UITextField
             let groupName = groupTextField.text
+            let routeName = routeTextField.text
             let existingGroups = getObjects(Const.Data.Group, nil) as [Group]
+            let existingRoutes = getObjects(Const.Data.Route, nil) as [Route]
             
             // Don't allow blank group names
-            if groupName.stringByTrimmingCharactersInSet(NSCharacterSet.whitespaceCharacterSet()) == "" {
-                self.logger.debug("Add group empty name not allowed")
+            if groupName.stringByTrimmingCharactersInSet(NSCharacterSet.whitespaceCharacterSet()) == "" ||
+            routeName.stringByTrimmingCharactersInSet(NSCharacterSet.whitespaceCharacterSet()) == ""{
+                self.logger.debug("Empty name not allowed")
                 
-                let notAllowedController = UIAlertController(title: "Error", message: "Group name cannot be empty", preferredStyle: UIAlertControllerStyle.Alert)
+                let notAllowedController = UIAlertController(title: "Error", message: "Names cannot be blank", preferredStyle: UIAlertControllerStyle.Alert)
                 
                 let okButton = UIAlertAction(title: "Ok", style: UIAlertActionStyle.Default) { (_) in
                     self.presentViewController(newGroupController, animated: true, completion: nil)
@@ -114,17 +120,32 @@ class RouteTableContainer: UIViewController {
                 }
             }
             
-            self.logger.debug("Creating group: \(groupName)")
+            self.logger.debug("Creating group: \(groupName) with route: \(routeName)")
             
-            // Create our group and save it to CoreData
+            // Create our group
             let newGroup = insertObject(Const.Data.Group) as? Group
             newGroup!.name = groupName
             
+            // Create a default route
+            let newRoute = insertObject(Const.Data.Route) as? Route
+            newRoute!.name = routeName
+            newRoute!.group = newGroup!
+            
+            // Add the new route to the group's route list
+            var mutableRoutes = newGroup!.routes.mutableCopy() as NSMutableOrderedSet
+            mutableRoutes.addObject(newRoute!)
+            newGroup!.routes = mutableRoutes.copy() as NSOrderedSet
+            
             save()
             
-            // Update the route table
+            // Animate the addition of the new group
+            self.routeTable!.tableView.beginUpdates()
+            
+            self.routeTable!.tableView.insertSections(NSIndexSet(index: self.routeTable!.groupNames.count), withRowAnimation: UITableViewRowAnimation.Automatic)
+            self.routeTable!.tableView.insertRowsAtIndexPaths([NSIndexPath(forRow: 0, inSection: self.routeTable!.groupNames.count)], withRowAnimation: UITableViewRowAnimation.Automatic)
             self.routeTable!.populateDataSource()
-            self.routeTable!.tableView.reloadData()
+            
+            self.routeTable!.tableView.endUpdates()
         }
         
         let cancelAction = UIAlertAction(title: "Cancel", style: UIAlertActionStyle.Cancel) { (_) in
@@ -133,6 +154,10 @@ class RouteTableContainer: UIViewController {
         
         newGroupController.addTextFieldWithConfigurationHandler { (textField) in
             textField.placeholder = "Group Name"
+        }
+        
+        newGroupController.addTextFieldWithConfigurationHandler { (textField) in
+            textField.placeholder = "Route Name"
         }
         
         newGroupController.addAction(createAction)
@@ -269,6 +294,8 @@ class RouteTableContainer: UIViewController {
     }
 }
 
+// MARK: - GroupTableViewController
+
 class GroupTableViewController: UITableViewController, UITableViewDelegate, UITableViewDataSource {
     // Logger
     let logger = Swell.getLogger("GroupTableViewController")
@@ -327,6 +354,8 @@ class GroupTableViewController: UITableViewController, UITableViewDelegate, UITa
         selectedIndex = indexPath.row
     }
 }
+
+// MARK: - RouteTableViewController
 
 class RouteTableViewController: UITableViewController, UITableViewDelegate, UITableViewDataSource {
     // Logger
@@ -410,38 +439,15 @@ class RouteTableViewController: UITableViewController, UITableViewDelegate, UITa
         // This will be the case for programmatically loaded cells (see viewDidLoad to switch approaches)
         if let cell = tableView.dequeueReusableCellWithIdentifier(Const.Cell.Route) as? UITableViewCell {
             cell.textLabel!.text = "\(routeNames[indexPath.section][indexPath.row]) - \(sessionCounts[indexPath.section][indexPath.row])"
-            // Configure the cell for this indexPath
-            //            cell.updateFonts()
-            //            let modelItem = model.dataArray[indexPath.row]
-            //            cell.titleLabel.text = modelItem.title
-            //            cell.bodyLabel.text = modelItem.body
-            //
-            //            // Make sure the constraints have been added to this cell, since it may have just been created from scratch
-            //            cell.setNeedsUpdateConstraints()
-            //            cell.updateConstraintsIfNeeded()
-            
             return cell
         }
-        
-        //        // This will be the case for interface builder loaded cells (see viewDidLoad to switch approaches)
-        //        if let cell: NibTableViewCell = tableView.dequeueReusableCellWithIdentifier(kCellIdentifier) as? NibTableViewCell {
-        //            // Configure the cell for this indexPath
-        //            cell.updateFonts()
-        //            let modelItem = model.dataArray[indexPath.row]
-        //            cell.titleLabel.text = modelItem.title
-        //            cell.bodyLabel.text = modelItem.body
-        //
-        //            // Make sure the constraints have been added to this cell, since it may have just been created from scratch
-        //            cell.setNeedsUpdateConstraints()
-        //            cell.updateConstraintsIfNeeded()
-        //            
-        //            return cell
-        //        }
         
         logger.error("Did not recognize reusable cell")
         return UITableViewCell();
     }
 }
+
+// MARK: - SessionTableViewController
 
 class SessionTableViewController: UITableViewController, UITableViewDelegate, UITableViewDataSource {
     // Logger
@@ -469,83 +475,4 @@ class SessionTableViewController: UITableViewController, UITableViewDelegate, UI
     override func prefersStatusBarHidden() -> Bool {
         return true
     }
-    
-    // MARK: - CoreData accessors
-    
-//    // Populate UITableView data source
-//    func populateDataSource() {
-//        // Load all groups and their associated routes
-//        let groups = getObjects(Const.Data.Group, nil) as [Group]
-//        
-//        for group in groups {
-//            // Populate the section headers
-//            groupNames.append(group.name)
-//            
-//            let routes = group.routes
-//            var tempRouteNames = [String]()
-//            var tempSessionCounts = [Int]()
-//            
-//            // Enumerate the objects in our NSOrderedSet and save the route names
-//            routes.enumerateObjectsUsingBlock { (route, index, stop) -> Void in
-//                tempRouteNames.append(route.name)
-//                tempSessionCounts.append(routes.count)
-//            }
-//            
-//            routeNames.append(tempRouteNames)
-//            sessionCounts.append(tempSessionCounts)
-//        }
-//        
-//        logger.debug("Data source populated")
-//    }
-//    
-//    // MARK: - UITableViewController overrides
-//    
-//    override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
-//        return groupNames.count
-//    }
-//    
-//    override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-//        return routeNames[section].count
-//    }
-//    
-//    override func tableView(tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-//        return groupNames[section]
-//    }
-//    
-//    override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell
-//    {
-//        // This will be the case for programmatically loaded cells (see viewDidLoad to switch approaches)
-//        if let cell = tableView.dequeueReusableCellWithIdentifier(Const.Cell.Route) as? UITableViewCell {
-//            cell.textLabel!.text = "\(routeNames[indexPath.section][indexPath.row]) - \(sessionCounts[indexPath.section][indexPath.row])"
-//            // Configure the cell for this indexPath
-//            //            cell.updateFonts()
-//            //            let modelItem = model.dataArray[indexPath.row]
-//            //            cell.titleLabel.text = modelItem.title
-//            //            cell.bodyLabel.text = modelItem.body
-//            //
-//            //            // Make sure the constraints have been added to this cell, since it may have just been created from scratch
-//            //            cell.setNeedsUpdateConstraints()
-//            //            cell.updateConstraintsIfNeeded()
-//            
-//            return cell
-//        }
-//        
-//        //        // This will be the case for interface builder loaded cells (see viewDidLoad to switch approaches)
-//        //        if let cell: NibTableViewCell = tableView.dequeueReusableCellWithIdentifier(kCellIdentifier) as? NibTableViewCell {
-//        //            // Configure the cell for this indexPath
-//        //            cell.updateFonts()
-//        //            let modelItem = model.dataArray[indexPath.row]
-//        //            cell.titleLabel.text = modelItem.title
-//        //            cell.bodyLabel.text = modelItem.body
-//        //
-//        //            // Make sure the constraints have been added to this cell, since it may have just been created from scratch
-//        //            cell.setNeedsUpdateConstraints()
-//        //            cell.updateConstraintsIfNeeded()
-//        //            
-//        //            return cell
-//        //        }
-//        
-//        logger.error("Did not recognize reusable cell")
-//        return UITableViewCell();
-//    }
 }
