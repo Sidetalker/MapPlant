@@ -221,7 +221,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <prototypes>
-                            <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" id="pAx-ZF-5BH">
+                            <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="sessionCell" id="pAx-ZF-5BH">
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="pAx-ZF-5BH" id="sYK-Ws-34h">
                                     <autoresizingMask key="autoresizingMask"/>
@@ -269,7 +269,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
                         <sections>
-                            <tableViewSection id="bWw-am-hen">
+                            <tableViewSection headerTitle="Session Information" id="bWw-am-hen">
                                 <cells>
                                     <tableViewCell contentMode="scaleToFill" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="10" textLabel="6K3-e2-6Sk" detailTextLabel="37F-oH-kdR" style="IBUITableViewCellStyleSubtitle" id="8l4-yG-Fzl">
                                         <autoresizingMask key="autoresizingMask"/>
@@ -324,7 +324,7 @@
                                             </subviews>
                                         </tableViewCellContentView>
                                     </tableViewCell>
-                                    <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" textLabel="Zjh-Wc-WVv" detailTextLabel="n4L-BT-2om" style="IBUITableViewCellStyleValue1" id="OXH-jd-oOl">
+                                    <tableViewCell contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" textLabel="Zjh-Wc-WVv" detailTextLabel="n4L-BT-2om" style="IBUITableViewCellStyleValue1" id="OXH-jd-oOl">
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="OXH-jd-oOl" id="kiP-K1-TRi">
                                             <autoresizingMask key="autoresizingMask"/>
@@ -350,7 +350,7 @@
                                             </subviews>
                                         </tableViewCellContentView>
                                     </tableViewCell>
-                                    <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" textLabel="Rqd-Kr-Ek8" detailTextLabel="YWQ-aJ-Fcm" style="IBUITableViewCellStyleValue1" id="dZd-fy-Jgy">
+                                    <tableViewCell contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" textLabel="Rqd-Kr-Ek8" detailTextLabel="YWQ-aJ-Fcm" style="IBUITableViewCellStyleValue1" id="dZd-fy-Jgy">
                                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="dZd-fy-Jgy" id="x3i-T6-p6M">
@@ -377,7 +377,7 @@
                                             </subviews>
                                         </tableViewCellContentView>
                                     </tableViewCell>
-                                    <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" textLabel="WwF-Ga-8mo" detailTextLabel="a3T-Ts-Vce" style="IBUITableViewCellStyleValue1" id="thm-8s-af0">
+                                    <tableViewCell contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" textLabel="WwF-Ga-8mo" detailTextLabel="a3T-Ts-Vce" style="IBUITableViewCellStyleValue1" id="thm-8s-af0">
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="thm-8s-af0" id="E92-Ae-SY6">
                                             <autoresizingMask key="autoresizingMask"/>
@@ -402,6 +402,121 @@
                                                 </label>
                                             </subviews>
                                         </tableViewCellContentView>
+                                    </tableViewCell>
+                                </cells>
+                            </tableViewSection>
+                            <tableViewSection id="z9l-sN-0VV">
+                                <cells>
+                                    <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" id="ldh-sC-oke">
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="ldh-sC-oke" id="It8-jy-UWh">
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Save Session" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="PMt-MX-Spl">
+                                                    <rect key="frame" x="0.0" y="-21" width="42" height="21"/>
+                                                    <fontDescription key="fontDescription" type="boldSystem" pointSize="17"/>
+                                                    <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                            </subviews>
+                                            <constraints>
+                                                <constraint firstAttribute="centerY" secondItem="PMt-MX-Spl" secondAttribute="centerY" id="2N7-WP-vPx"/>
+                                                <constraint firstAttribute="centerX" secondItem="PMt-MX-Spl" secondAttribute="centerX" id="8HC-y7-z5t"/>
+                                            </constraints>
+                                            <variation key="default">
+                                                <mask key="subviews">
+                                                    <exclude reference="PMt-MX-Spl"/>
+                                                </mask>
+                                                <mask key="constraints">
+                                                    <exclude reference="2N7-WP-vPx"/>
+                                                    <exclude reference="8HC-y7-z5t"/>
+                                                </mask>
+                                            </variation>
+                                            <variation key="widthClass=compact">
+                                                <mask key="subviews">
+                                                    <include reference="PMt-MX-Spl"/>
+                                                </mask>
+                                                <mask key="constraints">
+                                                    <include reference="2N7-WP-vPx"/>
+                                                    <include reference="8HC-y7-z5t"/>
+                                                </mask>
+                                            </variation>
+                                        </tableViewCellContentView>
+                                        <color key="backgroundColor" red="0.25098040699958801" green="0.50196081399917603" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                    </tableViewCell>
+                                    <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" id="WqW-q4-HQV">
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="WqW-q4-HQV" id="tiD-at-jr0">
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Resume Session" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Brq-Db-7eF">
+                                                    <rect key="frame" x="0.0" y="-21" width="42" height="21"/>
+                                                    <fontDescription key="fontDescription" type="boldSystem" pointSize="17"/>
+                                                    <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                            </subviews>
+                                            <constraints>
+                                                <constraint firstAttribute="centerX" secondItem="Brq-Db-7eF" secondAttribute="centerX" id="VuE-it-sh9"/>
+                                                <constraint firstAttribute="centerY" secondItem="Brq-Db-7eF" secondAttribute="centerY" id="jCZ-9h-hYb"/>
+                                            </constraints>
+                                            <variation key="default">
+                                                <mask key="subviews">
+                                                    <exclude reference="Brq-Db-7eF"/>
+                                                </mask>
+                                                <mask key="constraints">
+                                                    <exclude reference="jCZ-9h-hYb"/>
+                                                    <exclude reference="VuE-it-sh9"/>
+                                                </mask>
+                                            </variation>
+                                            <variation key="widthClass=compact">
+                                                <mask key="subviews">
+                                                    <include reference="Brq-Db-7eF"/>
+                                                </mask>
+                                                <mask key="constraints">
+                                                    <include reference="jCZ-9h-hYb"/>
+                                                    <include reference="VuE-it-sh9"/>
+                                                </mask>
+                                            </variation>
+                                        </tableViewCellContentView>
+                                        <color key="backgroundColor" red="1" green="0.50196081399917603" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                    </tableViewCell>
+                                    <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" id="f6P-EC-Ege">
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="f6P-EC-Ege" id="0Pf-8H-opg">
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Discard Session" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gKP-mQ-LZm">
+                                                    <rect key="frame" x="0.0" y="-21" width="42" height="21"/>
+                                                    <fontDescription key="fontDescription" type="boldSystem" pointSize="17"/>
+                                                    <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                            </subviews>
+                                            <constraints>
+                                                <constraint firstAttribute="centerY" secondItem="gKP-mQ-LZm" secondAttribute="centerY" id="QFU-QV-jP6"/>
+                                                <constraint firstAttribute="centerX" secondItem="gKP-mQ-LZm" secondAttribute="centerX" id="bEu-gN-s2Y"/>
+                                            </constraints>
+                                            <variation key="default">
+                                                <mask key="subviews">
+                                                    <exclude reference="gKP-mQ-LZm"/>
+                                                </mask>
+                                                <mask key="constraints">
+                                                    <exclude reference="QFU-QV-jP6"/>
+                                                    <exclude reference="bEu-gN-s2Y"/>
+                                                </mask>
+                                            </variation>
+                                            <variation key="widthClass=compact">
+                                                <mask key="subviews">
+                                                    <include reference="gKP-mQ-LZm"/>
+                                                </mask>
+                                                <mask key="constraints">
+                                                    <include reference="QFU-QV-jP6"/>
+                                                    <include reference="bEu-gN-s2Y"/>
+                                                </mask>
+                                            </variation>
+                                        </tableViewCellContentView>
+                                        <color key="backgroundColor" red="1" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                     </tableViewCell>
                                 </cells>
                             </tableViewSection>

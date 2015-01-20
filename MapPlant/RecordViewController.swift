@@ -10,7 +10,9 @@ import UIKit
 import MapKit
 import CoreLocation
 
-class RecordSaveViewController: UITableViewController {
+// MARK: - RecordSaveViewController
+
+class RecordSaveViewController: UITableViewController, UITableViewDelegate {
     
     // IBOutlets
     @IBOutlet weak var lblSessionName: UILabel!
@@ -39,7 +41,33 @@ class RecordSaveViewController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
     }
+    
+    // MARK: - UITableView delegates
+    
+    override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+        if indexPath.section == 0 {
+            if indexPath.row == 0 {
+                // Name
+            }
+            else if indexPath.row == 1 {
+                // Route / Group
+            }
+        }
+        else if indexPath.section == 1 {
+            if indexPath.row == 0 {
+                // Save it
+            }
+            else if indexPath.row == 1 {
+                self.dismissViewControllerAnimated(true, completion: nil)
+            }
+            else if indexPath.row == 2 {
+                // Prompt for destruction
+            }
+        }
+    }
 }
+
+// MARK - RecordViewController
 
 class RecordViewController: UIViewController, CLLocationManagerDelegate, MKMapViewDelegate {
     // Map variables
@@ -182,6 +210,9 @@ class RecordViewController: UIViewController, CLLocationManagerDelegate, MKMapVi
             logger.error("We don't have any locations logged you moron!")
             return
         }
+        
+        // Stop the presses!!!
+        stopRecording()
         
         // Create a location set
         let locationSet = insertObject(Const.Data.LocationSet) as LocationSet
