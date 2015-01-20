@@ -27,6 +27,8 @@
     </entity>
     <entity name="Session" representedClassName="MapPlant.Session" syncable="YES">
         <attribute name="date" optional="YES" attributeType="Date" syncable="YES"/>
+        <attribute name="distance" optional="YES" attributeType="Double" defaultValueString="0.0" syncable="YES"/>
+        <attribute name="length" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="name" optional="YES" attributeType="String" syncable="YES"/>
         <relationship name="locationSet" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="LocationSet" inverseName="session" inverseEntity="LocationSet" syncable="YES"/>
         <relationship name="route" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Route" inverseName="session" inverseEntity="Route" syncable="YES"/>
@@ -44,7 +46,7 @@
         <element name="LocationSet" positionX="-9" positionY="54" width="128" height="75"/>
         <element name="LogBook" positionX="18" positionY="81" width="128" height="60"/>
         <element name="Route" positionX="-54" positionY="-9" width="128" height="105"/>
-        <element name="Session" positionX="-36" positionY="36" width="128" height="120"/>
+        <element name="Session" positionX="-36" positionY="36" width="128" height="150"/>
         <element name="Tags" positionX="0" positionY="72" width="128" height="105"/>
     </elements>
 </model>

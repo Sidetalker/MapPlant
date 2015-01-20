@@ -465,8 +465,8 @@
                                                     <exclude reference="Brq-Db-7eF"/>
                                                 </mask>
                                                 <mask key="constraints">
-                                                    <exclude reference="jCZ-9h-hYb"/>
                                                     <exclude reference="VuE-it-sh9"/>
+                                                    <exclude reference="jCZ-9h-hYb"/>
                                                 </mask>
                                             </variation>
                                             <variation key="widthClass=compact">
@@ -474,8 +474,8 @@
                                                     <include reference="Brq-Db-7eF"/>
                                                 </mask>
                                                 <mask key="constraints">
-                                                    <include reference="jCZ-9h-hYb"/>
                                                     <include reference="VuE-it-sh9"/>
+                                                    <include reference="jCZ-9h-hYb"/>
                                                 </mask>
                                             </variation>
                                         </tableViewCellContentView>

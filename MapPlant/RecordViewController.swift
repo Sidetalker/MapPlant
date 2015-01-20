@@ -23,23 +23,76 @@ class RecordSaveViewController: UITableViewController, UITableViewDelegate {
     @IBOutlet weak var lblSessionTime: UILabel!
     @IBOutlet weak var lblDistance: UILabel!
     
-//    let dateFormatter = NSDateFormatter()
-//    dateFormatter.dateFormat = "MM/DD/YY | HH:MM:SS"
-//    let str = dateFormatter.stringFromDate(NSDate())
-    
     // Matching variables
     var sessionName = "My New Session"
-    var sessionTimestamp = NSDate.timeIntervalSinceReferenceDate()
+    var sessionTimestamp = NSDate()
     var routeName = "My New Route"
     var groupName = "My New Group"
     var dataPoints = -1
-    var sessionTime = NSTimeInterval(1)
+    var length = "00:00"
     var distance = 0.0
+    
+    // CoreData
+    var locationSet: LocationSet?
+    var route: Route?
+    var sessionEntity: Session?
+    var groupIndex = -1
+    var routeIndex = -1
     
     // MARK: - UITableViewController overrides
     
     override func viewDidLoad() {
         super.viewDidLoad()
+    }
+    
+    // Generate or rewire this session's CoreData entity
+    override func viewWillAppear(animated: Bool) {
+        if sessionEntity == nil {
+            sessionEntity = insertObject(Const.Data.Session) as? Session
+            
+            // We need to make sure there is always 1 group and route or this shit will break
+            let existingGroups = getObjects(Const.Data.Group, nil) as [Group]
+            let firstGroupRoute = existingGroups[0].routes[0] as Route
+            
+            groupName = existingGroups[0].name
+            routeName = firstGroupRoute.name
+            groupIndex = 0
+            routeIndex = 0
+            sessionEntity!.route = firstGroupRoute
+        }
+        
+        // Use many exclamations for we are MANY excited
+        sessionEntity!.name = sessionName
+        sessionEntity!.distance = distance
+        sessionEntity!.length = length
+        sessionEntity!.date = sessionTimestamp
+        sessionEntity!.locationSet = locationSet!
+        
+        // Show
+        updateUI()
+    }
+    
+    // MARK: - UI Management
+    
+    func updateUI() {
+        // Format our date string
+        let dateFormatter = NSDateFormatter()
+        dateFormatter.dateFormat = "MM/DD/YY | HH:MM:SS"
+        let dateString = dateFormatter.stringFromDate(sessionTimestamp)
+        
+        lblSessionName.text = sessionName
+        lblSessionTimestamp.text = dateString
+        lblSessionTime.text = length
+        lblRouteName.text = routeName
+        lblGroupName.text = groupName
+        lblDistance.text = "\(round(distance * 100)/100) meters"
+        
+        if locationSet != nil {
+            lblDataPointCount.text = "\(locationSet!.locations.count)"
+        }
+        else {
+            lblDataPointCount.text = "nil"
+        }
     }
     
     // MARK: - UITableView delegates
@@ -65,6 +118,10 @@ class RecordSaveViewController: UITableViewController, UITableViewDelegate {
             }
         }
     }
+    
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+        return
+    }
 }
 
 // MARK - RecordViewController
@@ -86,7 +143,7 @@ class RecordViewController: UIViewController, CLLocationManagerDelegate, MKMapVi
     // State variables
     var state = Const.Record.Stopped
     var focus = Const.Record.FocusOn
-    var startTime = NSDate().timeIntervalSinceReferenceDate
+    var startTime = NSDate()
     var session: Session?
     
     // Location variables
@@ -102,6 +159,9 @@ class RecordViewController: UIViewController, CLLocationManagerDelegate, MKMapVi
     // Device details
     var width: CGFloat = 0
     var height: CGFloat = 0
+    
+    // CoreData
+    var locationSet: LocationSet?
     
     // MARK: - UIViewController overrides
     
@@ -215,15 +275,15 @@ class RecordViewController: UIViewController, CLLocationManagerDelegate, MKMapVi
         stopRecording()
         
         // Create a location set
-        let locationSet = insertObject(Const.Data.LocationSet) as LocationSet
+        locationSet = insertObject(Const.Data.LocationSet) as? LocationSet
         session = insertObject(Const.Data.Session) as? Session
         var route: Route!
         
-        locationSet.session = session!
+        locationSet!.session = session!
         
         session!.name = "New Session"
         session!.date = NSDate()
-        session!.locationSet = locationSet
+        session!.locationSet = locationSet!
         
         var tempLocations = [Location]()
         
@@ -234,12 +294,12 @@ class RecordViewController: UIViewController, CLLocationManagerDelegate, MKMapVi
             location.lat = allLocations[i].latitude as Double
             location.long = allLocations[i].longitude as Double
             location.accuracy = allAccuracies[i] as Double
-            location.locationSet = locationSet
+            location.locationSet = locationSet!
             
             tempLocations.append(location)
         }
         
-        locationSet.locations = NSOrderedSet(array: tempLocations)
+        locationSet!.locations = NSOrderedSet(array: tempLocations)
         
         save()
         
@@ -322,7 +382,7 @@ class RecordViewController: UIViewController, CLLocationManagerDelegate, MKMapVi
             
             allLocations = [CLLocationCoordinate2D]()
             allAccuracies = [CLLocationAccuracy]()
-            startTime = NSDate().timeIntervalSinceReferenceDate
+            startTime = NSDate()
             distance = 0.0
             
             lblInfo.text = "Lat: NULL\nLong: NULL\nAccuracy: NULL\nLocations: 0\nTime: 00:00\nDistance: 0 meters"
@@ -343,10 +403,17 @@ class RecordViewController: UIViewController, CLLocationManagerDelegate, MKMapVi
         if segue.identifier == Const.Segue.RecordToSave {
             let saveVC = segue.destinationViewController as RecordSaveViewController
             
-            saveVC.sessionTimestamp = startTime
-            saveVC.sessionTime = NSDate().timeIntervalSinceReferenceDate - startTime
+            let timeInterval = NSDate().timeIntervalSinceReferenceDate - startTime.timeIntervalSinceReferenceDate
+            let minutes = floor(timeInterval/60)
+            let seconds = round(timeInterval - minutes * 60)
+            
+            let lengthString = NSString(format: "%02d:%02d", minutes, seconds)
+            
+            saveVC.length = lengthString
             saveVC.dataPoints = allLocations.count
             saveVC.distance = distance
+            saveVC.sessionTimestamp = startTime
+            saveVC.locationSet = locationSet
         }
     }
     
@@ -379,7 +446,7 @@ class RecordViewController: UIViewController, CLLocationManagerDelegate, MKMapVi
             
             // Determine the current record time
             let curTime = NSDate().timeIntervalSinceReferenceDate
-            var elapsedTime: NSTimeInterval = curTime - startTime
+            var elapsedTime: NSTimeInterval = curTime - startTime.timeIntervalSinceReferenceDate
             
             let minutes = UInt8(elapsedTime / 60.0)
             elapsedTime -= NSTimeInterval(minutes) * 60
