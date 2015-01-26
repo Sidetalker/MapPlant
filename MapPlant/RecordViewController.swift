@@ -12,8 +12,7 @@ import CoreLocation
 
 // MARK: - RecordSaveViewController
 
-class RecordSaveViewController: UITableViewController, UITableViewDelegate {
-    
+class RecordSaveViewController: UITableViewController, UITableViewDelegate, RouteTableViewControllerDelegate {
     // IBOutlets
     @IBOutlet weak var lblSessionName: UILabel!
     @IBOutlet weak var lblSessionTimestamp: UILabel!
@@ -50,7 +49,6 @@ class RecordSaveViewController: UITableViewController, UITableViewDelegate {
         if sessionEntity == nil {
             sessionEntity = insertObject(Const.Data.Session) as? Session
             
-            // We need to make sure there is always 1 group and route or this shit will break
             let existingGroups = getObjects(Const.Data.Group, nil) as [Group]
             let firstGroupRoute = existingGroups[0].routes[0] as Route
             
@@ -58,21 +56,39 @@ class RecordSaveViewController: UITableViewController, UITableViewDelegate {
             routeName = firstGroupRoute.name
             groupIndex = 0
             routeIndex = 0
-            sessionEntity!.route = firstGroupRoute
+            route = firstGroupRoute
         }
         
-        // Use many exclamations for we are MANY excited
+        // Update our entity and the UI
+        update()
+    }
+    
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+        if segue.identifier == Const.Segue.SaveRouteSelection {
+            let routesTable = segue.destinationViewController as? RouteTableViewController
+            
+            routesTable!.state = 1
+            routesTable!.delegate = self
+        }
+        
+        return
+    }
+    
+    // MARK: - UI Management
+    
+    func update() {
+        updateSessionEntity()
+        updateUI()
+    }
+    
+    func updateSessionEntity() {
         sessionEntity!.name = sessionName
         sessionEntity!.distance = distance
         sessionEntity!.length = length
         sessionEntity!.date = sessionTimestamp
         sessionEntity!.locationSet = locationSet!
-        
-        // Show
-        updateUI()
+        sessionEntity!.route = route!
     }
-    
-    // MARK: - UI Management
     
     func updateUI() {
         // Format our date string
@@ -100,17 +116,44 @@ class RecordSaveViewController: UITableViewController, UITableViewDelegate {
     override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         if indexPath.section == 0 {
             if indexPath.row == 0 {
-                // Name
+                // Name change cell
+                let nameChanger = UIAlertController(title: "Name Your Session", message: "Enter a name for your new session", preferredStyle: UIAlertControllerStyle.Alert)
+                
+                nameChanger.addTextFieldWithConfigurationHandler { (textField) in
+                    textField.placeholder = "Session Name"
+                }
+                
+                let ok = UIAlertAction(title: "OK", style: UIAlertActionStyle.Default, handler: { (_) in
+                    let nameField = nameChanger.textFields![0] as UITextField
+                    self.sessionName = nameField.text
+                    
+                    self.update()
+                })
+                
+                nameChanger.addAction(ok)
+                self.presentViewController(nameChanger, animated: true, completion: { (_) in
+                    self.tableView.deselectRowAtIndexPath(indexPath, animated: true) })
+                
             }
             else if indexPath.row == 1 {
                 // Route / Group
+                self.tableView.deselectRowAtIndexPath(indexPath, animated: true)
             }
         }
         else if indexPath.section == 1 {
             if indexPath.row == 0 {
-                // Save it
+                // Save the session to the selected route
+                updateSessionEntity()
+                
+                var mutableSessions = NSMutableOrderedSet(orderedSet: route!.session)
+                mutableSessions.addObject(sessionEntity!)
+                route!.session = NSOrderedSet(orderedSet: mutableSessions)
+                
+                // Dismiss everything (how?!)
+                self.dismissViewControllerAnimated(true, completion: nil)
             }
             else if indexPath.row == 1 {
+                // Go back to the recording screen
                 self.dismissViewControllerAnimated(true, completion: nil)
             }
             else if indexPath.row == 2 {
@@ -119,8 +162,20 @@ class RecordSaveViewController: UITableViewController, UITableViewDelegate {
         }
     }
     
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        return
+    // MARK: - RouteTableViewController delegate
+    
+    func cellSelected(indexPath: NSIndexPath) {
+        let existingGroups = getObjects(Const.Data.Group, nil) as [Group]
+        let selectedGroup = existingGroups[indexPath.section] as Group
+        let selectedRoute = selectedGroup.routes[indexPath.row] as Route
+        
+        groupName = selectedGroup.name
+        routeName = selectedRoute.name
+        groupIndex = indexPath.section
+        routeIndex = indexPath.row
+        sessionEntity!.route = selectedRoute
+        
+        update()
     }
 }
 
@@ -151,6 +206,7 @@ class RecordViewController: UIViewController, CLLocationManagerDelegate, MKMapVi
     var lastLoc = [0.0, 0.0]
     var allLocations = [CLLocationCoordinate2D]()
     var allAccuracies = [CLLocationAccuracy]()
+    var allTimes = [NSDate]()
     var distance = 0.0
     
     // Logger
@@ -295,6 +351,7 @@ class RecordViewController: UIViewController, CLLocationManagerDelegate, MKMapVi
             location.long = allLocations[i].longitude as Double
             location.accuracy = allAccuracies[i] as Double
             location.locationSet = locationSet!
+            location.timestamp = allTimes[i]
             
             tempLocations.append(location)
         }
@@ -443,6 +500,7 @@ class RecordViewController: UIViewController, CLLocationManagerDelegate, MKMapVi
             // Store the latest location data
             allLocations.append(coordinate)
             allAccuracies.append(accuracy)
+            allTimes.append(NSDate())
             
             // Determine the current record time
             let curTime = NSDate().timeIntervalSinceReferenceDate

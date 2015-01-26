@@ -38,7 +38,7 @@ class RouteTableContainer: UIViewController {
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         if segue.identifier == Const.Segue.RoutesTable {
             routeTable = segue.destinationViewController as? RouteTableViewController
-            routeTable?.parent = self
+            routeTable?.state = 0
         }
     }
     
@@ -304,9 +304,6 @@ class GroupTableViewController: UITableViewController, UITableViewDelegate, UITa
     var groupNames = [String]()
     var selectedIndex = -1
     
-    // Parent reference
-    var parent: RouteTableContainer?
-    
     // MARK: - UITableViewController overrides
     
     override func viewDidLoad() {
@@ -357,6 +354,11 @@ class GroupTableViewController: UITableViewController, UITableViewDelegate, UITa
 
 // MARK: - RouteTableViewController
 
+// Implement a delegate callback for cell selection
+@objc protocol RouteTableViewControllerDelegate {
+    optional func cellSelected(indexPath: NSIndexPath)
+}
+
 class RouteTableViewController: UITableViewController, UITableViewDelegate, UITableViewDataSource {
     // Logger
     let logger = Swell.getLogger("RouteTableViewController")
@@ -366,8 +368,9 @@ class RouteTableViewController: UITableViewController, UITableViewDelegate, UITa
     var routeNames = [[String]]()
     var sessionCounts = [[Int]]()
     
-    // Parent reference
-    var parent: RouteTableContainer?
+    // Control variables
+    var delegate: RouteTableViewControllerDelegate?
+    var state = 0
     
     // MARK: - UITableViewController overrides
     
@@ -384,6 +387,14 @@ class RouteTableViewController: UITableViewController, UITableViewDelegate, UITa
     }
     
     override func prefersStatusBarHidden() -> Bool {
+        return true
+    }
+    
+    override func shouldPerformSegueWithIdentifier(identifier: String?, sender: AnyObject?) -> Bool {
+        if identifier == Const.Segue.SessionsTable && state == 1 {
+            return false
+        }
+        
         return true
     }
     
@@ -437,7 +448,19 @@ class RouteTableViewController: UITableViewController, UITableViewDelegate, UITa
     }
     
     override func tableView(tableView: UITableView, canEditRowAtIndexPath indexPath: NSIndexPath) -> Bool {
-        return true
+        if state == 1 {
+            return false
+        }
+        
+        if groupNames.count > 1 {
+            return true
+        }
+        
+        if routeNames[0].count > 1 {
+            return true
+        }
+        
+        return false
     }
     
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell
@@ -457,6 +480,16 @@ class RouteTableViewController: UITableViewController, UITableViewDelegate, UITa
         
         logger.error("Did not recognize reusable cell")
         return UITableViewCell();
+    }
+    
+    override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+        if state == 1 {
+            if delegate != nil {
+                delegate!.cellSelected!(indexPath)
+            }
+            
+            self.dismissViewControllerAnimated(true, completion: nil)
+        }
     }
     
     override func tableView(tableView: UITableView, commitEditingStyle editingStyle: UITableViewCellEditingStyle, forRowAtIndexPath indexPath: NSIndexPath) {

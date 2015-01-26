@@ -197,7 +197,7 @@
                                     </subviews>
                                 </tableViewCellContentView>
                                 <connections>
-                                    <segue destination="1NA-0T-ceb" kind="show" id="cbN-h3-Ppc"/>
+                                    <segue destination="1NA-0T-ceb" kind="show" identifier="segueSessionsTable" id="cbN-h3-Ppc"/>
                                 </connections>
                             </tableViewCell>
                         </prototypes>
@@ -323,6 +323,11 @@
                                                 </label>
                                             </subviews>
                                         </tableViewCellContentView>
+                                        <connections>
+                                            <segue destination="DXC-pw-8xl" kind="popoverPresentation" identifier="segueSaveRouteSelection" popoverAnchorView="fUv-DB-q2G" id="5Hm-LQ-bcJ">
+                                                <popoverArrowDirection key="popoverArrowDirection" up="YES" down="YES" left="YES" right="YES"/>
+                                            </segue>
+                                        </connections>
                                     </tableViewCell>
                                     <tableViewCell contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" textLabel="Zjh-Wc-WVv" detailTextLabel="n4L-BT-2om" style="IBUITableViewCellStyleValue1" id="OXH-jd-oOl">
                                         <autoresizingMask key="autoresizingMask"/>
@@ -577,4 +582,7 @@
             <point key="canvasLocation" x="1758" y="-70"/>
         </scene>
     </scenes>
+    <inferredMetricsTieBreakers>
+        <segue reference="5Hm-LQ-bcJ"/>
+    </inferredMetricsTieBreakers>
 </document>

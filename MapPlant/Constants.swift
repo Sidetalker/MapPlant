@@ -34,5 +34,7 @@ struct Const {
     struct Segue {
         static let RecordToSave = "segueRecordSave"
         static let RoutesTable = "segueRouteTableEmbed"
+        static let SaveRouteSelection = "segueSaveRouteSelection"
+        static let SessionsTable = "segueSessionsTable"
     }
 }
