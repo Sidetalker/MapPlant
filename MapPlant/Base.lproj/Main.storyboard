@@ -160,7 +160,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Kbn-Vk-fIC" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2449.5" y="-70"/>
+            <point key="canvasLocation" x="2779.5" y="-50"/>
         </scene>
         <!--Route Table View Controller-->
         <scene sceneID="MxZ-2U-zPO">
@@ -196,9 +196,6 @@
                                         </label>
                                     </subviews>
                                 </tableViewCellContentView>
-                                <connections>
-                                    <segue destination="1NA-0T-ceb" kind="show" identifier="segueSessionsTable" id="cbN-h3-Ppc"/>
-                                </connections>
                             </tableViewCell>
                         </prototypes>
                         <connections>
@@ -207,17 +204,20 @@
                         </connections>
                     </tableView>
                     <nil key="simulatedTopBarMetrics"/>
+                    <connections>
+                        <segue destination="Wck-0V-If0" kind="showDetail" identifier="segueSessionsTable" id="zmk-no-G54"/>
+                    </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="3Qy-Qu-qct" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3162" y="-90"/>
+            <point key="canvasLocation" x="3636" y="-50"/>
         </scene>
         <!--Session Table View Controller-->
         <scene sceneID="cnp-3y-OO1">
             <objects>
                 <tableViewController id="1NA-0T-ceb" customClass="SessionTableViewController" customModule="MapPlant" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="U1v-Wd-4au">
-                        <rect key="frame" x="0.0" y="0.0" width="240" height="84"/>
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <prototypes>
@@ -233,11 +233,17 @@
                             <outlet property="delegate" destination="1NA-0T-ceb" id="waK-7e-THJ"/>
                         </connections>
                     </tableView>
-                    <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" translucent="NO" prompted="NO"/>
+                    <navigationItem key="navigationItem" id="5Jf-A2-yAD">
+                        <barButtonItem key="leftBarButtonItem" systemItem="stop" id="hHa-al-b48">
+                            <connections>
+                                <action selector="btnExitTouch:" destination="1NA-0T-ceb" id="AN3-ft-bHF"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="aNl-zf-reK" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3933" y="-90"/>
+            <point key="canvasLocation" x="5322" y="-420"/>
         </scene>
         <!--Record View Controller-->
         <scene sceneID="Z6D-Bf-qB8">
@@ -258,7 +264,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="5bh-DS-jaO" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2070" y="-799"/>
+            <point key="canvasLocation" x="1902" y="-795"/>
         </scene>
         <!--Record Save View Controller-->
         <scene sceneID="9K9-5z-Q79">
@@ -543,7 +549,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="5C2-Jd-SrJ" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2887.5" y="-787"/>
+            <point key="canvasLocation" x="2779.5" y="-795"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="D0z-Ba-oeR">
@@ -579,10 +585,28 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="9D1-mz-sNT" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1758" y="-70"/>
+            <point key="canvasLocation" x="1902" y="-50"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="1NV-Kp-33S">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="Wck-0V-If0" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="CA0-yq-Gbg">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="1NA-0T-ceb" kind="relationship" relationship="rootViewController" id="mGx-da-Ji4"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="EZq-fa-sYR" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="4488" y="-420"/>
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
-        <segue reference="5Hm-LQ-bcJ"/>
+        <segue reference="opx-qo-9q7"/>
     </inferredMetricsTieBreakers>
 </document>

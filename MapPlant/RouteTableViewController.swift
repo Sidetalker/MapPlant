@@ -371,6 +371,8 @@ class RouteTableViewController: UITableViewController, UITableViewDelegate, UITa
     // Control variables
     var delegate: RouteTableViewControllerDelegate?
     var state = 0
+    var curSection = -1
+    var curRow = -1
     
     // MARK: - UITableViewController overrides
     
@@ -396,6 +398,16 @@ class RouteTableViewController: UITableViewController, UITableViewDelegate, UITa
         }
         
         return true
+    }
+    
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+        if segue.identifier == Const.Segue.SessionsTable {
+            let sessionNavContainer = segue.destinationViewController as UINavigationController
+            let sessionTableVC = sessionNavContainer.viewControllers[0] as SessionTableViewController
+            
+            sessionTableVC.groupIndex = curSection
+            sessionTableVC.routeIndex = curRow
+        }
     }
     
     // MARK: - CoreData accessors
@@ -489,7 +501,15 @@ class RouteTableViewController: UITableViewController, UITableViewDelegate, UITa
             }
             
             self.dismissViewControllerAnimated(true, completion: nil)
+            return
         }
+        
+        // Update the section and row
+        curSection = indexPath.section
+        curRow = indexPath.row
+        
+        // Manually perform the segue
+        performSegueWithIdentifier(Const.Segue.SessionsTable, sender: self)
     }
     
     override func tableView(tableView: UITableView, commitEditingStyle editingStyle: UITableViewCellEditingStyle, forRowAtIndexPath indexPath: NSIndexPath) {
@@ -528,25 +548,89 @@ class SessionTableViewController: UITableViewController, UITableViewDelegate, UI
     let logger = Swell.getLogger("SessionTableViewController")
     
     // Datasource variables
+    var groupIndex = -1
+    var routeIndex = -1
     var sessionNames = [String]()
-    var sessionDistances = [[Double]]()
-    var sessionTimes = [NSDate]()
+    var sessionDistances = [NSNumber]()
+    var sessionTimes = [String]()
     
     // MARK: - UITableViewController overrides
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-//        populateDataSource()
+        // See if our group and route indices have been populated
+        if groupIndex == -1 || routeIndex == -1 {
+            logger.error("Group and/or route indices not populated")
+        }
+        
+        populateDataSource()
     }
     
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
-        
-        navigationController?.setNavigationBarHidden(false, animated: false)
     }
     
     override func prefersStatusBarHidden() -> Bool {
         return true
+    }
+    
+    // MARK: - IBActions
+    
+    @IBAction func btnExitTouch(sender: AnyObject) {
+        self.dismissViewControllerAnimated(true, completion: nil)
+    }
+    
+    // MARK: - CoreData accessors
+    
+    func populateDataSource() {
+        // Get the latest data
+        let groups = getObjects(Const.Data.Group, nil) as [Group]
+        let route = groups[groupIndex].routes[routeIndex] as Route
+        var sessions = route.session
+        
+        self.title = route.name
+        
+        sessionNames = [String]()
+        sessionDistances = [NSNumber]()
+        sessionTimes = [String]()
+        
+        sessions.enumerateObjectsUsingBlock { (session, index, stop) -> Void in
+            if let curSession = session as? Session {
+                self.sessionNames.append(curSession.name)
+                self.sessionDistances.append(curSession.distance)
+                self.sessionTimes.append(curSession.length)
+            }
+        }
+        
+        logger.debug("Data source populated")
+    }
+    
+    // MARK: UITableView delegates
+    
+    override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
+        return 1
+    }
+    
+    override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return sessionNames.count
+    }
+    
+    override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+        if let cell = tableView.dequeueReusableCellWithIdentifier(Const.Cell.Session) as? UITableViewCell {
+            cell.textLabel!.text = "\(sessionNames[indexPath.row])"
+            
+//            if sessionCounts[indexPath.section][indexPath.row] == 1 {
+//                cell.detailTextLabel!.text = "\(sessionCounts[indexPath.section][indexPath.row]) session"
+//            }
+//            else {
+//                cell.detailTextLabel!.text = "\(sessionCounts[indexPath.section][indexPath.row]) sessions"
+//            }
+            
+            return cell
+        }
+        
+        logger.error("Did not recognize reusable cell")
+        return UITableViewCell();
     }
 }

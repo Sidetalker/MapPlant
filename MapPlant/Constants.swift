@@ -29,6 +29,7 @@ struct Const {
     
     struct Cell {
         static let Route = "routeCell"
+        static let Session = "sessionCell"
     }
     
     struct Segue {

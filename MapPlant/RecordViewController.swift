@@ -47,8 +47,9 @@ class RecordSaveViewController: UITableViewController, UITableViewDelegate, Rout
     // Generate or rewire this session's CoreData entity
     override func viewWillAppear(animated: Bool) {
         if sessionEntity == nil {
-            sessionEntity = insertObject(Const.Data.Session) as? Session
-            
+            logger.error("sessionEntity is nil - it should always be populated in the parent's segue prep")
+        }
+        else if route == nil {
             let existingGroups = getObjects(Const.Data.Group, nil) as [Group]
             let firstGroupRoute = existingGroups[0].routes[0] as Route
             
@@ -57,9 +58,13 @@ class RecordSaveViewController: UITableViewController, UITableViewDelegate, Rout
             groupIndex = 0
             routeIndex = 0
             route = firstGroupRoute
+            sessionName = sessionEntity!.name
+            sessionTimestamp = sessionEntity!.date
+        }
+        else {
+            logger.error("route is nil - it should always be populated in the else if statement above this")
         }
         
-        // Update our entity and the UI
         update()
     }
     
@@ -79,6 +84,7 @@ class RecordSaveViewController: UITableViewController, UITableViewDelegate, Rout
     func update() {
         updateSessionEntity()
         updateUI()
+        save()
     }
     
     func updateSessionEntity() {
@@ -88,6 +94,7 @@ class RecordSaveViewController: UITableViewController, UITableViewDelegate, Rout
         sessionEntity!.date = sessionTimestamp
         sessionEntity!.locationSet = locationSet!
         sessionEntity!.route = route!
+        
     }
     
     func updateUI() {
@@ -137,17 +144,19 @@ class RecordSaveViewController: UITableViewController, UITableViewDelegate, Rout
             }
             else if indexPath.row == 1 {
                 // Route / Group
+                update()
                 self.tableView.deselectRowAtIndexPath(indexPath, animated: true)
             }
         }
         else if indexPath.section == 1 {
             if indexPath.row == 0 {
                 // Save the session to the selected route
-                updateSessionEntity()
+                update()
                 
                 var mutableSessions = NSMutableOrderedSet(orderedSet: route!.session)
                 mutableSessions.addObject(sessionEntity!)
                 route!.session = NSOrderedSet(orderedSet: mutableSessions)
+                sessionEntity!.route = route!
                 
                 // Dismiss everything (how?!)
                 self.dismissViewControllerAnimated(true, completion: nil)
@@ -173,7 +182,8 @@ class RecordSaveViewController: UITableViewController, UITableViewDelegate, Rout
         routeName = selectedRoute.name
         groupIndex = indexPath.section
         routeIndex = indexPath.row
-        sessionEntity!.route = selectedRoute
+        route = selectedRoute
+        sessionEntity!.route = route!
         
         update()
     }
@@ -241,6 +251,25 @@ class RecordViewController: UIViewController, CLLocationManagerDelegate, MKMapVi
     
     override func prefersStatusBarHidden() -> Bool {
         return true
+    }
+    
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+        if segue.identifier == Const.Segue.RecordToSave {
+            let saveVC = segue.destinationViewController as RecordSaveViewController
+            
+            let timeInterval = NSDate().timeIntervalSinceReferenceDate - startTime.timeIntervalSinceReferenceDate
+            let minutes = floor(timeInterval/60)
+            let seconds = round(timeInterval - minutes * 60)
+            
+            let lengthString = NSString(format: "%02d:%02d", minutes, seconds)
+            
+            saveVC.length = lengthString
+            saveVC.dataPoints = allLocations.count
+            saveVC.distance = distance
+            saveVC.sessionTimestamp = startTime
+            saveVC.locationSet = locationSet
+            saveVC.sessionEntity = session!
+        }
     }
     
     // MARK: - Initializations
@@ -330,16 +359,18 @@ class RecordViewController: UIViewController, CLLocationManagerDelegate, MKMapVi
         // Stop the presses!!!
         stopRecording()
         
-        // Create a location set
-        locationSet = insertObject(Const.Data.LocationSet) as? LocationSet
-        session = insertObject(Const.Data.Session) as? Session
-        var route: Route!
-        
-        locationSet!.session = session!
-        
-        session!.name = "New Session"
-        session!.date = NSDate()
-        session!.locationSet = locationSet!
+        if locationSet == nil {
+            // Create a location set
+            locationSet = insertObject(Const.Data.LocationSet) as? LocationSet
+            session = insertObject(Const.Data.Session) as? Session
+            var route: Route!
+            
+            locationSet!.session = session!
+            
+            session!.name = "New Session"
+            session!.date = NSDate()
+            session!.locationSet = locationSet!
+        }
         
         var tempLocations = [Location]()
         
@@ -451,26 +482,6 @@ class RecordViewController: UIViewController, CLLocationManagerDelegate, MKMapVi
             }
         default:
             logger.error("Unrecognized State")
-        }
-    }
-    
-    // MARK: - Segue preparation
-    
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        if segue.identifier == Const.Segue.RecordToSave {
-            let saveVC = segue.destinationViewController as RecordSaveViewController
-            
-            let timeInterval = NSDate().timeIntervalSinceReferenceDate - startTime.timeIntervalSinceReferenceDate
-            let minutes = floor(timeInterval/60)
-            let seconds = round(timeInterval - minutes * 60)
-            
-            let lengthString = NSString(format: "%02d:%02d", minutes, seconds)
-            
-            saveVC.length = lengthString
-            saveVC.dataPoints = allLocations.count
-            saveVC.distance = distance
-            saveVC.sessionTimestamp = startTime
-            saveVC.locationSet = locationSet
         }
     }
     
