@@ -12,6 +12,8 @@
 	<dict>
 		<key>4453DCFF2F774C1A073A9711AF3C7F90634EC1F5</key>
 		<string>https://github.com/Sidetalker/MapPlant.git</string>
+		<key>9F99647DBE4211218623E63A60D5192984DE0FB2</key>
+		<string>https://github.com/Sidetalker/SeaFoam.git</string>
 	</dict>
 	<key>IDESourceControlProjectPath</key>
 	<string>MapPlant.xcodeproj</string>
@@ -19,6 +21,8 @@
 	<dict>
 		<key>4453DCFF2F774C1A073A9711AF3C7F90634EC1F5</key>
 		<string>../..</string>
+		<key>9F99647DBE4211218623E63A60D5192984DE0FB2</key>
+		<string>../../../Dropbox/school/sd&amp;d/SeaFoamGit</string>
 	</dict>
 	<key>IDESourceControlProjectURL</key>
 	<string>https://github.com/Sidetalker/MapPlant.git</string>
@@ -35,6 +39,14 @@
 			<string>4453DCFF2F774C1A073A9711AF3C7F90634EC1F5</string>
 			<key>IDESourceControlWCCName</key>
 			<string>MapPlant</string>
+		</dict>
+		<dict>
+			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
+			<string>public.vcs.git</string>
+			<key>IDESourceControlWCCIdentifierKey</key>
+			<string>9F99647DBE4211218623E63A60D5192984DE0FB2</string>
+			<key>IDESourceControlWCCName</key>
+			<string>SeaFoamGit</string>
 		</dict>
 	</array>
 </dict>

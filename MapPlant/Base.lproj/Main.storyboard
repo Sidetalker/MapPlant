@@ -36,11 +36,22 @@
                                     <segue destination="sLr-bR-4Re" kind="presentation" modalTransitionStyle="coverVertical" id="8j7-LF-XbL"/>
                                 </connections>
                             </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="cgY-CL-HdC">
+                                <rect key="frame" x="-23" y="-15" width="46" height="30"/>
+                                <state key="normal" title="Busfinder Mobile Proof of Concept">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <segue destination="ADq-DR-8Vc" kind="presentation" identifier="segueBusfinderLogin" id="CDy-y9-rav"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstAttribute="centerX" secondItem="FRv-Bo-jo9" secondAttribute="centerX" id="4gA-EL-wJy"/>
+                            <constraint firstItem="2fi-mo-0CV" firstAttribute="top" secondItem="cgY-CL-HdC" secondAttribute="bottom" constant="8" id="5QJ-bP-OMg"/>
                             <constraint firstItem="zcl-13-cKP" firstAttribute="top" secondItem="FRv-Bo-jo9" secondAttribute="bottom" constant="49" id="A9H-qq-Nvw"/>
+                            <constraint firstAttribute="centerX" secondItem="cgY-CL-HdC" secondAttribute="centerX" id="UFb-5o-wJ2"/>
                             <constraint firstAttribute="centerX" secondItem="zcl-13-cKP" secondAttribute="centerX" constant="-0.5" id="tox-Yv-fGh"/>
                             <constraint firstItem="FRv-Bo-jo9" firstAttribute="top" secondItem="jyV-Pf-zRb" secondAttribute="bottom" constant="154" id="vws-C0-ktr"/>
                         </constraints>
@@ -48,10 +59,13 @@
                             <mask key="subviews">
                                 <exclude reference="FRv-Bo-jo9"/>
                                 <exclude reference="zcl-13-cKP"/>
+                                <exclude reference="cgY-CL-HdC"/>
                             </mask>
                             <mask key="constraints">
+                                <exclude reference="5QJ-bP-OMg"/>
                                 <exclude reference="4gA-EL-wJy"/>
                                 <exclude reference="vws-C0-ktr"/>
+                                <exclude reference="UFb-5o-wJ2"/>
                                 <exclude reference="A9H-qq-Nvw"/>
                                 <exclude reference="tox-Yv-fGh"/>
                             </mask>
@@ -60,10 +74,13 @@
                             <mask key="subviews">
                                 <include reference="FRv-Bo-jo9"/>
                                 <include reference="zcl-13-cKP"/>
+                                <include reference="cgY-CL-HdC"/>
                             </mask>
                             <mask key="constraints">
+                                <include reference="5QJ-bP-OMg"/>
                                 <include reference="4gA-EL-wJy"/>
                                 <include reference="vws-C0-ktr"/>
+                                <include reference="UFb-5o-wJ2"/>
                                 <include reference="A9H-qq-Nvw"/>
                                 <include reference="tox-Yv-fGh"/>
                             </mask>
@@ -75,6 +92,132 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="x5A-6p-PRh" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1063.5" y="-467"/>
+        </scene>
+        <!--Busfinder Login View Controller-->
+        <scene sceneID="nXE-RJ-In8">
+            <objects>
+                <viewController id="ADq-DR-8Vc" customClass="BusfinderLoginViewController" customModule="MapPlant" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="4OI-cO-ySD"/>
+                        <viewControllerLayoutGuide type="bottom" id="BmB-YS-ew4"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="iFj-no-0xZ">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="BusfinderLoginBG.jpg" translatesAutoresizingMaskIntoConstraints="NO" id="XEl-ZA-ryJ">
+                                <rect key="frame" x="0.0" y="0.0" width="240" height="128"/>
+                            </imageView>
+                            <imageView alpha="0.0" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="BusfinderLogo.png" translatesAutoresizingMaskIntoConstraints="NO" id="0UG-RO-4dt">
+                                <rect key="frame" x="0.0" y="0.0" width="240" height="128"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="100" id="5fU-4Z-M8p"/>
+                                    <constraint firstAttribute="width" constant="100" id="oGB-1C-fMu"/>
+                                </constraints>
+                                <variation key="default">
+                                    <mask key="constraints">
+                                        <exclude reference="5fU-4Z-M8p"/>
+                                        <exclude reference="oGB-1C-fMu"/>
+                                    </mask>
+                                </variation>
+                                <variation key="widthClass=compact">
+                                    <mask key="constraints">
+                                        <include reference="5fU-4Z-M8p"/>
+                                        <include reference="oGB-1C-fMu"/>
+                                    </mask>
+                                </variation>
+                            </imageView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="XEl-ZA-ryJ" firstAttribute="leading" secondItem="iFj-no-0xZ" secondAttribute="leadingMargin" constant="-16" id="3vn-Eb-tma"/>
+                            <constraint firstItem="BmB-YS-ew4" firstAttribute="top" secondItem="0UG-RO-4dt" secondAttribute="bottom" id="4a0-RF-e93"/>
+                            <constraint firstItem="0UG-RO-4dt" firstAttribute="leading" secondItem="iFj-no-0xZ" secondAttribute="leadingMargin" constant="-16" id="bK4-YU-IWa"/>
+                            <constraint firstItem="BmB-YS-ew4" firstAttribute="top" secondItem="XEl-ZA-ryJ" secondAttribute="bottom" id="l2n-sl-pML"/>
+                            <constraint firstItem="XEl-ZA-ryJ" firstAttribute="top" secondItem="4OI-cO-ySD" secondAttribute="bottom" constant="-20" id="ldg-1m-lU5"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="XEl-ZA-ryJ" secondAttribute="trailing" constant="-16" id="umG-kn-bYY"/>
+                        </constraints>
+                        <variation key="default">
+                            <mask key="subviews">
+                                <exclude reference="XEl-ZA-ryJ"/>
+                                <exclude reference="0UG-RO-4dt"/>
+                            </mask>
+                            <mask key="constraints">
+                                <exclude reference="3vn-Eb-tma"/>
+                                <exclude reference="ldg-1m-lU5"/>
+                                <exclude reference="umG-kn-bYY"/>
+                                <exclude reference="bK4-YU-IWa"/>
+                                <exclude reference="4a0-RF-e93"/>
+                                <exclude reference="l2n-sl-pML"/>
+                            </mask>
+                        </variation>
+                        <variation key="widthClass=compact">
+                            <mask key="subviews">
+                                <include reference="XEl-ZA-ryJ"/>
+                                <include reference="0UG-RO-4dt"/>
+                            </mask>
+                            <mask key="constraints">
+                                <include reference="3vn-Eb-tma"/>
+                                <include reference="ldg-1m-lU5"/>
+                                <include reference="umG-kn-bYY"/>
+                                <include reference="bK4-YU-IWa"/>
+                                <include reference="4a0-RF-e93"/>
+                                <include reference="l2n-sl-pML"/>
+                            </mask>
+                        </variation>
+                    </view>
+                    <connections>
+                        <outlet property="imgBG" destination="XEl-ZA-ryJ" id="9o8-Hh-n17"/>
+                        <outlet property="imgLogo" destination="0UG-RO-4dt" id="EQd-C1-P5s"/>
+                        <segue destination="3oy-of-Hy0" kind="presentation" identifier="segueBusfinderMain" modalTransitionStyle="coverVertical" id="36Q-yu-1hI"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="P3D-Xs-RVz" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1063.5" y="403"/>
+        </scene>
+        <!--Busfinder Main View Controller-->
+        <scene sceneID="ias-PI-Yb4">
+            <objects>
+                <viewController id="3oy-of-Hy0" customClass="BusfinderMainViewController" customModule="MapPlant" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="SLD-sq-VEB"/>
+                        <viewControllerLayoutGuide type="bottom" id="leY-HO-XCR"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="iuV-eM-WBO">
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="7dN-HG-zKL">
+                                <rect key="frame" x="0.0" y="0.0" width="240" height="128"/>
+                                <variation key="widthClass=compact" fixedFrame="YES">
+                                    <rect key="frame" x="0.0" y="0.0" width="199" height="240"/>
+                                </variation>
+                            </imageView>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="SXf-68-6cv">
+                                <rect key="frame" x="0.0" y="0.0" width="240" height="128"/>
+                                <variation key="widthClass=compact" fixedFrame="YES">
+                                    <rect key="frame" x="212" y="0.0" width="188" height="240"/>
+                                </variation>
+                            </imageView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <variation key="default">
+                            <mask key="subviews">
+                                <exclude reference="7dN-HG-zKL"/>
+                                <exclude reference="SXf-68-6cv"/>
+                            </mask>
+                        </variation>
+                        <variation key="widthClass=compact">
+                            <mask key="subviews">
+                                <include reference="7dN-HG-zKL"/>
+                                <include reference="SXf-68-6cv"/>
+                            </mask>
+                        </variation>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Dxn-L0-cmd" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1902" y="669"/>
         </scene>
         <!--Route Table Container-->
         <scene sceneID="2cd-gr-k1f">
@@ -606,6 +749,10 @@
             <point key="canvasLocation" x="4488" y="-420"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="BusfinderLoginBG.jpg" width="645" height="1080"/>
+        <image name="BusfinderLogo.png" width="600" height="600"/>
+    </resources>
     <inferredMetricsTieBreakers>
         <segue reference="opx-qo-9q7"/>
     </inferredMetricsTieBreakers>

@@ -21,6 +21,16 @@ class HomeViewController: UIViewController {
         navigationController?.setNavigationBarHidden(true, animated: false)
         
         generateDefaults()
+        
+        let sessions = getObjects(Const.Data.Session, nil) as [Session]
+        
+        for session in sessions {
+            let sessionName = session.name
+            let locSet = session.locationSet
+            let locCount = locSet.locations.count
+            
+            logger.debug("Session \(sessionName) has \(locCount) locations")
+        }
     }
     
     override func viewDidAppear(animated: Bool) {

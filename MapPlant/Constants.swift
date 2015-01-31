@@ -37,5 +37,13 @@ struct Const {
         static let RoutesTable = "segueRouteTableEmbed"
         static let SaveRouteSelection = "segueSaveRouteSelection"
         static let SessionsTable = "segueSessionsTable"
+        static let BusfinderMainScreen = "segueBusfinderMain"
+    }
+    
+    struct Image {
+        static let BusfinderLogo = "BusfinderLogo.png"
+        static let BusfinderLoginBG = "BusfinderLoginBG.jpg"
+        static let ClearButton = "ClearWhite.png"
+        static let ClearButtonPressed = "ClearWhitePressed.png"
     }
 }
