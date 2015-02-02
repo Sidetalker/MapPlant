@@ -28,17 +28,16 @@ class BusfinderMapViewController: UIViewController, CLLocationManagerDelegate, M
     
     // Location variables
     var locationManager = CLLocationManager()
+    var routeLocations = [CLLocationCoordinate2D]()
     
     // Logger
     let logger = Swell.getLogger("BusfinderMapViewController")
     
     override func viewDidLoad() {
-        mapView = MKMapView(frame: CGRect(x: 0, y: 0, width: self.view.frame.width, height: 0))
-        mapView.showsUserLocation = true
-        mapView.mapType = MKMapType.Standard
-        mapView.delegate = self
+        super.viewDidLoad()
         
-        self.view.addSubview(mapView)
+        populateLocations()
+        addMap()
     }
     
     override func viewDidAppear(animated: Bool) {
@@ -49,5 +48,55 @@ class BusfinderMapViewController: UIViewController, CLLocationManagerDelegate, M
     
     override func prefersStatusBarHidden() -> Bool {
         return true
+    }
+    
+    func populateLocations() {
+        routeLocations = [CLLocationCoordinate2D]()
+        
+        let sessions = getObjects(Const.Data.Session, nil) as [Session]
+        let curSession = sessions[0]
+        let locationSet = curSession.locationSet
+        let dataPoints = locationSet.locations
+        
+        dataPoints.enumerateObjectsUsingBlock { (elem, idx, stop) -> Void in
+            let location = elem as Location
+            let coord = CLLocationCoordinate2D(latitude: CLLocationDegrees(location.lat), longitude: CLLocationDegrees(location.long))
+            
+            self.routeLocations.append(coord)
+        }
+    }
+    
+    func addMap() {
+        mapView = MKMapView(frame: CGRect(x: 0, y: 0, width: self.view.frame.width, height: 0))
+        mapView.showsUserLocation = true
+        mapView.mapType = MKMapType.Standard
+        mapView.delegate = self
+        
+        // Gather location info
+        var location = CLLocationCoordinate2D(latitude: routeLocations[0].latitude, longitude: routeLocations[0].longitude)
+        var span = MKCoordinateSpan(latitudeDelta: 0.01, longitudeDelta: 0.01)
+        var region = MKCoordinateRegion(center: location, span: span)
+        
+        // Zoom to the generated region
+        mapView.setRegion(region, animated: true)
+        
+        polyline = MKPolyline(coordinates: &routeLocations, count: routeLocations.count)
+        
+        mapView.addOverlay(polyline)
+        
+        self.view.addSubview(mapView)
+    }
+    
+    // Handle polyline drawing
+    func mapView(mapView: MKMapView!, rendererForOverlay overlay: MKOverlay!) -> MKOverlayRenderer! {
+        if overlay is MKPolyline {
+            let renderer = MKPolylineRenderer(overlay: overlay)
+            renderer.strokeColor = lineColor
+            renderer.lineWidth = lineWidth
+            
+            return renderer
+        }
+        
+        return nil
     }
 }

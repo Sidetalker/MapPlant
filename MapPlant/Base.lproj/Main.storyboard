@@ -196,14 +196,14 @@
                                 </constraints>
                                 <variation key="default">
                                     <mask key="constraints">
-                                        <exclude reference="s1y-T6-2kx"/>
                                         <exclude reference="mGb-NR-oYl"/>
+                                        <exclude reference="s1y-T6-2kx"/>
                                     </mask>
                                 </variation>
                                 <variation key="widthClass=compact">
                                     <mask key="constraints">
-                                        <include reference="s1y-T6-2kx"/>
                                         <include reference="mGb-NR-oYl"/>
+                                        <include reference="s1y-T6-2kx"/>
                                     </mask>
                                 </variation>
                             </imageView>
@@ -228,8 +228,8 @@
                                 <exclude reference="zG3-Me-fD8"/>
                             </mask>
                             <mask key="constraints">
-                                <exclude reference="FlM-fe-BtC"/>
                                 <exclude reference="DFm-cJ-3gv"/>
+                                <exclude reference="FlM-fe-BtC"/>
                             </mask>
                         </variation>
                         <variation key="widthClass=compact">
@@ -238,8 +238,8 @@
                                 <include reference="zG3-Me-fD8"/>
                             </mask>
                             <mask key="constraints">
-                                <include reference="FlM-fe-BtC"/>
                                 <include reference="DFm-cJ-3gv"/>
+                                <include reference="FlM-fe-BtC"/>
                             </mask>
                         </variation>
                     </view>
@@ -258,6 +258,7 @@
             <objects>
                 <tableViewController id="xuq-iV-htz" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="static" style="grouped" separatorStyle="default" rowHeight="44" sectionHeaderHeight="10" sectionFooterHeight="10" id="67X-9M-N3M">
+                        <rect key="frame" x="0.0" y="0.0" width="240" height="128"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
                         <sections>
@@ -418,10 +419,10 @@
                                                     <exclude reference="fgH-Gd-pQh"/>
                                                 </mask>
                                                 <mask key="constraints">
-                                                    <exclude reference="tgF-OG-av9"/>
-                                                    <exclude reference="zAv-sM-3ZC"/>
                                                     <exclude reference="1QP-Dc-a3M"/>
                                                     <exclude reference="jgV-KU-su5"/>
+                                                    <exclude reference="tgF-OG-av9"/>
+                                                    <exclude reference="zAv-sM-3ZC"/>
                                                 </mask>
                                             </variation>
                                             <variation key="widthClass=compact">
@@ -429,10 +430,10 @@
                                                     <include reference="fgH-Gd-pQh"/>
                                                 </mask>
                                                 <mask key="constraints">
-                                                    <include reference="tgF-OG-av9"/>
-                                                    <include reference="zAv-sM-3ZC"/>
                                                     <include reference="1QP-Dc-a3M"/>
                                                     <include reference="jgV-KU-su5"/>
+                                                    <include reference="tgF-OG-av9"/>
+                                                    <include reference="zAv-sM-3ZC"/>
                                                 </mask>
                                             </variation>
                                         </tableViewCellContentView>
@@ -460,10 +461,10 @@
                                                     <exclude reference="o4a-N0-Gvx"/>
                                                 </mask>
                                                 <mask key="constraints">
-                                                    <exclude reference="sbn-iX-mdf"/>
                                                     <exclude reference="CbS-IB-9ld"/>
                                                     <exclude reference="KuC-7d-ahZ"/>
                                                     <exclude reference="ZCW-Yx-kBa"/>
+                                                    <exclude reference="sbn-iX-mdf"/>
                                                 </mask>
                                             </variation>
                                             <variation key="widthClass=compact">
@@ -471,10 +472,10 @@
                                                     <include reference="o4a-N0-Gvx"/>
                                                 </mask>
                                                 <mask key="constraints">
-                                                    <include reference="sbn-iX-mdf"/>
                                                     <include reference="CbS-IB-9ld"/>
                                                     <include reference="KuC-7d-ahZ"/>
                                                     <include reference="ZCW-Yx-kBa"/>
+                                                    <include reference="sbn-iX-mdf"/>
                                                 </mask>
                                             </variation>
                                         </tableViewCellContentView>
@@ -501,6 +502,7 @@
                         <viewControllerLayoutGuide type="bottom" id="k9N-d1-zKK"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="ulC-Z6-Zjk">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
                     </view>
