@@ -116,13 +116,13 @@ class BusfinderLoginViewController: UIViewController, UITextFieldDelegate {
         self.view.addSubview(loginButton!)
     }
     
-    // These two functions take care of a tiny graphical inconsistency while fading out the Float On text
+    // These two functions take care of a tiny graphical inconsistency while fading out the Log On text
     func smoothAnim() {
-        loginButton?.setAttributedTitle(NSAttributedString(string: loginButton!.titleLabel!.text!, attributes: Dictionary(dictionaryLiteral: (NSForegroundColorAttributeName, UIColor.lightGrayColor().colorWithAlphaComponent(0.8)), (NSFontAttributeName, UIFont(name: "DamascusMedium", size: 23)!))), forState: UIControlState.Normal)
+        loginButton?.setAttributedTitle(NSAttributedString(string: loginButton!.titleLabel!.text!, attributes: Dictionary(dictionaryLiteral: (NSForegroundColorAttributeName, UIColor.lightGrayColor().colorWithAlphaComponent(0.8)), (NSFontAttributeName, UIFont(name: "HelveticaNeue-Light", size: 23)!))), forState: UIControlState.Normal)
     }
     
     func smoothAnimUndo() {
-        loginButton?.setAttributedTitle(NSAttributedString(string: loginButton!.titleLabel!.text!, attributes: Dictionary(dictionaryLiteral: (NSForegroundColorAttributeName, UIColor.whiteColor().colorWithAlphaComponent(0.8)), (NSFontAttributeName, UIFont(name: "DamascusMedium", size: 23)!))), forState: UIControlState.Normal)
+        loginButton?.setAttributedTitle(NSAttributedString(string: loginButton!.titleLabel!.text!, attributes: Dictionary(dictionaryLiteral: (NSForegroundColorAttributeName, UIColor.whiteColor().colorWithAlphaComponent(0.8)), (NSFontAttributeName, UIFont(name: "HelveticaNeue-Light", size: 23)!))), forState: UIControlState.Normal)
     }
     
     // Get pretty transparent text fields provided frame and placeholder

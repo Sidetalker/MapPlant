@@ -45,5 +45,7 @@ struct Const {
         static let BusfinderLoginBG = "BusfinderLoginBG.jpg"
         static let ClearButton = "ClearWhite.png"
         static let ClearButtonPressed = "ClearWhitePressed.png"
+        static let HeadshotA = "headshot1.jpg"
+        static let HeadshotB = "headshot2.jpg"
     }
 }
