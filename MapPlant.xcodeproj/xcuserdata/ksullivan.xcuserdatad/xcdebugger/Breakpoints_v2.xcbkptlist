@@ -964,12 +964,74 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "MapPlant/BusfinderMainViewController.swift"
-            timestampString = "444524020.832402"
+            timestampString = "444536599.314369"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "54"
-            endingLineNumber = "54"
+            startingLineNumber = "58"
+            endingLineNumber = "58"
             landmarkName = "addImages()"
+            landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "MapPlant/BusfinderMainViewController.swift"
+            timestampString = "444537886.645441"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "105"
+            endingLineNumber = "105"
+            landmarkName = "tapKidA(_:)"
+            landmarkType = "5">
+            <Locations>
+               <Location
+                  shouldBeEnabled = "No"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "MapPlant.BusfinderMainViewController.tapKid (MapPlant.BusfinderMainViewController)(ObjectiveC.UIImageView) -&gt; ()"
+                  moduleName = "MapPlant"
+                  urlString = "file:///Users/ksullivan/Documents/github/MapPlant/MapPlant/BusfinderMainViewController.swift"
+                  timestampString = "444536774.907808"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "102"
+                  endingLineNumber = "102"
+                  offsetFromSymbolStart = "69">
+               </Location>
+               <Location
+                  shouldBeEnabled = "No"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "MapPlant.BusfinderMainViewController.(tapKid (MapPlant.BusfinderMainViewController) -&gt; (ObjectiveC.UIImageView) -&gt; ()).(implicit closure #1)"
+                  moduleName = "MapPlant"
+                  urlString = "file:///Users/ksullivan/Documents/github/MapPlant/MapPlant/BusfinderMainViewController.swift"
+                  timestampString = "444536774.909843"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "102"
+                  endingLineNumber = "102"
+                  offsetFromSymbolStart = "4">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "MapPlant/BusfinderMapViewController.swift"
+            timestampString = "444538617.977652"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "36"
+            endingLineNumber = "36"
+            landmarkName = "viewDidLoad()"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>

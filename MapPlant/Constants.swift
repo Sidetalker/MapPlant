@@ -38,6 +38,7 @@ struct Const {
         static let SaveRouteSelection = "segueSaveRouteSelection"
         static let SessionsTable = "segueSessionsTable"
         static let BusfinderMainScreen = "segueBusfinderMain"
+        static let BusfinderMapScreen = "segueBusfinderMap"
     }
     
     struct Image {
@@ -47,5 +48,9 @@ struct Const {
         static let ClearButtonPressed = "ClearWhitePressed.png"
         static let HeadshotA = "headshot1.jpg"
         static let HeadshotB = "headshot2.jpg"
+    }
+    
+    struct View {
+        static let BusfinderMapScreen = "busfinderMapScreen"
     }
 }

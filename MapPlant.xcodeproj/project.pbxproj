@@ -14,6 +14,7 @@
 		31CBD8D71A662B5800BF195C /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 31CBD8D61A662B5800BF195C /* Images.xcassets */; };
 		31CBD8DA1A662B5800BF195C /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 31CBD8D81A662B5800BF195C /* LaunchScreen.xib */; };
 		31CBD8E61A662B5800BF195C /* MapPlantTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31CBD8E51A662B5800BF195C /* MapPlantTests.swift */; };
+		7504C5751A7F0F160040AC61 /* BusfinderMapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7504C5741A7F0F160040AC61 /* BusfinderMapViewController.swift */; };
 		750E27671A6F10F4003B2823 /* Session.swift in Sources */ = {isa = PBXBuildFile; fileRef = 750E27661A6F10F4003B2823 /* Session.swift */; };
 		757057EA1A688BD600C05B21 /* Location.swift in Sources */ = {isa = PBXBuildFile; fileRef = 757057E91A688BD600C05B21 /* Location.swift */; };
 		757057EC1A688BD600C05B21 /* Group.swift in Sources */ = {isa = PBXBuildFile; fileRef = 757057EB1A688BD600C05B21 /* Group.swift */; };
@@ -68,6 +69,7 @@
 		31CBD8DF1A662B5800BF195C /* MapPlantTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = MapPlantTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		31CBD8E41A662B5800BF195C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		31CBD8E51A662B5800BF195C /* MapPlantTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapPlantTests.swift; sourceTree = "<group>"; };
+		7504C5741A7F0F160040AC61 /* BusfinderMapViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BusfinderMapViewController.swift; sourceTree = "<group>"; };
 		750E27661A6F10F4003B2823 /* Session.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Session.swift; sourceTree = "<group>"; };
 		757057E91A688BD600C05B21 /* Location.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Location.swift; sourceTree = "<group>"; };
 		757057EB1A688BD600C05B21 /* Group.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Group.swift; sourceTree = "<group>"; };
@@ -146,15 +148,12 @@
 			isa = PBXGroup;
 			children = (
 				75C1CB0C1A688DBB00110FCA /* CoreData */,
-				31CBD8D31A662B5800BF195C /* Main.storyboard */,
-				75BE584F1A7D416600C8CD5E /* Images */,
-				75ACFB2C1A6C311900162FDB /* RouteTableViewController.swift */,
-				75BE58491A7D3CD000C8CD5E /* BusfinderLoginViewController.swift */,
-				75BE585A1A7D48B700C8CD5E /* BusfinderMainViewController.swift */,
-				31CBD8D81A662B5800BF195C /* LaunchScreen.xib */,
-				31CBD8CC1A662B5800BF195C /* AppDelegate.swift */,
 				31CBD8D11A662B5800BF195C /* HomeViewController.swift */,
+				75ACFB2C1A6C311900162FDB /* RouteTableViewController.swift */,
 				75C1CB0F1A68A48E00110FCA /* RecordViewController.swift */,
+				7504C5761A7F0F200040AC61 /* Busfinder Prototype */,
+				7504C5771A7F0F2F0040AC61 /* UI Elements */,
+				75BE584F1A7D416600C8CD5E /* Images */,
 				31CBD8CA1A662B5800BF195C /* Supporting Files */,
 			);
 			path = MapPlant;
@@ -163,6 +162,7 @@
 		31CBD8CA1A662B5800BF195C /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				31CBD8CC1A662B5800BF195C /* AppDelegate.swift */,
 				75ACFB2E1A6C32F000162FDB /* MapPlantPlayground.playground */,
 				75C1CB0A1A688DB200110FCA /* Constants.swift */,
 				75BE58581A7D481100C8CD5E /* TransitionManager.swift */,
@@ -188,6 +188,25 @@
 				31CBD8E41A662B5800BF195C /* Info.plist */,
 			);
 			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		7504C5761A7F0F200040AC61 /* Busfinder Prototype */ = {
+			isa = PBXGroup;
+			children = (
+				75BE58491A7D3CD000C8CD5E /* BusfinderLoginViewController.swift */,
+				75BE585A1A7D48B700C8CD5E /* BusfinderMainViewController.swift */,
+				7504C5741A7F0F160040AC61 /* BusfinderMapViewController.swift */,
+			);
+			name = "Busfinder Prototype";
+			sourceTree = "<group>";
+		};
+		7504C5771A7F0F2F0040AC61 /* UI Elements */ = {
+			isa = PBXGroup;
+			children = (
+				31CBD8D31A662B5800BF195C /* Main.storyboard */,
+				31CBD8D81A662B5800BF195C /* LaunchScreen.xib */,
+			);
+			name = "UI Elements";
 			sourceTree = "<group>";
 		};
 		75B2484B1A68817B005ECBA1 /* 3rd Party Frameworks */ = {
@@ -380,6 +399,7 @@
 				75C1CB0E1A688EC300110FCA /* Helpers.swift in Sources */,
 				75ACFB2D1A6C311900162FDB /* RouteTableViewController.swift in Sources */,
 				75B248591A688197005ECBA1 /* Logger.swift in Sources */,
+				7504C5751A7F0F160040AC61 /* BusfinderMapViewController.swift in Sources */,
 				75B2485C1A688197005ECBA1 /* LogSelector.swift in Sources */,
 				75B2485D1A688197005ECBA1 /* Swell.swift in Sources */,
 				31CBD8CD1A662B5800BF195C /* AppDelegate.swift in Sources */,

@@ -19,12 +19,16 @@ class BusfinderMainViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        container.frame = CGRect(x: 0, y: self.view.frame.width / 2, width: self.view.frame.width, height: self.view.frame.height - self.view.frame.width / 2 - imgLogo.frame.height)
     }
     
     override func viewWillAppear(animated: Bool) {
+        super.viewWillAppear(animated)
+        
         addImages()
+    }
+    
+    override func viewDidAppear(animated: Bool) {
+        super.viewDidAppear(animated)
     }
     
     override func prefersStatusBarHidden() -> Bool {
@@ -77,6 +81,13 @@ class BusfinderMainViewController: UIViewController {
         imgHeadshotA.addMotionEffect(group)
         imgHeadshotB.addMotionEffect(group)
         
+        // Gesture recognizers
+        let tapKidA = UITapGestureRecognizer(target: self, action: "tapKidA:")
+        let tapKidB = UITapGestureRecognizer(target: self, action: "tapKidB:")
+        
+        imgHeadshotA.addGestureRecognizer(tapKidA)
+        imgHeadshotB.addGestureRecognizer(tapKidB)
+        
         self.view.addSubview(imgHeadshotA)
         self.view.addSubview(imgHeadshotB)
         
@@ -87,5 +98,51 @@ class BusfinderMainViewController: UIViewController {
         UIView.animateWithDuration(0.9, delay: 0.35, usingSpringWithDamping: 0.52, initialSpringVelocity: 0.0, options: UIViewAnimationOptions.AllowUserInteraction, animations: {
             self.imgHeadshotB.frame = finalFrameB
         }, completion: nil)
+    }
+    
+    func tapKidA(sender: UIImageView) {
+        logger.debug("KidA done got tapped")
+        
+        transition(0)
+    }
+    
+    func tapKidB(sender: UIImageView) {
+        logger.debug("KidB done got tapped")
+        
+        transition(1)
+    }
+    
+    func transition(tapped: Int) {
+        let size = self.view.frame.width / 2
+        let newFrameA = CGRect(x: size / 2, y: size / 2, width: 0, height: 0)
+        let newFrameB = CGRect(x: size + size / 2, y: size / 2, width: 0, height: 0)
+        
+        if tapped == 0 {
+            UIView.animateWithDuration(0.3, delay: 0, options: UIViewAnimationOptions.CurveEaseIn, animations: {
+                self.imgHeadshotA.frame = newFrameA
+                }, completion: nil)
+            
+            UIView.animateWithDuration(0.3, delay: 0.1, options: UIViewAnimationOptions.CurveEaseIn, animations: {
+                self.imgHeadshotB.frame = newFrameB
+                }, completion: nil)
+        }
+        else {
+            UIView.animateWithDuration(0.3, delay: 0, options: UIViewAnimationOptions.CurveEaseIn, animations: {
+                self.imgHeadshotB.frame = newFrameB
+                }, completion: nil)
+            
+            UIView.animateWithDuration(0.3, delay: 0.1, options: UIViewAnimationOptions.CurveEaseIn, animations: {
+                self.imgHeadshotA.frame = newFrameA
+                }, completion: nil)
+        }
+        
+        UIView.animateWithDuration(0.4, delay: 0.0, options: nil, animations: {
+            self.container.frame = CGRect(x: 0, y: self.view.frame.height, width: self.view.frame.width, height: 0)
+            }, completion: { Bool in
+                let storyboard = UIStoryboard(name: "Main", bundle: nil)
+                
+                let mapView = storyboard.instantiateViewControllerWithIdentifier(Const.View.BusfinderMapScreen) as BusfinderMapViewController
+                self.presentViewController(mapView, animated: false, completion: nil)
+            })
     }
 }

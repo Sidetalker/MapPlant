@@ -174,7 +174,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="P3D-Xs-RVz" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1063.5" y="403"/>
+            <point key="canvasLocation" x="1063.5" y="335"/>
         </scene>
         <!--Busfinder Main View Controller-->
         <scene sceneID="ias-PI-Yb4">
@@ -188,7 +188,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="BusfinderLogo.png" translatesAutoresizingMaskIntoConstraints="NO" id="DTj-Cs-vyD">
+                            <imageView alpha="0.0" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="BusfinderLogo.png" translatesAutoresizingMaskIntoConstraints="NO" id="DTj-Cs-vyD">
                                 <rect key="frame" x="0.0" y="0.0" width="240" height="128"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="100" id="mGb-NR-oYl"/>
@@ -210,7 +210,7 @@
                             <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="zG3-Me-fD8">
                                 <rect key="frame" x="0.0" y="0.0" width="240" height="128"/>
                                 <variation key="widthClass=compact" fixedFrame="YES">
-                                    <rect key="frame" x="0.0" y="170" width="400" height="391"/>
+                                    <rect key="frame" x="0.0" y="170" width="400" height="430"/>
                                 </variation>
                                 <connections>
                                     <segue destination="xuq-iV-htz" kind="embed" id="9Sd-F9-mVP"/>
@@ -246,11 +246,12 @@
                     <connections>
                         <outlet property="container" destination="zG3-Me-fD8" id="qsx-kt-pFG"/>
                         <outlet property="imgLogo" destination="DTj-Cs-vyD" id="GoN-AP-3Df"/>
+                        <segue destination="nHm-Pz-HtT" kind="custom" identifier="segueBusfinderMap" customClass="PushSegueNoAnimation" customModule="MapPlant" customModuleProvider="target" id="LyO-wh-gtm"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Dxn-L0-cmd" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1902" y="668"/>
+            <point key="canvasLocation" x="1902" y="680"/>
         </scene>
         <!--Table View Controller-->
         <scene sceneID="tNV-MG-oVn">
@@ -260,7 +261,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
                         <sections>
-                            <tableViewSection headerTitle="Emergency Contact" id="iJ1-gg-wvO">
+                            <tableViewSection headerTitle="Contact Info" id="iJ1-gg-wvO">
                                 <cells>
                                     <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" id="elD-nv-P4E">
                                         <autoresizingMask key="autoresizingMask"/>
@@ -489,7 +490,24 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="nJ2-FF-60X" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2682" y="601.5"/>
+            <point key="canvasLocation" x="2779.5" y="561"/>
+        </scene>
+        <!--Busfinder Map View Controller-->
+        <scene sceneID="QmY-lV-9z1">
+            <objects>
+                <viewController storyboardIdentifier="busfinderMapScreen" useStoryboardIdentifierAsRestorationIdentifier="YES" id="nHm-Pz-HtT" customClass="BusfinderMapViewController" customModule="MapPlant" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="qrX-ew-w6K"/>
+                        <viewControllerLayoutGuide type="bottom" id="k9N-d1-zKK"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="ulC-Z6-Zjk">
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="JeS-V5-5Fz" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2779.5" y="1178"/>
         </scene>
         <!--Route Table Container-->
         <scene sceneID="2cd-gr-k1f">
