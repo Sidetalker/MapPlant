@@ -53,4 +53,15 @@ struct Const {
     struct View {
         static let BusfinderMapScreen = "busfinderMapScreen"
     }
+    
+    struct Tag {
+        struct dropStatView {
+            static let StatusImage = 111
+            static let InfoLabel = 112
+        }
+    }
+    
+    struct Nib {
+        static let DropStatView = "DropStatView"
+    }
 }

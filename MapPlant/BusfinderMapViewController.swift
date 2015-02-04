@@ -30,6 +30,9 @@ class BusfinderMapViewController: UIViewController, CLLocationManagerDelegate, M
     var locationManager = CLLocationManager()
     var routeLocations = [CLLocationCoordinate2D]()
     
+    // User display variables
+    var dropStatView: UIView!
+    
     // Logger
     let logger = Swell.getLogger("BusfinderMapViewController")
     
@@ -38,12 +41,17 @@ class BusfinderMapViewController: UIViewController, CLLocationManagerDelegate, M
         
         populateLocations()
         addMap()
+        addStatDrop()
     }
     
     override func viewDidAppear(animated: Bool) {
-        UIView.animateWithDuration(0.7, delay: 0, usingSpringWithDamping: 0.52, initialSpringVelocity: 0.0, options: UIViewAnimationOptions.AllowUserInteraction, animations: {
+        UIView.animateWithDuration(0.5, delay: 0, options: UIViewAnimationOptions.AllowUserInteraction, animations: {
             self.mapView.frame = CGRect(x: 0, y: 0, width: self.view.frame.width, height: self.view.frame.height / 2)
-            }, completion: nil)
+            }, completion: { Bool in
+                UIView.animateWithDuration(1.6, delay: 0.7, usingSpringWithDamping: 0.3, initialSpringVelocity: 10, options: UIViewAnimationOptions.AllowUserInteraction, animations: {
+                    self.dropStatView.frame = CGRect(x: 15, y: self.view.frame.height / 2 - 20, width: self.view.frame.width - 30, height: 50)
+                    }, completion: nil)
+        })
     }
     
     override func prefersStatusBarHidden() -> Bool {
@@ -70,7 +78,14 @@ class BusfinderMapViewController: UIViewController, CLLocationManagerDelegate, M
         mapView = MKMapView(frame: CGRect(x: 0, y: 0, width: self.view.frame.width, height: 0))
         mapView.showsUserLocation = true
         mapView.mapType = MKMapType.Standard
+        mapView.clipsToBounds = false
         mapView.delegate = self
+        
+        // Add shadow
+        mapView.layer.shadowOpacity = 0.6;
+        mapView.layer.shadowOffset = CGSizeMake(0, 0);
+        mapView.layer.shadowRadius = 5;
+        mapView.layer.shadowColor = UIColor.blackColor().CGColor
         
         // Gather location info
         var location = CLLocationCoordinate2D(latitude: routeLocations[0].latitude, longitude: routeLocations[0].longitude)
@@ -85,6 +100,21 @@ class BusfinderMapViewController: UIViewController, CLLocationManagerDelegate, M
         mapView.addOverlay(polyline)
         
         self.view.addSubview(mapView)
+    }
+    
+    func addStatDrop() {
+        dropStatView = NSBundle.mainBundle().loadNibNamed(Const.Nib.DropStatView, owner: self, options: nil)[0] as? UIView
+            
+        dropStatView.frame = CGRect(x: 15, y: self.view.frame.height / 2, width: self.view.frame.width - 30, height: 0)
+        
+        // Add shadow
+        dropStatView.layer.shadowOpacity = 0.8;
+        dropStatView.layer.shadowOffset = CGSizeMake(0, 0);
+        dropStatView.layer.shadowRadius = 3;
+        dropStatView.layer.shadowColor = UIColor.blackColor().CGColor
+        
+        self.view.addSubview(dropStatView)
+        self.view.sendSubviewToBack(dropStatView)
     }
     
     // Handle polyline drawing

@@ -45,6 +45,7 @@
 		75C1CB101A68A48E00110FCA /* RecordViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75C1CB0F1A68A48E00110FCA /* RecordViewController.swift */; };
 		75C1CB121A68A61100110FCA /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 75C1CB111A68A61100110FCA /* MapKit.framework */; };
 		75C1CB141A68A71B00110FCA /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 75C1CB131A68A71B00110FCA /* CoreLocation.framework */; };
+		75FA4C801A81CB930070CEC0 /* DropStatView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 75FA4C7F1A81CB930070CEC0 /* DropStatView.xib */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -102,6 +103,7 @@
 		75C1CB0F1A68A48E00110FCA /* RecordViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RecordViewController.swift; sourceTree = "<group>"; };
 		75C1CB111A68A61100110FCA /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
 		75C1CB131A68A71B00110FCA /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
+		75FA4C7F1A81CB930070CEC0 /* DropStatView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = DropStatView.xib; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -204,6 +206,7 @@
 			isa = PBXGroup;
 			children = (
 				31CBD8D31A662B5800BF195C /* Main.storyboard */,
+				75FA4C7F1A81CB930070CEC0 /* DropStatView.xib */,
 				31CBD8D81A662B5800BF195C /* LaunchScreen.xib */,
 			);
 			name = "UI Elements";
@@ -356,6 +359,7 @@
 				75BE584E1A7D415400C8CD5E /* BusfinderLogo.png in Resources */,
 				31CBD8D51A662B5800BF195C /* Main.storyboard in Resources */,
 				31CBD8DA1A662B5800BF195C /* LaunchScreen.xib in Resources */,
+				75FA4C801A81CB930070CEC0 /* DropStatView.xib in Resources */,
 				75BE58571A7D445400C8CD5E /* ClearWhitePressed.png in Resources */,
 				75BE585E1A7D4E5D00C8CD5E /* headshot2.jpg in Resources */,
 				75BE584C1A7D414400C8CD5E /* BusfinderLoginBG.jpg in Resources */,
