@@ -393,7 +393,7 @@ class RouteTableViewController: UITableViewController, UITableViewDelegate, UITa
     }
     
     override func shouldPerformSegueWithIdentifier(identifier: String?, sender: AnyObject?) -> Bool {
-        if identifier == Const.Segue.SessionsTable && state == 1 {
+        if identifier == Const.Segue.RouteView && state == 1 {
             return false
         }
         
@@ -401,12 +401,16 @@ class RouteTableViewController: UITableViewController, UITableViewDelegate, UITa
     }
     
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        if segue.identifier == Const.Segue.SessionsTable {
-            let sessionNavContainer = segue.destinationViewController as UINavigationController
-            let sessionTableVC = sessionNavContainer.viewControllers[0] as SessionTableViewController
+        if segue.identifier == Const.Segue.RouteView {
+            let routeNavContainer = segue.destinationViewController as UINavigationController
+            let routeVC = routeNavContainer.viewControllers[0] as RouteViewController
             
-            sessionTableVC.groupIndex = curSection
-            sessionTableVC.routeIndex = curRow
+            routeVC.groupIndex = curSection
+            routeVC.routeIndex = curRow
+            
+//            // But this guy definitely needs it
+//            routeVC.containerSessions.groupIndex = curSection
+//            routeVC.containerSessions.routeIndex = curRow
         }
     }
     
@@ -509,7 +513,7 @@ class RouteTableViewController: UITableViewController, UITableViewDelegate, UITa
         curRow = indexPath.row
         
         // Manually perform the segue
-        performSegueWithIdentifier(Const.Segue.SessionsTable, sender: self)
+        performSegueWithIdentifier(Const.Segue.RouteView, sender: self)
     }
     
     override func tableView(tableView: UITableView, commitEditingStyle editingStyle: UITableViewCellEditingStyle, forRowAtIndexPath indexPath: NSIndexPath) {
@@ -558,6 +562,10 @@ class SessionTableViewController: UITableViewController, UITableViewDelegate, UI
     
     override func viewDidLoad() {
         super.viewDidLoad()
+    }
+    
+    override func viewWillAppear(animated: Bool) {
+        super.viewWillAppear(animated)
         
         // See if our group and route indices have been populated
         if groupIndex == -1 || routeIndex == -1 {
@@ -565,10 +573,6 @@ class SessionTableViewController: UITableViewController, UITableViewDelegate, UI
         }
         
         populateDataSource()
-    }
-    
-    override func viewWillAppear(animated: Bool) {
-        super.viewWillAppear(animated)
     }
     
     override func prefersStatusBarHidden() -> Bool {
@@ -603,10 +607,11 @@ class SessionTableViewController: UITableViewController, UITableViewDelegate, UI
             }
         }
         
+        tableView.reloadData()
         logger.debug("Data source populated")
     }
     
-    // MARK: UITableView delegates
+    // MARK: - UITableView delegates
     
     override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
         return 1

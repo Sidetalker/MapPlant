@@ -36,7 +36,8 @@ struct Const {
         static let RecordToSave = "segueRecordSave"
         static let RoutesTable = "segueRouteTableEmbed"
         static let SaveRouteSelection = "segueSaveRouteSelection"
-        static let SessionsTable = "segueSessionsTable"
+        static let SessionsTable = "segueSessionTable"
+        static let RouteView = "segueRouteView"
         static let BusfinderMainScreen = "segueBusfinderMain"
         static let BusfinderMapScreen = "segueBusfinderMap"
     }

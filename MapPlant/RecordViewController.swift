@@ -121,6 +121,8 @@ class RecordSaveViewController: UITableViewController, UITableViewDelegate, Rout
     // MARK: - UITableView delegates
     
     override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+        tableView.deselectRowAtIndexPath(indexPath, animated: true)
+        
         if indexPath.section == 0 {
             if indexPath.row == 0 {
                 // Name change cell
@@ -167,6 +169,18 @@ class RecordSaveViewController: UITableViewController, UITableViewDelegate, Rout
             }
             else if indexPath.row == 2 {
                 // Prompt for destruction
+                var prompt = UIAlertController(title: "Delete Session?", message: "Are you sure you'd like to delete the current session?", preferredStyle: UIAlertControllerStyle.Alert)
+                
+                let delete = UIAlertAction(title: "Delete", style: UIAlertActionStyle.Destructive, handler: {(alert: UIAlertAction!) in
+                    self.dismissViewControllerAnimated(true, completion: nil)
+                })
+                
+                let cancel = UIAlertAction(title: "Cancel", style: UIAlertActionStyle.Cancel, handler: nil)
+                
+                prompt.addAction(delete)
+                prompt.addAction(cancel)
+                
+                presentViewController(prompt, animated: true, completion: nil)
             }
         }
     }

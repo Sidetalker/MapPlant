@@ -16,6 +16,7 @@
 		31CBD8E61A662B5800BF195C /* MapPlantTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31CBD8E51A662B5800BF195C /* MapPlantTests.swift */; };
 		7504C5751A7F0F160040AC61 /* BusfinderMapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7504C5741A7F0F160040AC61 /* BusfinderMapViewController.swift */; };
 		750E27671A6F10F4003B2823 /* Session.swift in Sources */ = {isa = PBXBuildFile; fileRef = 750E27661A6F10F4003B2823 /* Session.swift */; };
+		7519611A1AA24A2E000519A0 /* RouteViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 751961191AA24A2E000519A0 /* RouteViewController.swift */; };
 		757057EA1A688BD600C05B21 /* Location.swift in Sources */ = {isa = PBXBuildFile; fileRef = 757057E91A688BD600C05B21 /* Location.swift */; };
 		757057EC1A688BD600C05B21 /* Group.swift in Sources */ = {isa = PBXBuildFile; fileRef = 757057EB1A688BD600C05B21 /* Group.swift */; };
 		757057EE1A688BD600C05B21 /* LocationSet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 757057ED1A688BD600C05B21 /* LocationSet.swift */; };
@@ -72,6 +73,7 @@
 		31CBD8E51A662B5800BF195C /* MapPlantTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapPlantTests.swift; sourceTree = "<group>"; };
 		7504C5741A7F0F160040AC61 /* BusfinderMapViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BusfinderMapViewController.swift; sourceTree = "<group>"; };
 		750E27661A6F10F4003B2823 /* Session.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Session.swift; sourceTree = "<group>"; };
+		751961191AA24A2E000519A0 /* RouteViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RouteViewController.swift; sourceTree = "<group>"; };
 		757057E91A688BD600C05B21 /* Location.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Location.swift; sourceTree = "<group>"; };
 		757057EB1A688BD600C05B21 /* Group.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Group.swift; sourceTree = "<group>"; };
 		757057ED1A688BD600C05B21 /* LocationSet.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LocationSet.swift; sourceTree = "<group>"; };
@@ -151,6 +153,7 @@
 			children = (
 				75C1CB0C1A688DBB00110FCA /* CoreData */,
 				31CBD8D11A662B5800BF195C /* HomeViewController.swift */,
+				751961191AA24A2E000519A0 /* RouteViewController.swift */,
 				75ACFB2C1A6C311900162FDB /* RouteTableViewController.swift */,
 				75C1CB0F1A68A48E00110FCA /* RecordViewController.swift */,
 				7504C5761A7F0F200040AC61 /* Busfinder Prototype */,
@@ -396,6 +399,7 @@
 				75BE58591A7D481100C8CD5E /* TransitionManager.swift in Sources */,
 				75B2485B1A688197005ECBA1 /* LogLocation.swift in Sources */,
 				75B2485A1A688197005ECBA1 /* LogLevel.swift in Sources */,
+				7519611A1AA24A2E000519A0 /* RouteViewController.swift in Sources */,
 				757057F21A688BD700C05B21 /* Tags.swift in Sources */,
 				31CBD8D01A662B5800BF195C /* MapPlant.xcdatamodeld in Sources */,
 				75BE585B1A7D48B700C8CD5E /* BusfinderMainViewController.swift in Sources */,
@@ -529,6 +533,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				INFOPLIST_FILE = MapPlant/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.1;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
@@ -540,6 +545,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				INFOPLIST_FILE = MapPlant/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.1;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";

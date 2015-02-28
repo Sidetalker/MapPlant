@@ -1,9 +1,10 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6254" systemVersion="14B25" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="R9z-b1-aG0">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6254" systemVersion="14C109" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="R9z-b1-aG0">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6247"/>
         <capability name="Alignment constraints with different attributes" minToolsVersion="5.1"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
+        <capability name="Constraints with non-1.0 multipliers" minToolsVersion="5.1"/>
     </dependencies>
     <scenes>
         <!--Home View Controller-->
@@ -640,7 +641,7 @@
                     </tableView>
                     <nil key="simulatedTopBarMetrics"/>
                     <connections>
-                        <segue destination="Wck-0V-If0" kind="showDetail" identifier="segueSessionsTable" id="zmk-no-G54"/>
+                        <segue destination="Wck-0V-If0" kind="showDetail" identifier="segueRouteView" id="zmk-no-G54"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="3Qy-Qu-qct" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -678,7 +679,64 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="aNl-zf-reK" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="5322" y="-420"/>
+            <point key="canvasLocation" x="5310" y="185"/>
+        </scene>
+        <!--Route View Controller-->
+        <scene sceneID="7Bh-nc-2nj">
+            <objects>
+                <viewController id="9pb-zl-Xk3" customClass="RouteViewController" customModule="MapPlant" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="vXh-Vl-D3L"/>
+                        <viewControllerLayoutGuide type="bottom" id="OM7-8w-Von"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="hB2-pX-P4T">
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="AZz-dp-xsh">
+                                <rect key="frame" x="0.0" y="0.0" width="240" height="128"/>
+                                <connections>
+                                    <segue destination="1NA-0T-ceb" kind="embed" identifier="segueSessionTable" id="5Oq-Lz-C0l"/>
+                                </connections>
+                            </containerView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="AZz-dp-xsh" firstAttribute="leading" secondItem="hB2-pX-P4T" secondAttribute="leadingMargin" constant="-16" id="GNi-ae-3dp"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="AZz-dp-xsh" secondAttribute="trailing" constant="-16" id="cjg-Q5-1x8"/>
+                            <constraint firstAttribute="height" secondItem="AZz-dp-xsh" secondAttribute="height" multiplier="2:1" id="fu8-1M-Ey6"/>
+                            <constraint firstItem="OM7-8w-Von" firstAttribute="top" secondItem="AZz-dp-xsh" secondAttribute="bottom" id="ky2-CX-FpS"/>
+                        </constraints>
+                        <variation key="default">
+                            <mask key="subviews">
+                                <exclude reference="AZz-dp-xsh"/>
+                            </mask>
+                            <mask key="constraints">
+                                <exclude reference="GNi-ae-3dp"/>
+                                <exclude reference="cjg-Q5-1x8"/>
+                                <exclude reference="fu8-1M-Ey6"/>
+                                <exclude reference="ky2-CX-FpS"/>
+                            </mask>
+                        </variation>
+                        <variation key="widthClass=compact">
+                            <mask key="subviews">
+                                <include reference="AZz-dp-xsh"/>
+                            </mask>
+                            <mask key="constraints">
+                                <include reference="GNi-ae-3dp"/>
+                                <include reference="cjg-Q5-1x8"/>
+                                <include reference="fu8-1M-Ey6"/>
+                                <include reference="ky2-CX-FpS"/>
+                            </mask>
+                        </variation>
+                    </view>
+                    <navigationItem key="navigationItem" id="nId-5T-dBh"/>
+                    <connections>
+                        <outlet property="containerSessions" destination="AZz-dp-xsh" id="g9O-aH-DHq"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="PJb-6n-2JV" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="5310" y="-420"/>
         </scene>
         <!--Record View Controller-->
         <scene sceneID="Z6D-Bf-qB8">
@@ -1033,7 +1091,7 @@
                     </navigationBar>
                     <nil name="viewControllers"/>
                     <connections>
-                        <segue destination="1NA-0T-ceb" kind="relationship" relationship="rootViewController" id="mGx-da-Ji4"/>
+                        <segue destination="9pb-zl-Xk3" kind="relationship" relationship="rootViewController" id="HoA-Vr-Tj0"/>
                     </connections>
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="EZq-fa-sYR" userLabel="First Responder" sceneMemberID="firstResponder"/>

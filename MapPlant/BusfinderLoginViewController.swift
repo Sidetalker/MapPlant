@@ -43,7 +43,9 @@ class BusfinderLoginViewController: UIViewController, UITextFieldDelegate {
             self.passwordField!.alpha = 0.8
             self.usernameField!.alpha = 0.8
             self.loginButton!.alpha = 0.8
-            }, completion: nil)
+            }, completion: { Bool in
+                self.titleLabel!.alpha = 1.0
+        })
         
         UIView.animateWithDuration(1.2, delay: 0, options: UIViewAnimationOptions.CurveEaseOut, animations: {
             self.imgLogo.alpha = 1
