@@ -24,17 +24,7 @@
 		757057F21A688BD700C05B21 /* Tags.swift in Sources */ = {isa = PBXBuildFile; fileRef = 757057F11A688BD700C05B21 /* Tags.swift */; };
 		757057F41A688BD700C05B21 /* LogBook.swift in Sources */ = {isa = PBXBuildFile; fileRef = 757057F31A688BD700C05B21 /* LogBook.swift */; };
 		75ACFB2D1A6C311900162FDB /* RouteTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75ACFB2C1A6C311900162FDB /* RouteTableViewController.swift */; };
-		75B248561A688197005ECBA1 /* combine.sh in Resources */ = {isa = PBXBuildFile; fileRef = 75B2484D1A688197005ECBA1 /* combine.sh */; };
-		75B248571A688197005ECBA1 /* Formatter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75B2484E1A688197005ECBA1 /* Formatter.swift */; };
-		75B248581A688197005ECBA1 /* Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 75B2484F1A688197005ECBA1 /* Info.plist */; };
-		75B248591A688197005ECBA1 /* Logger.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75B248501A688197005ECBA1 /* Logger.swift */; };
-		75B2485A1A688197005ECBA1 /* LogLevel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75B248511A688197005ECBA1 /* LogLevel.swift */; };
-		75B2485B1A688197005ECBA1 /* LogLocation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75B248521A688197005ECBA1 /* LogLocation.swift */; };
-		75B2485C1A688197005ECBA1 /* LogSelector.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75B248531A688197005ECBA1 /* LogSelector.swift */; };
-		75B2485D1A688197005ECBA1 /* Swell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75B248551A688197005ECBA1 /* Swell.swift */; };
 		75BE584A1A7D3CD000C8CD5E /* BusfinderLoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75BE58491A7D3CD000C8CD5E /* BusfinderLoginViewController.swift */; };
-		75BE584C1A7D414400C8CD5E /* BusfinderLoginBG.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 75BE584B1A7D414400C8CD5E /* BusfinderLoginBG.jpg */; };
-		75BE584E1A7D415400C8CD5E /* BusfinderLogo.png in Resources */ = {isa = PBXBuildFile; fileRef = 75BE584D1A7D415400C8CD5E /* BusfinderLogo.png */; };
 		75BE58561A7D445400C8CD5E /* ClearWhite.png in Resources */ = {isa = PBXBuildFile; fileRef = 75BE58541A7D445400C8CD5E /* ClearWhite.png */; };
 		75BE58571A7D445400C8CD5E /* ClearWhitePressed.png in Resources */ = {isa = PBXBuildFile; fileRef = 75BE58551A7D445400C8CD5E /* ClearWhitePressed.png */; };
 		75BE58591A7D481100C8CD5E /* TransitionManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75BE58581A7D481100C8CD5E /* TransitionManager.swift */; };
@@ -82,18 +72,7 @@
 		757057F31A688BD700C05B21 /* LogBook.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LogBook.swift; sourceTree = "<group>"; };
 		75ACFB2C1A6C311900162FDB /* RouteTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RouteTableViewController.swift; sourceTree = "<group>"; };
 		75ACFB2E1A6C32F000162FDB /* MapPlantPlayground.playground */ = {isa = PBXFileReference; lastKnownFileType = file.playground; path = MapPlantPlayground.playground; sourceTree = "<group>"; };
-		75B2484D1A688197005ECBA1 /* combine.sh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.script.sh; path = combine.sh; sourceTree = "<group>"; };
-		75B2484E1A688197005ECBA1 /* Formatter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Formatter.swift; sourceTree = "<group>"; };
-		75B2484F1A688197005ECBA1 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		75B248501A688197005ECBA1 /* Logger.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Logger.swift; sourceTree = "<group>"; };
-		75B248511A688197005ECBA1 /* LogLevel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LogLevel.swift; sourceTree = "<group>"; };
-		75B248521A688197005ECBA1 /* LogLocation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LogLocation.swift; sourceTree = "<group>"; };
-		75B248531A688197005ECBA1 /* LogSelector.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LogSelector.swift; sourceTree = "<group>"; };
-		75B248541A688197005ECBA1 /* Swell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Swell.h; sourceTree = "<group>"; };
-		75B248551A688197005ECBA1 /* Swell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Swell.swift; sourceTree = "<group>"; };
 		75BE58491A7D3CD000C8CD5E /* BusfinderLoginViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BusfinderLoginViewController.swift; sourceTree = "<group>"; };
-		75BE584B1A7D414400C8CD5E /* BusfinderLoginBG.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = BusfinderLoginBG.jpg; path = ../../../../Downloads/BusfinderLoginBG.jpg; sourceTree = "<group>"; };
-		75BE584D1A7D415400C8CD5E /* BusfinderLogo.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = BusfinderLogo.png; path = ../../../../Downloads/BusfinderLogo.png; sourceTree = "<group>"; };
 		75BE58541A7D445400C8CD5E /* ClearWhite.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ClearWhite.png; sourceTree = "<group>"; };
 		75BE58551A7D445400C8CD5E /* ClearWhitePressed.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ClearWhitePressed.png; sourceTree = "<group>"; };
 		75BE58581A7D481100C8CD5E /* TransitionManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TransitionManager.swift; sourceTree = "<group>"; };
@@ -218,25 +197,8 @@
 		75B2484B1A68817B005ECBA1 /* 3rd Party Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				75B2484C1A688188005ECBA1 /* Swell */,
 			);
 			name = "3rd Party Frameworks";
-			sourceTree = "<group>";
-		};
-		75B2484C1A688188005ECBA1 /* Swell */ = {
-			isa = PBXGroup;
-			children = (
-				75B2484D1A688197005ECBA1 /* combine.sh */,
-				75B2484E1A688197005ECBA1 /* Formatter.swift */,
-				75B2484F1A688197005ECBA1 /* Info.plist */,
-				75B248501A688197005ECBA1 /* Logger.swift */,
-				75B248511A688197005ECBA1 /* LogLevel.swift */,
-				75B248521A688197005ECBA1 /* LogLocation.swift */,
-				75B248531A688197005ECBA1 /* LogSelector.swift */,
-				75B248541A688197005ECBA1 /* Swell.h */,
-				75B248551A688197005ECBA1 /* Swell.swift */,
-			);
-			name = Swell;
 			sourceTree = "<group>";
 		};
 		75BE584F1A7D416600C8CD5E /* Images */ = {
@@ -244,8 +206,6 @@
 			children = (
 				75BE58541A7D445400C8CD5E /* ClearWhite.png */,
 				75BE58551A7D445400C8CD5E /* ClearWhitePressed.png */,
-				75BE584D1A7D415400C8CD5E /* BusfinderLogo.png */,
-				75BE584B1A7D414400C8CD5E /* BusfinderLoginBG.jpg */,
 				75BE585C1A7D4E5D00C8CD5E /* headshot2.jpg */,
 				75BE585D1A7D4E5D00C8CD5E /* headshot1.jpg */,
 			);
@@ -320,6 +280,7 @@
 		31CBD8BF1A662B5800BF195C /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
+				LastSwiftUpdateCheck = 0700;
 				LastUpgradeCheck = 0610;
 				ORGANIZATIONNAME = "Kevin Sullivan";
 				TargetAttributes = {
@@ -357,16 +318,12 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				75B248561A688197005ECBA1 /* combine.sh in Resources */,
 				75BE58561A7D445400C8CD5E /* ClearWhite.png in Resources */,
-				75BE584E1A7D415400C8CD5E /* BusfinderLogo.png in Resources */,
 				31CBD8D51A662B5800BF195C /* Main.storyboard in Resources */,
 				31CBD8DA1A662B5800BF195C /* LaunchScreen.xib in Resources */,
 				75FA4C801A81CB930070CEC0 /* DropStatView.xib in Resources */,
 				75BE58571A7D445400C8CD5E /* ClearWhitePressed.png in Resources */,
 				75BE585E1A7D4E5D00C8CD5E /* headshot2.jpg in Resources */,
-				75BE584C1A7D414400C8CD5E /* BusfinderLoginBG.jpg in Resources */,
-				75B248581A688197005ECBA1 /* Info.plist in Resources */,
 				75BE585F1A7D4E5D00C8CD5E /* headshot1.jpg in Resources */,
 				31CBD8D71A662B5800BF195C /* Images.xcassets in Resources */,
 			);
@@ -388,7 +345,6 @@
 			files = (
 				75C1CB0B1A688DB200110FCA /* Constants.swift in Sources */,
 				757057EA1A688BD600C05B21 /* Location.swift in Sources */,
-				75B248571A688197005ECBA1 /* Formatter.swift in Sources */,
 				75BE584A1A7D3CD000C8CD5E /* BusfinderLoginViewController.swift in Sources */,
 				757057EC1A688BD600C05B21 /* Group.swift in Sources */,
 				31CBD8D21A662B5800BF195C /* HomeViewController.swift in Sources */,
@@ -397,8 +353,6 @@
 				757057F01A688BD700C05B21 /* Route.swift in Sources */,
 				750E27671A6F10F4003B2823 /* Session.swift in Sources */,
 				75BE58591A7D481100C8CD5E /* TransitionManager.swift in Sources */,
-				75B2485B1A688197005ECBA1 /* LogLocation.swift in Sources */,
-				75B2485A1A688197005ECBA1 /* LogLevel.swift in Sources */,
 				7519611A1AA24A2E000519A0 /* RouteViewController.swift in Sources */,
 				757057F21A688BD700C05B21 /* Tags.swift in Sources */,
 				31CBD8D01A662B5800BF195C /* MapPlant.xcdatamodeld in Sources */,
@@ -406,10 +360,7 @@
 				757057EE1A688BD600C05B21 /* LocationSet.swift in Sources */,
 				75C1CB0E1A688EC300110FCA /* Helpers.swift in Sources */,
 				75ACFB2D1A6C311900162FDB /* RouteTableViewController.swift in Sources */,
-				75B248591A688197005ECBA1 /* Logger.swift in Sources */,
 				7504C5751A7F0F160040AC61 /* BusfinderMapViewController.swift in Sources */,
-				75B2485C1A688197005ECBA1 /* LogSelector.swift in Sources */,
-				75B2485D1A688197005ECBA1 /* Swell.swift in Sources */,
 				31CBD8CD1A662B5800BF195C /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

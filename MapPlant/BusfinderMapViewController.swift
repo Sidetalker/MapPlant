@@ -34,7 +34,7 @@ class BusfinderMapViewController: UIViewController, CLLocationManagerDelegate, M
     var dropStatView: UIView!
     
     // Logger
-    let logger = Swell.getLogger("BusfinderMapViewController")
+    // let logger = Swell.getLogger("BusfinderMapViewController")
     
     override func viewDidLoad() {
         super.viewDidLoad()

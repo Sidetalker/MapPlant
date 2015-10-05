@@ -11,7 +11,7 @@ import CoreData
 
 class HomeViewController: UIViewController {
     // Logger configuration
-    let logger = Swell.getLogger("HomeViewController")
+    // let logger = Swell.getLogger("HomeViewController")
 
     // MARK: - UIViewController overrides
     
@@ -29,7 +29,7 @@ class HomeViewController: UIViewController {
             let locSet = session.locationSet
             let locCount = locSet.locations.count
             
-            logger.debug("Session \(sessionName) has \(locCount) locations")
+            // logger.debug("Session \(sessionName) has \(locCount) locations")
         }
     }
     
@@ -54,7 +54,7 @@ class HomeViewController: UIViewController {
         var defaultRoute: Route?
         
         if groups.count == 0 {
-            logger.debug("Generated default group")
+            // logger.debug("Generated default group")
             
             defaultGroup = insertObject(Const.Data.Group) as? Group
             defaultGroup!.name = "My First Group"
@@ -66,7 +66,7 @@ class HomeViewController: UIViewController {
         }
         
         if routes.count == 0 {
-            logger.debug("Generated default route")
+            // logger.debug("Generated default route")
             
             defaultRoute = insertObject(Const.Data.Route) as? Route
             defaultRoute!.name = "My First Route"

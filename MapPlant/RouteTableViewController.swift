@@ -12,7 +12,7 @@ import UIKit
 
 class RouteTableContainer: UIViewController {
     // Logger
-    let logger = Swell.getLogger("RouteTableContainer")
+    // let logger = Swell.getLogger("RouteTableContainer")
     
     // Other view references
     var routeTable: RouteTableViewController?
@@ -71,7 +71,7 @@ class RouteTableContainer: UIViewController {
     
     // Handles user input for adding a new group
     func addGroup() {
-        logger.debug("Adding a new group")
+        // logger.debug("Adding a new group")
         
         let newGroupController = UIAlertController(title: "Add Group", message: "Enter the new group and route name", preferredStyle: UIAlertControllerStyle.Alert)
         
@@ -86,7 +86,7 @@ class RouteTableContainer: UIViewController {
             // Don't allow blank group names
             if groupName.stringByTrimmingCharactersInSet(NSCharacterSet.whitespaceCharacterSet()) == "" ||
             routeName.stringByTrimmingCharactersInSet(NSCharacterSet.whitespaceCharacterSet()) == ""{
-                self.logger.debug("Empty name not allowed")
+                // self.logger.debug("Empty name not allowed")
                 
                 let notAllowedController = UIAlertController(title: "Error", message: "Names cannot be blank", preferredStyle: UIAlertControllerStyle.Alert)
                 
@@ -104,7 +104,7 @@ class RouteTableContainer: UIViewController {
             // Look throughout existing groups for a duplicate group name
             for group in existingGroups {
                 if group.name == groupName {
-                    self.logger.debug("Duplicate group name not allowed")
+                    // self.logger.debug("Duplicate group name not allowed")
                     
                     let notAllowedController = UIAlertController(title: "Error", message: "Group name already exists", preferredStyle: UIAlertControllerStyle.Alert)
                     
@@ -120,7 +120,7 @@ class RouteTableContainer: UIViewController {
                 }
             }
             
-            self.logger.debug("Creating group: \(groupName) with route: \(routeName)")
+            // self.logger.debug("Creating group: \(groupName) with route: \(routeName)")
             
             // Create our group
             let newGroup = insertObject(Const.Data.Group) as? Group
@@ -149,7 +149,7 @@ class RouteTableContainer: UIViewController {
         }
         
         let cancelAction = UIAlertAction(title: "Cancel", style: UIAlertActionStyle.Cancel) { (_) in
-            self.logger.debug("Add group cancelled by user")
+            // self.logger.debug("Add group cancelled by user")
         }
         
         newGroupController.addTextFieldWithConfigurationHandler { (textField) in
@@ -168,7 +168,7 @@ class RouteTableContainer: UIViewController {
     
     // Handles user input for adding a new route
     func addRoute() {
-        logger.debug("Adding a new route")
+        // logger.debug("Adding a new route")
         
         let newRouteController = UIAlertController(title: "Add Route", message: nil, preferredStyle: UIAlertControllerStyle.Alert)
         
@@ -179,7 +179,7 @@ class RouteTableContainer: UIViewController {
             
             // Don't allow blank group names
             if routeName.stringByTrimmingCharactersInSet(NSCharacterSet.whitespaceCharacterSet()) == "" {
-                self.logger.debug("Add route empty name not allowed")
+                // self.logger.debug("Add route empty name not allowed")
                 
                 let notAllowedController = UIAlertController(title: "Error", message: "Route name cannot be empty", preferredStyle: UIAlertControllerStyle.Alert)
                 
@@ -197,7 +197,7 @@ class RouteTableContainer: UIViewController {
             // Look throughout existing groups for a duplicate group name
             for route in existingRoutes {
                 if route.name == routeName {
-                    self.logger.debug("Duplicate route name not allowed")
+                    // self.logger.debug("Duplicate route name not allowed")
                     
                     let notAllowedController = UIAlertController(title: "Error", message: "Route name already exists", preferredStyle: UIAlertControllerStyle.Alert)
                     
@@ -214,7 +214,7 @@ class RouteTableContainer: UIViewController {
             }
             
             if self.groupTable!.selectedIndex == -1 {
-                self.logger.debug("Must select group for new route")
+                // self.logger.debug("Must select group for new route")
                 
                 let notAllowedController = UIAlertController(title: "Error", message: "You must select a group", preferredStyle: UIAlertControllerStyle.Alert)
                 
@@ -245,7 +245,7 @@ class RouteTableContainer: UIViewController {
             
             save()
             
-            self.logger.debug("Creating route: \(routeName) in group: \(targetGroup.name)")
+            // self.logger.debug("Creating route: \(routeName) in group: \(targetGroup.name)")
             
             // Update the route table
             self.routeTable!.populateDataSource()
@@ -253,7 +253,7 @@ class RouteTableContainer: UIViewController {
         }
         
         let cancelAction = UIAlertAction(title: "Cancel", style: UIAlertActionStyle.Cancel) { (_) in
-            self.logger.debug("Add group cancelled by user")
+            // self.logger.debug("Add group cancelled by user")
         }
         
         newRouteController.addTextFieldWithConfigurationHandler { (textField) in
@@ -298,7 +298,7 @@ class RouteTableContainer: UIViewController {
 
 class GroupTableViewController: UITableViewController, UITableViewDelegate, UITableViewDataSource {
     // Logger
-    let logger = Swell.getLogger("GroupTableViewController")
+    // let logger = Swell.getLogger("GroupTableViewController")
     
     // Datasource variables
     var groupNames = [String]()
@@ -326,7 +326,7 @@ class GroupTableViewController: UITableViewController, UITableViewDelegate, UITa
             groupNames.append(group.name)
         }
         
-        logger.debug("Data source populated - \(groupNames.count) groups")
+        // logger.debug("Data source populated - \(groupNames.count) groups")
     }
     
     // MARK: - UITableViewDelegate overrides
@@ -361,7 +361,7 @@ class GroupTableViewController: UITableViewController, UITableViewDelegate, UITa
 
 class RouteTableViewController: UITableViewController, UITableViewDelegate, UITableViewDataSource {
     // Logger
-    let logger = Swell.getLogger("RouteTableViewController")
+    // let logger = Swell.getLogger("RouteTableViewController")
     
     // Datasource variables
     var groupNames = [String]()
@@ -446,7 +446,7 @@ class RouteTableViewController: UITableViewController, UITableViewDelegate, UITa
             sessionCounts.append(tempSessionCounts)
         }
         
-        logger.debug("Data source populated")
+        // logger.debug("Data source populated")
     }
     
     // MARK: - UITableViewDelegate overrides
@@ -494,7 +494,7 @@ class RouteTableViewController: UITableViewController, UITableViewDelegate, UITa
             return cell
         }
         
-        logger.error("Did not recognize reusable cell")
+        // logger.error("Did not recognize reusable cell")
         return UITableViewCell();
     }
     
@@ -549,7 +549,7 @@ class RouteTableViewController: UITableViewController, UITableViewDelegate, UITa
 
 class SessionTableViewController: UITableViewController, UITableViewDelegate, UITableViewDataSource {
     // Logger
-    let logger = Swell.getLogger("SessionTableViewController")
+    // let logger = Swell.getLogger("SessionTableViewController")
     
     // Datasource variables
     var groupIndex = -1
@@ -569,7 +569,7 @@ class SessionTableViewController: UITableViewController, UITableViewDelegate, UI
         
         // See if our group and route indices have been populated
         if groupIndex == -1 || routeIndex == -1 {
-            logger.error("Group and/or route indices not populated")
+            // logger.error("Group and/or route indices not populated")
         }
         
         populateDataSource()
@@ -608,7 +608,7 @@ class SessionTableViewController: UITableViewController, UITableViewDelegate, UI
         }
         
         tableView.reloadData()
-        logger.debug("Data source populated")
+        // logger.debug("Data source populated")
     }
     
     // MARK: - UITableView delegates
@@ -635,7 +635,7 @@ class SessionTableViewController: UITableViewController, UITableViewDelegate, UI
             return cell
         }
         
-        logger.error("Did not recognize reusable cell")
+        // logger.error("Did not recognize reusable cell")
         return UITableViewCell();
     }
 }

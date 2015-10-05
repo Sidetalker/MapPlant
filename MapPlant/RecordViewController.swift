@@ -47,7 +47,7 @@ class RecordSaveViewController: UITableViewController, UITableViewDelegate, Rout
     // Generate or rewire this session's CoreData entity
     override func viewWillAppear(animated: Bool) {
         if sessionEntity == nil {
-            logger.error("sessionEntity is nil - it should always be populated in the parent's segue prep")
+            // logger.error("sessionEntity is nil - it should always be populated in the parent's segue prep")
         }
         else if route == nil {
             let existingGroups = getObjects(Const.Data.Group, nil) as [Group]
@@ -62,7 +62,7 @@ class RecordSaveViewController: UITableViewController, UITableViewDelegate, Rout
             sessionTimestamp = sessionEntity!.date
         }
         else {
-            logger.error("route is nil - it should always be populated in the else if statement above this")
+            // logger.error("route is nil - it should always be populated in the else if statement above this")
         }
         
         update()
@@ -234,7 +234,7 @@ class RecordViewController: UIViewController, CLLocationManagerDelegate, MKMapVi
     var distance = 0.0
     
     // Logger
-    let logger = Swell.getLogger("RecordViewController")
+    // let logger = Swell.getLogger("RecordViewController")
     
     // Device details
     var width: CGFloat = 0
@@ -349,24 +349,23 @@ class RecordViewController: UIViewController, CLLocationManagerDelegate, MKMapVi
     func configureLocationManager() {
         locationManager.delegate = self
         locationManager.desiredAccuracy = kCLLocationAccuracyBest
-        locationManager.requestAlwaysAuthorization()
     }
     
     // MARK: - Button handlers
     
     // Save the location data to CoreData store and transition to
     func btnFinishRecordingPressed() {
-        logger.debug("Finishing Recording")
+        // logger.debug("Finishing Recording")
         
         // Make sure the location count matches the accuracy count
         if allLocations.count != allAccuracies.count {
-            logger.error("Location count doesn't match accuracy count")
+            // logger.error("Location count doesn't match accuracy count")
             return
         }
         
         // Make sure we HAVE a location
         if allLocations.count == 0 {
-            logger.error("We don't have any locations logged you moron!")
+            // logger.error("We don't have any locations logged you moron!")
             return
         }
         
@@ -411,13 +410,13 @@ class RecordViewController: UIViewController, CLLocationManagerDelegate, MKMapVi
     // Enable / disable display and tracking of blue dot on map
     func btnToggleFocusPressed() {
         if focus == Const.Record.FocusOn {
-            logger.debug("Focus Off")
+            // logger.debug("Focus Off")
             mapView.showsUserLocation = false
             btnToggleFocus.backgroundColor = UIColor.lightGrayColor()
             focus = Const.Record.FocusOff
         }
         else {
-            logger.debug("Focus On")
+            // logger.debug("Focus On")
             mapView.showsUserLocation = true
             btnToggleFocus.backgroundColor = UIColor.blueColor()
             focus = Const.Record.FocusOn
@@ -432,13 +431,14 @@ class RecordViewController: UIViewController, CLLocationManagerDelegate, MKMapVi
         case Const.Record.Running:
             stopRecording()
         default:
-            logger.error("Unrecognized State")
+            // logger.error("Unrecognized State")
+            return
         }
     }
     
     // Update state, location manager and buttons to begin recording
     func startRecording() {
-        logger.debug("Started Recording")
+        // logger.debug("Started Recording")
         
         // Change state
         state = Const.Record.Running
@@ -456,7 +456,7 @@ class RecordViewController: UIViewController, CLLocationManagerDelegate, MKMapVi
     
     // Update state, location manager and buttons to stop recording
     func stopRecording() {
-        logger.debug("Stopped Recording")
+        // logger.debug("Stopped Recording")
         
         // Change state
         state = Const.Record.Stopped
@@ -476,11 +476,11 @@ class RecordViewController: UIViewController, CLLocationManagerDelegate, MKMapVi
     func btnClearQuitPressed() {
         switch state {
         case Const.Record.Stopped:
-            logger.debug("Quitting Record")
+            // logger.debug("Quitting Record")
             
             self.dismissViewControllerAnimated(true, completion: nil)
         case Const.Record.Running:
-            logger.debug("Clearing all Data")
+            // logger.debug("Clearing all Data")
             
             allLocations = [CLLocationCoordinate2D]()
             allAccuracies = [CLLocationAccuracy]()
@@ -495,7 +495,8 @@ class RecordViewController: UIViewController, CLLocationManagerDelegate, MKMapVi
                 }
             }
         default:
-            logger.error("Unrecognized State")
+            // logger.error("Unrecognized State")
+            return
         }
     }
     
@@ -506,7 +507,7 @@ class RecordViewController: UIViewController, CLLocationManagerDelegate, MKMapVi
         locationManager.stopUpdatingLocation()
         
         if (error != nil) {
-            logger.error("Location manager failed with error: \(error)")
+            // logger.error("Location manager failed with error: \(error)")
         }
     }
     

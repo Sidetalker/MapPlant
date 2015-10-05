@@ -101,13 +101,13 @@ class BusfinderMainViewController: UIViewController {
     }
     
     func tapKidA(sender: UIImageView) {
-        logger.debug("KidA done got tapped")
+        // logger.debug("KidA done got tapped")
         
         transition(0)
     }
     
     func tapKidB(sender: UIImageView) {
-        logger.debug("KidB done got tapped")
+        // logger.debug("KidB done got tapped")
         
         transition(1)
     }
